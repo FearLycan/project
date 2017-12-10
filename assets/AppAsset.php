@@ -20,9 +20,23 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'css/hamburgers.min.css',
+        'css/animate.min.css',
+        'fonts/font-awesome/css/font-awesome.min.css',
+        'fonts/ionicons/css/ionicons.min.css',
+        'css/styles.min.css',
         'css/site.css',
     ];
     public $js = [
+        'js/pace.min.js', //niebieski pasek pokazujący wczytywanie strony
+        'js/popper.min.js',
+        'js/bootstrap.min.js',
+        'js/jquery.easing.js',
+        'js/ie10-viewport-bug-workaround.js',
+        'js/slidebar.js',
+        'js/classie.js',
+        'js/bootstrap-dropdown-hover.min.js',
+        'js/boomerang.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
