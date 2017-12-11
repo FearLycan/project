@@ -35,7 +35,7 @@ class AppAsset extends AssetBundle
         'js/ie10-viewport-bug-workaround.js',
         'js/slidebar.js',
         'js/classie.js',
-        'js/bootstrap-dropdown-hover.min.js',
+        ///'js/bootstrap-dropdown-hover.min.js',
         'js/boomerang.min.js',
     ];
     public $depends = [

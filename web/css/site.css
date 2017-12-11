@@ -136,3 +136,13 @@ a.desc:after {
     width: 100%;
     height: 2px;
 }
+
+.help-block{
+    margin-top: .25rem;
+    font-size: .875rem;
+    color: #dc3545;
+}
+
+div.has-error > input{
+    border-color: #dc3545 !important;
+}

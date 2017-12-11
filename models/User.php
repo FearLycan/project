@@ -62,9 +62,9 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'email' => 'Email',
-            'password' => 'Password',
+            'name' => 'Pseudonim',
+            'email' => 'E-mail',
+            'password' => 'Hasło',
             'role' => 'Role',
             'status' => 'Status',
             'registered_at' => 'Registered At',
@@ -152,7 +152,7 @@ class User extends \yii\db\ActiveRecord
      * Finds an identity by the given ID.
      *
      * @param string|int $id the ID to be looked for
-     * @return IdentityInterface|null the identity object that matches the given ID.
+     * @return User
      */
     public static function findIdentity($id)
     {
@@ -163,7 +163,7 @@ class User extends \yii\db\ActiveRecord
      * Finds an identity by the given token.
      *
      * @param string $token the token to be looked for
-     * @return IdentityInterface|null the identity object that matches the given token.
+     * @return User
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
@@ -203,5 +203,34 @@ class User extends \yii\db\ActiveRecord
     public static function hashPassword($password)
     {
         return Yii::$app->security->generatePasswordHash($password);
+    }
+
+    /**
+     * @param bool $insert
+     * @return bool
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->auth_key = \Yii::$app->security->generateRandomString();
+                $this->verification_code = \Yii::$app->security->generateRandomString();
+                $this->password = $this->hashPassword($this->password);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function sendEmail()
+    {
+        Yii::$app->mailer
+            ->compose("welcome-message", [
+                'user' => $this,
+            ])
+            ->setFrom([Yii::$app->params['site-email'] => Yii::$app->name])
+            ->setTo([$this->email => $this->name])
+            ->setSubject('Your account has been created')
+            ->send();
     }
 }

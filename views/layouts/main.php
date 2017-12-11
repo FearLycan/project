@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -21,7 +22,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 
     <!-- Favicon -->
-    <link href="favicon.png" rel="icon" type="image/png">
+    <!--    <link href="favicon.png" rel="icon" type="image/png">-->
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -34,82 +35,83 @@ AppAsset::register($this);
 
 <div class="body-wrap">
     <div id="st-container" class="st-container">
-
-        <nav class="st-menu st-effect-1" id="menu-1">
-            <div class="st-profile">
-                <div class="st-profile-user-wrapper">
-                    <div class="profile-user-image">
-                        <img src="http://via.placeholder.com/56x56" class="img-circle">
-                    </div>
-                    <div class="profile-user-info">
-                        <span class="profile-user-name">Bertram Ozzie</span>
-                        <span class="profile-user-email">username@example.com</span>
+        <?php if (!Yii::$app->user->isGuest): ?>
+            <nav class="st-menu st-effect-1" id="menu-1">
+                <div class="st-profile">
+                    <div class="st-profile-user-wrapper">
+                        <div class="profile-user-image">
+                            <img src="http://via.placeholder.com/56x56" class="img-circle">
+                        </div>
+                        <div class="profile-user-info">
+                            <span class="profile-user-name">Bertram Ozzie</span>
+                            <span class="profile-user-email">username@example.com</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="st-menu-list mt-2">
-                <ul>
-                    <li>
-                        <a href="#">
-                            <i class="ion-ios-bookmarks-outline"></i> Theme documentation
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="ion-ios-cart-outline"></i> Purchase Tribus
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <div class="st-menu-list mt-2">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="ion-ios-bookmarks-outline"></i> Theme documentation
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ion-ios-cart-outline"></i> Purchase Tribus
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-            <h3 class="st-menu-title">Account</h3>
-            <div class="st-menu-list">
-                <ul>
-                    <li>
-                        <a href="#">
-                            <i class="ion-ios-person-outline"></i> User profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="ion-ios-location-outline"></i> My addresses
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="ion-card"></i> My cards
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="ion-ios-unlocked-outline"></i> Password update
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <h3 class="st-menu-title">Account</h3>
+                <div class="st-menu-list">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="ion-ios-person-outline"></i> User profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ion-ios-location-outline"></i> My addresses
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ion-card"></i> My cards
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ion-ios-unlocked-outline"></i> Password update
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-            <h3 class="st-menu-title">Support center</h3>
-            <div class="st-menu-list">
-                <ul>
-                    <li>
-                        <a href="#">
-                            <i class="ion-ios-information-outline"></i> About Tribus
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="ion-ios-email-outline"></i> Contact &amp; support
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-camera"></i> Getting started
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                <h3 class="st-menu-title">Support center</h3>
+                <div class="st-menu-list">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="ion-ios-information-outline"></i> About Tribus
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ion-ios-email-outline"></i> Contact &amp; support
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-camera"></i> Getting started
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        <?php endif; ?>
 
         <div class="st-pusher">
             <div class="st-content">
@@ -124,22 +126,25 @@ AppAsset::register($this);
             	<span class="aux-text d-none d-md-inline-block">
                     <ul class="inline-links inline-links--style-1">
 <!--                        <li class="d-none d-lg-inline-block">...</li>-->
-                        <li>
-                            <i class="fa fa-envelope"></i>
-                            <a href="#">support@webpixels.io</a>
-                        </li>
+                        <!--                        <li>-->
+                        <!--                            <i class="fa fa-envelope"></i>-->
+                        <!--                            <a href="#">support@webpixels.io</a>-->
+                        <!--                        </li>-->
                     </ul>
                 </span>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <nav class="top-navbar-menu">
-                                            <ul class="top-menu">
-                                                <li><a href="#">Sign in</a></li>
-                                                <li><a href="#">Create account</a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                    <?php if (Yii::$app->user->isGuest): ?>
+                                        <div class="col-md-6">
+                                            <nav class="top-navbar-menu">
+                                                <ul class="top-menu">
+                                                    <li><a href="<?= Url::toRoute(['site/login']); ?>">Zaloguj się</a></li>
+                                                    <li><a href="<?= Url::toRoute(['site/registration']); ?>">Rejestracja</a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    <?php endif; ?>
+
                                 </div>
                             </div>
                         </div>
@@ -169,7 +174,7 @@ AppAsset::register($this);
                         <nav class="navbar navbar-expand-lg navbar--uppercase navbar-inverse bg-dark">
                             <div class="container navbar-container">
                                 <!-- Brand/Logo -->
-                                <a class="navbar-brand" href="/">
+                                <a class="navbar-brand" href="<?= Url::home(); ?>">
                                     <img src="#" alt="Boomerang">
                                 </a>
 
@@ -227,19 +232,21 @@ AppAsset::register($this);
                                             </a>
                                         </li>
 
-                                        <!-- Login -->
-                                        <li class="nav-item nav-item-icon">
-                                            <a href="#" class="nav-link hidden-md-down" data-toggle="dropdown">
-                                                <i class="fa fa-user"></i>
-                                            </a>
-                                        </li>
+                                        <?php if (!Yii::$app->user->isGuest): ?>
+                                            <!-- Profile -->
+                                            <li class="nav-item nav-item-icon">
+                                                <a href="#" class="nav-link hidden-md-down" data-toggle="dropdown">
+                                                    <i class="fa fa-user"></i>
+                                                </a>
+                                            </li>
 
-                                        <!-- Slidebar -->
-                                        <li class="nav-item nav-item-icon hidden-md-down">
-                                            <a href="#" class="nav-link btn-st-trigger" data-effect="st-effect-1">
-                                                <span><i class="fa fa-bars"></i></span>
-                                            </a>
-                                        </li>
+                                            <!-- Slidebar -->
+                                            <li class="nav-item nav-item-icon hidden-md-down">
+                                                <a href="#" class="nav-link btn-st-trigger" data-effect="st-effect-1">
+                                                    <span><i class="fa fa-bars"></i></span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
                                     </ul>
 
 
@@ -248,11 +255,9 @@ AppAsset::register($this);
                         </nav>
                     </div>
 
-                    <section class="slice sct-color-1">
-                        <div class="container">
-                            <?php echo $content ?>
-                        </div>
-                    </section>
+                    <div class="page-content">
+                        <?= $content ?>
+                    </div>
 
                     <!-- FOOTER -->
                     <footer id="footer" class="footer">
