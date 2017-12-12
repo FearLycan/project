@@ -17,9 +17,9 @@ class RegistrationForm extends User
     public function rules()
     {
         return [
-            ['name', 'unique'],
+            ['name', 'unique', 'message' => 'Ten pseudonim jest już zajęty'],
             [['name'], 'required', 'message' => 'Jaki będzie Twój pseudonim?'],
-            ['email', 'unique'],
+            ['email', 'unique', 'message' => 'Ten adres jest już w użyciu'],
             [['email'], 'required', 'message' => 'Adres e-mail jest wymagany'],
             ['email', 'email', 'message' => 'Błędny adres e-mail'],
             [['password_first'], 'required', 'message' => 'Hasło jest wymagane'],
@@ -48,9 +48,9 @@ class RegistrationForm extends User
         }
     }
 
-    public function setPassword($password)
-    {
-        $this->password = Yii::$app->security->generatePasswordHash($password);
-    }
+//    public function setPassword($password)
+//    {
+//        $this->password = Yii::$app->security->generatePasswordHash($password);
+//    }
 
 }

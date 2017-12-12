@@ -23,7 +23,7 @@ use yii\db\ActiveRecord;
  *
  * @property Shop[] $shops
  */
-class User extends \yii\db\ActiveRecord
+class User extends ActiveRecord
 {
     //statusy
     const STATUS_INACTIVE = 0; //użytkownik zarejestrował się ale nie potwierdził danych z forum.
@@ -77,6 +77,10 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * @param bool $insert
+     * @return bool
+     */
     public function behaviors()
     {
         return [
@@ -88,23 +92,6 @@ class User extends \yii\db\ActiveRecord
                 'value' => date("Y-m-d H:i:s"),
             ],
         ];
-    }
-
-    /**
-     * @param bool $insert
-     * @return bool
-     */
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            if ($this->isNewRecord) {
-                $this->auth_key = \Yii::$app->security->generateRandomString();
-                $this->verification_code = \Yii::$app->security->generateRandomString();
-                $this->password = $this->hashPassword($this->password);
-            }
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -228,9 +215,14 @@ class User extends \yii\db\ActiveRecord
         return $this->getAuthKey() === $authKey;
     }
 
+    /**
+     * @param $password
+     * @return bool
+     */
     public function validatePassword($password)
     {
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+        //return $this->password === static::hashPassword($password);
     }
 
     public static function hashPassword($password)

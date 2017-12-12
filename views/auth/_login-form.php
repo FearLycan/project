@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <?php $form = ActiveForm::begin([
     'id' => 'login-form',
-    'enableAjaxValidation' => true,
+    'enableAjaxValidation' => false,
     'options' => ['class' => 'form-default'],
 ]) ?>
 

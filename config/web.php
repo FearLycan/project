@@ -29,6 +29,25 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'damianek2326@gmail.com',
+                'password' => 'nwqepnnsbkmbqphr',
+                'port' => '587',
+                'encryption' => 'tls',
+                'streamOptions' => [
+                    'ssl' => [
+                        'allow_self_signed' => true,
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                    ],
+                ],
+            ],
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -38,15 +57,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => array_merge(
-            [
-                'class' => 'yii\db\Connection',
-                'charset' => 'utf8',
-                'enableSchemaCache' => true,
-                'schemaCacheDuration' => 3600,
-            ],
-            require(__DIR__ . '/db-local.php')
-        ),
+        'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

@@ -147,3 +147,7 @@ a.desc:after {
 div.has-error > input{
     border-color: #dc3545 !important;
 }
+
+div.has-success > input{
+    border-color: #28a745 !important;
+}

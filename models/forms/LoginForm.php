@@ -1,8 +1,6 @@
 <?php
 
-
 namespace app\models\forms;
-
 
 use app\models\User;
 use Yii;
@@ -17,7 +15,7 @@ class LoginForm extends User
     public function rules()
     {
         return [
-            [['email', 'name'], 'required'],
+            [['email'], 'required'],
             ['email', 'email', 'message' => 'Błędny adres e-mail.'],
             [['password'], 'required'],
             ['password', 'validatePasswordData']
@@ -47,7 +45,7 @@ class LoginForm extends User
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
+            die(var_dump(Yii::$app->security->generatePasswordHash($this->password)).' ------- '. $this->password);
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Błędny adres e-mail lub hasło');
             }
@@ -74,7 +72,7 @@ class LoginForm extends User
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::find()->where(['email' => $this->email])->one();
+            $this->_user = static::find()->where(['email' => $this->email])->one();
         }
 
         return $this->_user;

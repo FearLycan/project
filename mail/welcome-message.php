@@ -1,15 +1,5 @@
 <?php
 
-/*
- * This file is part of the lowcygier-bazaar.
- *
- * Copyright (c) 2016 Lowcygier.pl <copy@lowcygier.pl>
- *
- * This source code is proprietary to Lowcygier.pl. All rights reserved.
- * Unauthorized using or copying of this file, via any medium is strictly prohibited.
- */
-
-
 use app\modules\admin\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -25,6 +15,6 @@ use yii\helpers\Url;
     <p>Aby aktywować swoje konto musisz dokończyć proces rejestracji klikając, w poniższy link:</p>
     <p>
 
-<?= Html::a('Aktywuj', Url::to(['site/activation', 'code' => $user->verification_code], true)) ?>
+<?= Html::a('Aktywuj', Url::to(['auth/activation', 'code' => $user->verification_code], true)) ?>
 
 <?= $this->render('_message-footer', ['optional' => true]) ?>

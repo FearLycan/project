@@ -62,7 +62,9 @@ class AuthController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
+            //$model->login();
+            //die(var_dump($model->errors));
+            //die(var_dump(Yii::$app->security->generatePasswordHash($model->password)));
             Yii::$app->user->identity->last_login_at = date('Y-m-d H:i:s');
             Yii::$app->user->identity->save(false, ['last_login_at']);
 
@@ -95,6 +97,7 @@ class AuthController extends Controller
             return $this->goHome();
         }
 
+        $status = false;
         $model = new RegistrationForm();
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -104,16 +107,18 @@ class AuthController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->password = User::hashPassword($model->password_first);
+
             $model->auth_key = User::generateUniqueRandomString();
             $model->verification_code = User::generateUniqueRandomString();
             $model->save();
+            die(var_dump($model->password .' ---- '. $model->password_first));
             $model->sendEmail();
-            return $this->goBack();
+            $status = true;
         }
-
 
         return $this->render('registration', [
             'model' => $model,
+            'status' => $status,
         ]);
     }
 
@@ -127,7 +132,7 @@ class AuthController extends Controller
     public function actionActivation($code)
     {
         /* @var $user User */
-        $user = User::find()->where(['code' => $code])->one();
+        $user = User::find()->where(['verification_code' => $code])->one();
 
         $confirm = false;
 
