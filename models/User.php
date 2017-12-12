@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -75,6 +77,36 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['registered_at'],
+                ],
+                'value' => date("Y-m-d H:i:s"),
+            ],
+        ];
+    }
+
+    /**
+     * @param bool $insert
+     * @return bool
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->auth_key = \Yii::$app->security->generateRandomString();
+                $this->verification_code = \Yii::$app->security->generateRandomString();
+                $this->password = $this->hashPassword($this->password);
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -111,6 +143,7 @@ class User extends \yii\db\ActiveRecord
         return [
             static::ROLE_USER => 'Użytkownik',
             static::ROLE_ADMIN => 'Administrator',
+            static::ROLE_MODERSTOR => 'Moderator',
         ];
     }
 
@@ -205,23 +238,6 @@ class User extends \yii\db\ActiveRecord
         return Yii::$app->security->generatePasswordHash($password);
     }
 
-    /**
-     * @param bool $insert
-     * @return bool
-     */
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            if ($this->isNewRecord) {
-                $this->auth_key = \Yii::$app->security->generateRandomString();
-                $this->verification_code = \Yii::$app->security->generateRandomString();
-                $this->password = $this->hashPassword($this->password);
-            }
-            return true;
-        }
-        return false;
-    }
-
     public function sendEmail()
     {
         Yii::$app->mailer
@@ -232,5 +248,21 @@ class User extends \yii\db\ActiveRecord
             ->setTo([$this->email => $this->name])
             ->setSubject('Your account has been created')
             ->send();
+    }
+
+    public static function generateUniqueRandomString()
+    {
+        $code = Yii::$app->getSecurity()->generateRandomString(32);
+
+        $verification_code = static::find()
+            ->where(['verification_code' => $code])
+            ->orWhere(['auth_key' => $code])
+            ->one();
+
+        if (empty($verification_code)) {
+            return $code;
+        } else {
+            return static::generateUniqueRandomString();
+        }
     }
 }

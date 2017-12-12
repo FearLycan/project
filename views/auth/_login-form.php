@@ -10,10 +10,11 @@ use yii\widgets\ActiveForm;
 
 <?php $form = ActiveForm::begin([
     'id' => 'login-form',
+    'enableAjaxValidation' => true,
     'options' => ['class' => 'form-default'],
 ]) ?>
 
-<div class="row">
+<div class="row" style="margin-bottom: 10px;">
     <div class="col-12">
         <?= $form->field($model, 'email')->textInput([
             'class' => 'form-control form-control-lg'
@@ -29,14 +30,14 @@ use yii\widgets\ActiveForm;
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12">
-        <div class="checkbox">
-            <input type="checkbox" id="chkRemember">
-            <label for="chkRemember">Zapamiętaj mnie</label>
-        </div>
-    </div>
-</div>
+<!--<div class="row">-->
+<!--    <div class="col-12">-->
+<!--        <div class="checkbox">-->
+<!--            <input type="checkbox" id="chkRemember">-->
+<!--            <label for="chkRemember">Zapamiętaj mnie</label>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div class="row">
     <div class="col-12">

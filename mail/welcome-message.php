@@ -21,23 +21,10 @@ use yii\helpers\Url;
 
     <h2>Witaj, <?= Html::encode($user->name); ?></h2>
 
+    <h2>Dziękujemy za zarejestrowanie się w naszym serwisie.</h2>
+    <p>Aby aktywować swoje konto musisz dokończyć proces rejestracji klikając, w poniższy link:</p>
     <p>
-        Twoje konto na portalu Smart Helpline Panle własnie zostało założone. Dane do logowania znajdują się ponieżej.
-    </p>
 
-    <table>
-        <tr>
-            <th>Login: </th>
-            <td><?= Html::encode($user->email) ?></td>
-        </tr>
-        <tr>
-            <th>Hasło: </th>
-            <td><?= Html::encode($user->password) ?></td>
-        </tr>
-    </table>
-
-    <p>
-        <?= Html::a('Przejdź do strony', Url::to(['/site'], true)) ?>
-    </p>
+<?= Html::a('Aktywuj', Url::to(['site/activation', 'code' => $user->verification_code], true)) ?>
 
 <?= $this->render('_message-footer', ['optional' => true]) ?>

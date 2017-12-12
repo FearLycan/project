@@ -29,18 +29,6 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport' => true,
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => '#',
-                'username' => '#',
-                'password' => '#',
-                'port' => '#',
-                'encryption' => '#',
-            ],
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -50,7 +38,15 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
+        'db' => array_merge(
+            [
+                'class' => 'yii\db\Connection',
+                'charset' => 'utf8',
+                'enableSchemaCache' => true,
+                'schemaCacheDuration' => 3600,
+            ],
+            require(__DIR__ . '/db-local.php')
+        ),
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

@@ -141,6 +141,7 @@ a.desc:after {
     margin-top: .25rem;
     font-size: .875rem;
     color: #dc3545;
+    position: absolute;
 }
 
 div.has-error > input{

@@ -138,8 +138,8 @@ AppAsset::register($this);
                                         <div class="col-md-6">
                                             <nav class="top-navbar-menu">
                                                 <ul class="top-menu">
-                                                    <li><a href="<?= Url::toRoute(['site/login']); ?>">Zaloguj się</a></li>
-                                                    <li><a href="<?= Url::toRoute(['site/registration']); ?>">Rejestracja</a></li>
+                                                    <li><a href="<?= Url::toRoute(['auth/login']); ?>">Zaloguj się</a></li>
+                                                    <li><a href="<?= Url::toRoute(['auth/registration']); ?>">Rejestracja</a></li>
                                                 </ul>
                                             </nav>
                                         </div>
