@@ -44,9 +44,14 @@ class LoginForm extends User
     public function validatePasswordData($attribute, $params)
     {
         if (!$this->hasErrors()) {
+            /* @var $user User */
             $user = $this->getUser();
-            die(var_dump(Yii::$app->security->generatePasswordHash($this->password)).' ------- '. $this->password);
-            if (!$user || !$user->validatePassword($this->password)) {
+
+            if($user->status == User::STATUS_INACTIVE){
+                $this->addError($attribute, 'Konto nie zostało aktywowane');
+            }
+
+            if (!$user || !Yii::$app->getSecurity()->validatePassword($this->password, $user->password)) {
                 $this->addError($attribute, 'Błędny adres e-mail lub hasło');
             }
         }

@@ -16,7 +16,7 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '-XikfQKlp62-$VyH^3j&304KOyOx6uY1',
+            'cookieValidationKey' => '5ei8POAApkElVkjak0UBwCnE307EHNkA',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -35,8 +35,8 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
-                'username' => 'damianek2326@gmail.com',
-                'password' => 'nwqepnnsbkmbqphr',
+                'username' => '',
+                'password' => '',
                 'port' => '587',
                 'encryption' => 'tls',
                 'streamOptions' => [

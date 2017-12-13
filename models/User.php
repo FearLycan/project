@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -23,7 +24,7 @@ use yii\db\ActiveRecord;
  *
  * @property Shop[] $shops
  */
-class User extends ActiveRecord
+class User extends ActiveRecord implements IdentityInterface
 {
     //statusy
     const STATUS_INACTIVE = 0; //użytkownik zarejestrował się ale nie potwierdził danych z forum.
@@ -222,12 +223,11 @@ class User extends ActiveRecord
     public function validatePassword($password)
     {
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
-        //return $this->password === static::hashPassword($password);
     }
 
     public static function hashPassword($password)
     {
-        return Yii::$app->security->generatePasswordHash($password);
+        return Yii::$app->getSecurity()->generatePasswordHash($password);
     }
 
     public function sendEmail()
