@@ -4,12 +4,11 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
+use app\assets\AdminAsset;
 
-AppAsset::register($this);
+AdminAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -25,57 +24,45 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'Smart-Helpline Admin Panel',
-        'brandUrl' => ['user/index'],
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">
+        <img src="http://via.placeholder.com/120x120" width="30" height="30" class="d-inline-block align-top" alt="">
+        Bootstrap
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    $menuItems[] = ['label' => 'Users', 'url' => ['user/index']];
-    $menuItems[] = ['label' => 'Categories', 'url' => ['category/index']];
-    $menuItems[] = ['label' => 'Files', 'url' => ['file/index']];
-    $menuItems[] = ['label' => 'Contracts', 'url' => ['contract/index']];
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="<?= Url::to(['default/index']) ?>">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= Url::to(['shop/index']) ?>">Sklepy</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-    if (!Yii::$app->user->isGuest) {
-        $menuItems[] = [
-            'label' => Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname,
-            'options' => ['class' => 'hover'],
-            'items' => [
-                ['label' => 'Home Page', 'url' => ['/site/index']],
-                ['label' => 'Admin panel', 'url' => ['/admin/user/index']],
-                '<li class="divider"></li>',
-                ['label' => 'Logout',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post'],
-                ],
-            ]
-        ];
-    }
-
-
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-        'encodeLabels' => false,
-    ]);
-    NavBar::end();
-    ?>
-
+<main>
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= $content ?>
     </div>
-</div>
+</main>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Smart-Helpline Admin Panel <?= date('Y') ?></p>
+        <span class="text-muted">© Project Admin <?= date('Y') ?></span>
     </div>
 </footer>
 
