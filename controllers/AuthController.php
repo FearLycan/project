@@ -130,11 +130,11 @@ class AuthController extends Controller
     public function actionActivation($code)
     {
         /* @var $user User */
-        $user = User::find()->where(['verification_code' => $code])->one();
+        $user = User::find()->where(['verification_code' => $code, 'status' => User::STATUS_INACTIVE])->one();
 
         $confirm = false;
 
-        if (!empty($user) && $user->status == User::STATUS_INACTIVE) {
+        if (!empty($user)) {
             $user->status = User::STATUS_ACTIVE;
             $user->save();
             $confirm = true;

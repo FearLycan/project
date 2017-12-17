@@ -151,3 +151,7 @@ div.has-error > input{
 div.has-success > input{
     border-color: #28a745 !important;
 }
+
+.st-profile{
+    padding: 20px 10px 20px 10px;
+}

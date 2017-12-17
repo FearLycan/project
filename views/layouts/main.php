@@ -36,15 +36,15 @@ AppAsset::register($this);
 <div class="body-wrap">
     <div id="st-container" class="st-container">
         <?php if (!Yii::$app->user->isGuest): ?>
-            <nav class="st-menu st-effect-1" id="menu-1">
+            <nav class="st-menu st-effect-1">
                 <div class="st-profile">
                     <div class="st-profile-user-wrapper">
                         <div class="profile-user-image">
-                            <img src="http://via.placeholder.com/56x56" class="img-circle">
+                            <?= Html::img('@web/images/avatar/noavatar.jpg', ['alt' => 'no-avatar', 'class' => 'img-circle']) ?>
                         </div>
                         <div class="profile-user-info">
-                            <span class="profile-user-name">Bertram Ozzie</span>
-                            <span class="profile-user-email">username@example.com</span>
+                            <span class="profile-user-name"><?= Yii::$app->user->identity->name ?></span>
+                            <span class="profile-user-email"><?= Yii::$app->user->identity->email ?></span>
                         </div>
                     </div>
                 </div>
@@ -118,36 +118,28 @@ AppAsset::register($this);
                 <div class="st-content-inner">
                     <!-- HEADER -->
                     <div class="header">
-                        <!-- Top Bar -->
-                        <div class="top-navbar top-navbar--inverse">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6">
-            	<span class="aux-text d-none d-md-inline-block">
-                    <ul class="inline-links inline-links--style-1">
-<!--                        <li class="d-none d-lg-inline-block">...</li>-->
-                        <!--                        <li>-->
-                        <!--                            <i class="fa fa-envelope"></i>-->
-                        <!--                            <a href="#">support@webpixels.io</a>-->
-                        <!--                        </li>-->
-                    </ul>
-                </span>
-                                    </div>
-
-                                    <?php if (Yii::$app->user->isGuest): ?>
+                        <?php if (Yii::$app->user->isGuest): ?>
+                            <!-- Top Bar -->
+                            <div class="top-navbar top-navbar--inverse">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6"></div>
                                         <div class="col-md-6">
                                             <nav class="top-navbar-menu">
                                                 <ul class="top-menu">
-                                                    <li><a href="<?= Url::toRoute(['auth/login']); ?>">Zaloguj się</a></li>
-                                                    <li><a href="<?= Url::toRoute(['auth/registration']); ?>">Rejestracja</a></li>
+                                                    <li><a href="<?= Url::toRoute(['auth/login']); ?>">Zaloguj się</a>
+                                                    </li>
+                                                    <li><a href="<?= Url::toRoute(['auth/registration']); ?>">Rejestracja</a>
+                                                    </li>
                                                 </ul>
                                             </nav>
                                         </div>
-                                    <?php endif; ?>
 
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php endif; ?>
 
                         <!-- Global Search -->
                         <section id="sctGlobalSearch" class="global-search global-search-overlay">
