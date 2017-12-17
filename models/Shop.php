@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\SluggableBehavior;
 
 /**
  * This is the model class for table "{{%shop}}".
@@ -19,6 +20,16 @@ use Yii;
  */
 class Shop extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */

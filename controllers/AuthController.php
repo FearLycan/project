@@ -107,11 +107,9 @@ class AuthController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->password = User::hashPassword($model->password_first);
-
             $model->auth_key = User::generateUniqueRandomString();
             $model->verification_code = User::generateUniqueRandomString();
             $model->save();
-            die(var_dump($model->password .' ---- '. $model->password_first));
             $model->sendEmail();
             $status = true;
         }

@@ -47,10 +47,4 @@ class RegistrationForm extends User
             $this->addError($attribute, 'Podane hasła są różne');
         }
     }
-
-//    public function setPassword($password)
-//    {
-//        $this->password = Yii::$app->security->generatePasswordHash($password);
-//    }
-
 }

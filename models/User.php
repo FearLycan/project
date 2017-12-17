@@ -6,12 +6,14 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use yii\behaviors\SluggableBehavior;
 
 /**
  * This is the model class for table "{{%user}}".
  *
  * @property integer $id
  * @property string $name
+ * @property string $slug
  * @property string $email
  * @property string $password
  * @property integer $role
@@ -66,6 +68,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             'id' => 'ID',
             'name' => 'Pseudonim',
+            'slug' => 'Slug',
             'email' => 'E-mail',
             'password' => 'Hasło',
             'role' => 'Role',
@@ -80,7 +83,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * @param bool $insert
-     * @return bool
+     * @return array
      */
     public function behaviors()
     {
@@ -91,6 +94,10 @@ class User extends ActiveRecord implements IdentityInterface
                     ActiveRecord::EVENT_BEFORE_INSERT => ['registered_at'],
                 ],
                 'value' => date("Y-m-d H:i:s"),
+            ],
+            'slug' => [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
             ],
         ];
     }
