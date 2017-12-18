@@ -77,7 +77,6 @@ class ShopController extends Controller
             //die(var_dump($model->name));
             $model->author_id = Yii::$app->user->identity->id;
             $model->save();
-            die(var_dump($model->errors));
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

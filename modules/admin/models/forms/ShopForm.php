@@ -49,7 +49,7 @@ class ShopForm extends Shop
             $image->save();
 
             $this->file->saveAs('images/shop/' . $image->name);
-            //$this->file = null;
+            $this->file = $image->url;
             $this->image_id = $image->getPrimaryKey();
             return true;
         } else {
