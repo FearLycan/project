@@ -79,3 +79,18 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+
+.help-block{
+    margin-top: .25rem;
+    font-size: .875rem;
+    color: #dc3545;
+    position: absolute;
+}
+
+div.has-error > input{
+    border-color: #dc3545 !important;
+}
+
+div.has-success > input{
+    border-color: #28a745 !important;
+}

@@ -3,12 +3,13 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\Controller;
+use app\modules\admin\models\forms\ShopForm;
 use Yii;
 use app\modules\admin\models\Shop;
 use app\modules\admin\models\ShopSerach;
-
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ShopController implements the CRUD actions for Shop model.
@@ -64,9 +65,20 @@ class ShopController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Shop();
+        $model = new ShopForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                //return;
+            }
+            //die(var_dump($model->name));
+            $model->author_id = Yii::$app->user->identity->id;
+            $model->save();
+            die(var_dump($model->errors));
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

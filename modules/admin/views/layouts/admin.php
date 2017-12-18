@@ -37,7 +37,7 @@ AdminAsset::register($this);
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="<?= Url::home(); ?>">Home</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -55,6 +55,9 @@ AdminAsset::register($this);
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            'tag' => 'ol',
+            'itemTemplate' => "<li class=\"breadcrumb-item\">{link}</li>\n",
+            'activeItemTemplate' => "<li class=\"breadcrumb-item active\">{link}</li>\n"
         ]) ?>
         <?= $content ?>
     </div>
