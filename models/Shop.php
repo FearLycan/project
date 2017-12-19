@@ -9,6 +9,7 @@ use yii\behaviors\SluggableBehavior;
  *
  * @property integer $id
  * @property string $name
+ * @property string $image
  * @property string $slug
  * @property integer $author_id
  * @property integer $image_id
@@ -16,7 +17,6 @@ use yii\behaviors\SluggableBehavior;
  * @property string $updated_at
  *
  * @property User $author
- * @property Image $image
  */
 class Shop extends \yii\db\ActiveRecord
 {
@@ -44,7 +44,7 @@ class Shop extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['author_id','image_id'], 'integer'],
+            [['author_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'slug', 'image'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
@@ -62,7 +62,6 @@ class Shop extends \yii\db\ActiveRecord
             'slug' => 'Slug',
             'image' => 'Image',
             'author_id' => 'Author ID',
-            'image_id' => 'Image ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -74,13 +73,5 @@ class Shop extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImage()
-    {
-        return $this->hasOne(Image::className(), ['id' => 'image_id']);
     }
 }

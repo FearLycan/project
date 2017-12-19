@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
         </div>
 
         <div class="col">
-            <?= $form->field($model, 'file')->widget(FileInput::classname(), [
+            <?= $form->field($model, 'image')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'image/*'],
                 'pluginOptions' => [
                     'showPreview' => false,

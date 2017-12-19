@@ -94,3 +94,7 @@ div.has-error > input{
 div.has-success > input{
     border-color: #28a745 !important;
 }
+
+.not-set{
+    color: #dc3545;
+}

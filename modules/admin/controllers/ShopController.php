@@ -69,13 +69,13 @@ class ShopController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->image = UploadedFile::getInstance($model, 'image');
             if ($model->upload()) {
                 // file is uploaded successfully
                 //return;
             }
             //die(var_dump($model->name));
-            $model->author_id = Yii::$app->user->identity->id;
+            //$model->author_id = Yii::$app->user->identity->id;
             $model->save();
 
             return $this->redirect(['view', 'id' => $model->id]);

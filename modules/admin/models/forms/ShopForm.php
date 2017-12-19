@@ -9,9 +9,6 @@ use yii\helpers\Inflector;
 
 class ShopForm extends Shop
 {
-    public $file;
-    //public $name;
-
     /**
      * @inheritdoc
      */
@@ -19,8 +16,8 @@ class ShopForm extends Shop
     {
         return [
             [['name'], 'string', 'max' => 255],
-            [['name', 'file'], 'required'],
-            [['file'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024],
+            [['name', 'image'], 'required'],
+            [['image'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024],
         ];
     }
 
@@ -31,7 +28,7 @@ class ShopForm extends Shop
     {
         return [
             'name' => 'Nazwa',
-            'file' => 'Logo',
+            'image' => 'Logo',
         ];
     }
 
@@ -41,16 +38,16 @@ class ShopForm extends Shop
     public function upload()
     {
         if ($this->validate()) {
+            $name = Inflector::slug($this->name) . '.' . $this->image->extension;
 
-            $image = new Image();
-            $image->author_id = Yii::$app->user->identity->id;
-            $image->name = Inflector::slug($this->name) . '.' . $this->file->extension;
-            $image->url = 'images/shop/' . $image->name;
-            $image->save();
+            $url = 'images/shop/' . $name;
 
-            $this->file->saveAs('images/shop/' . $image->name);
-            $this->file = $image->url;
-            $this->image_id = $image->getPrimaryKey();
+            $this->image->saveAs($url);
+            $this->image = $name;
+            $this->author_id = Yii::$app->user->identity->id;
+
+            Image::createThumbnail($url);
+
             return true;
         } else {
             return false;
