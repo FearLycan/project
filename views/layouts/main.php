@@ -204,7 +204,7 @@ AppAsset::register($this);
                                             </a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a href="#" class="nav-link">
+                                            <a href="<?= Url::toRoute(['site/shops']); ?>" class="nav-link">
                                                 Sklepy
                                             </a>
                                         </li>
@@ -381,11 +381,10 @@ AppAsset::register($this);
 <!-- Back to top button -->
 <a href="#" class="back-to-top btn-back-to-top"></a>
 
-<?php //echo Alert::widget() ?>
-<?php //echo $content ?>
-
-
 <?php $this->endBody() ?>
+
+<?= $this->blocks['script'] ?>
+
 </body>
 </html>
 <?php $this->endPage() ?>

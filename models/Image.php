@@ -21,9 +21,9 @@ class Image
     const IMAGE_MAX_HEIGHT = 1024;
 
 
-    public static function createThumbnail($url)
+    public static function createThumbnail($url, $width, $height)
     {
-        Img::getImagine()->open($url)->thumbnail(new Box(static::THUMBNAIL_MAX_WIDTH, static::IMAGE_MAX_HEIGHT))
+        Img::getImagine()->open($url)->thumbnail(new Box($width, $height))
             ->save($url, ['quality' => 90]);
     }
 

@@ -12,7 +12,7 @@ class Controller extends \yii\web\Controller
      */
     public function notFound($message = null) {
         if ($message === null) {
-            $message = 'Strona, której szukasz nie istnieje.';
+            $message = 'Page not found';
         }
         throw new NotFoundHttpException($message);
     }
@@ -24,7 +24,8 @@ class Controller extends \yii\web\Controller
      */
     public function accessDenied($message = null) {
         if ($message === null) {
-            $message = 'Nie jesteś uprawniony do przeglądania tej strony.';
+            //$message = 'Nie jesteś uprawniony do przeglądania tej strony.';
+            $message = 'Page not found';
         }
         throw new ForbiddenHttpException($message);
     }

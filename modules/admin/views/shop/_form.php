@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\admin\models\Shop;
 use kartik\file\FileInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -13,7 +14,7 @@ use yii\widgets\ActiveForm;
 
 
     <?php $form = ActiveForm::begin(); ?>
-    <div class="row" style="margin-bottom: 20px;">
+    <div class="row" style="margin-bottom: 15px;">
         <div class="col">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
         </div>
@@ -28,6 +29,15 @@ use yii\widgets\ActiveForm;
                     'showUpload' => false
                 ]
             ]); ?>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 15px;">
+        <div class="col-8">
+            <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-4">
+            <?= $form->field($model, 'status')->dropDownList(Shop::getStatusNames()) ?>
         </div>
     </div>
 

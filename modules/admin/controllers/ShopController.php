@@ -66,17 +66,14 @@ class ShopController extends Controller
     public function actionCreate()
     {
         $model = new ShopForm();
+        $model->scenario = ShopForm::SCENARIO_CREATE;
 
         if ($model->load(Yii::$app->request->post())) {
 
             $model->image = UploadedFile::getInstance($model, 'image');
             if ($model->upload()) {
-                // file is uploaded successfully
-                //return;
+                $model->save();
             }
-            //die(var_dump($model->name));
-            //$model->author_id = Yii::$app->user->identity->id;
-            $model->save();
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -91,10 +88,12 @@ class ShopController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = ShopForm::SCENARIO_UPDATE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -127,7 +126,7 @@ class ShopController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Shop::findOne($id)) !== null) {
+        if (($model = ShopForm::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

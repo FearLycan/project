@@ -10,9 +10,11 @@ use app\components\AccessControl;
 //use app\models\FileSearch;
 //use app\models\User;
 use app\models\forms\RegistrationForm;
+use app\models\Shop;
 use app\models\User;
 use Yii;
 use app\components\Controller;
+use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 
 //use yii\validators\ValidationAsset;
@@ -38,13 +40,6 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
-                    [
-                        'allow' => true,
-                        'actions' => [
-                            'login'
-                        ],
-                        'roles' => ['?'],
-                    ]
                 ],
             ],
             'verbs' => [
@@ -80,5 +75,22 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionShops()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Shop::find()->where(['status' => Shop::STATUS_ACTIVE]),
+            'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
+            'pagination' => [
+                'pageSize' => 40,
+            ],
+        ]);
+
+        return $this->render('shops', [
+            'dataProvider' => $dataProvider,
+        ]);
+
+        //return $this->render('shops');
     }
 }

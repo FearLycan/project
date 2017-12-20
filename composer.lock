@@ -510,12 +510,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a6bba31ea11252124a16ca4a09fff7bbebd916ce"
+                "reference": "662b569ee334a6b85dcbae23245d28ab4afbd48b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a6bba31ea11252124a16ca4a09fff7bbebd916ce",
-                "reference": "a6bba31ea11252124a16ca4a09fff7bbebd916ce",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/662b569ee334a6b85dcbae23245d28ab4afbd48b",
+                "reference": "662b569ee334a6b85dcbae23245d28ab4afbd48b",
                 "shasum": ""
             },
             "require": {
@@ -602,7 +602,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-12-18T20:23:12+00:00"
+            "time": "2017-12-20T14:16:25+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1111,12 +1111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "502792ca151493f6b017520839ed978aefd77bf1"
+                "reference": "4f0b7effce77e8929879e07e5856f7779bf4f2d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/502792ca151493f6b017520839ed978aefd77bf1",
-                "reference": "502792ca151493f6b017520839ed978aefd77bf1",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/4f0b7effce77e8929879e07e5856f7779bf4f2d9",
+                "reference": "4f0b7effce77e8929879e07e5856f7779bf4f2d9",
                 "shasum": ""
             },
             "require": {
@@ -1153,7 +1153,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-12-18T20:34:41+00:00"
+            "time": "2017-12-18T20:53:47+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -2117,12 +2117,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "408d0d190976d08de44f19a8e502195a423b1281"
+                "reference": "329177051e1c113473530ab0486cb5e892e7e161"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/408d0d190976d08de44f19a8e502195a423b1281",
-                "reference": "408d0d190976d08de44f19a8e502195a423b1281",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/329177051e1c113473530ab0486cb5e892e7e161",
+                "reference": "329177051e1c113473530ab0486cb5e892e7e161",
                 "shasum": ""
             },
             "require": {
@@ -2173,7 +2173,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2017-12-16T05:51:45+00:00"
+            "time": "2017-12-19T21:05:59+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -2688,12 +2688,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "102b7a011bab43ea71f358c8e02d51dd35e7d4ed"
+                "reference": "bf56f79b8604e4dd32c236048606c507e9dbbcd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/102b7a011bab43ea71f358c8e02d51dd35e7d4ed",
-                "reference": "102b7a011bab43ea71f358c8e02d51dd35e7d4ed",
+                "url": "https://api.github.com/repos/symfony/console/zipball/bf56f79b8604e4dd32c236048606c507e9dbbcd3",
+                "reference": "bf56f79b8604e4dd32c236048606c507e9dbbcd3",
                 "shasum": ""
             },
             "require": {
@@ -2748,7 +2748,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:50:39+00:00"
+            "time": "2017-12-20T11:11:10+00:00"
         },
         {
             "name": "symfony/css-selector",

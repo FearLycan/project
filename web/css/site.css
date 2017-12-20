@@ -155,3 +155,7 @@ div.has-success > input{
 .st-profile{
     padding: 20px 10px 20px 10px;
 }
+
+.block--style-3 ul.aux-info li{
+    font-size: 0.9rem;
+}
