@@ -2,24 +2,29 @@
 
 namespace app\modules\admin\models;
 
-use Yii;
+//use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\Type;
+
+//use app\modules\admin\models\Type;
 
 /**
  * TypeSearch represents the model behind the search form about `app\modules\admin\models\Type`.
  */
 class TypeSearch extends Type
 {
+    public $author;
+    public $status;
+    public $name;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'author_id'], 'integer'],
-            [['name', 'slug', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'status'], 'integer'],
+            [['name', 'slug', 'created_at', 'updated_at', 'author'], 'string'],
         ];
     }
 
@@ -43,30 +48,26 @@ class TypeSearch extends Type
     {
         $query = Type::find();
 
-        // add conditions that should always apply here
+        $query->joinWith(['author author']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes['author'] = [
+            'asc' => ['author.name' => SORT_ASC],
+            'desc' => ['author.name' => SORT_DESC],
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'author_id' => $this->author_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'slug', $this->slug]);
+        $query->andFilterWhere(['like', 'type.name', $this->name])
+            ->andFilterWhere(['like', 'author', $this->author])
+            ->andFilterWhere(['=', 'type.status', $this->status]);
 
         return $dataProvider;
     }

@@ -12,14 +12,16 @@ use app\modules\admin\models\Shop;
  */
 class ShopSerach extends Shop
 {
+    public $author;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'author_id'], 'integer'],
-            [['name', 'slug', 'image', 'created_at', 'updated_at'], 'safe'],
+            [['id'], 'integer'],
+            [['name', 'slug', 'image', 'created_at', 'updated_at', 'author'], 'string'],
         ];
     }
 
@@ -43,11 +45,18 @@ class ShopSerach extends Shop
     {
         $query = Shop::find();
 
+        $query->joinWith(['author author']);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['author'] = [
+            'asc' => ['author.name' => SORT_ASC],
+            'desc' => ['author.name' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -60,13 +69,13 @@ class ShopSerach extends Shop
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'author_id' => $this->author_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'slug', $this->slug])
+            ->andFilterWhere(['like', 'author', $this->author])
             ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;

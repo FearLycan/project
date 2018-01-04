@@ -1,4 +1,4 @@
-main{
+main {
     padding-top: 90px;
     padding-bottom: 20px;
 }
@@ -7,10 +7,12 @@ html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
 }
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -80,21 +82,30 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
-.help-block{
+.help-block {
     margin-top: .25rem;
     font-size: .875rem;
     color: #dc3545;
     position: absolute;
 }
 
-div.has-error > input{
+div.has-error > input {
     border-color: #dc3545 !important;
 }
 
-div.has-success > input{
+div.has-success > input {
     border-color: #28a745 !important;
 }
 
-.not-set{
+.not-set {
     color: #dc3545;
+}
+
+.table th, .table td {
+    padding: 0.55rem;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+    padding: 0.2rem 0.7rem;
+    line-height: 1.3;
 }
