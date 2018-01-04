@@ -58,7 +58,7 @@ class ShopForm extends Shop
             $url = 'images/shop/' . $name;
 
             $this->image->saveAs($url);
-            //$this->image->saveAs($url);
+
             $this->image = $name;
             $this->author_id = Yii::$app->user->identity->id;
 
