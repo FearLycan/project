@@ -51,6 +51,9 @@ AdminAsset::register($this);
                 <a class="nav-link" href="<?= Url::to(['type/index']) ?>">Typy</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="<?= Url::to(['tag/index']) ?>">Tagi</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<?= Url::to(['user/index']) ?>">Użytkownicy</a>
             </li>
         </ul>

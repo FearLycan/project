@@ -109,3 +109,15 @@ div.has-success > input {
     padding: 0.2rem 0.7rem;
     line-height: 1.3;
 }
+
+table.detail-view th {
+    width: 20%;
+}
+
+table.detail-view td {
+    width: 80%;
+}
+
+.breadcrumb {
+    padding: 0.3rem 0.5rem;
+}
