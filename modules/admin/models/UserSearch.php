@@ -5,23 +5,22 @@ namespace app\modules\admin\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\Shop;
+use app\modules\admin\models\User;
 
 /**
- * ShopSerach represents the model behind the search form about `app\modules\admin\models\Shop`.
+ * UserSearch represents the model behind the search form about `app\modules\admin\models\User`.
  */
-class ShopSerach extends Shop
+class UserSearch extends User
 {
-    public $author;
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id','status'], 'integer'],
-            [['name', 'slug', 'image', 'created_at', 'updated_at', 'author'], 'string'],
+            [['id', 'role', 'status'], 'integer'],
+            [['name', 'slug', 'email'], 'string'],
+            [['registered_at', 'last_login_at', 'last_seen'], 'default', 'value' => null],
         ];
     }
 
@@ -43,20 +42,13 @@ class ShopSerach extends Shop
      */
     public function search($params)
     {
-        $query = Shop::find();
-
-        $query->joinWith(['author author']);
+        $query = User::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
-        $dataProvider->sort->attributes['author'] = [
-            'asc' => ['author.name' => SORT_ASC],
-            'desc' => ['author.name' => SORT_DESC],
-        ];
 
         $this->load($params);
 
@@ -69,15 +61,19 @@ class ShopSerach extends Shop
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'role' => $this->role,
+            'status' => $this->status,
+            'registered_at' => $this->registered_at,
+            'last_login_at' => $this->last_login_at,
+            'last_seen' => $this->last_seen,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'slug', $this->slug])
-            ->andFilterWhere(['like', 'author', $this->author])
-            ->andFilterWhere(['=', 'shop.status', $this->status])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'password', $this->password])
+            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'verification_code', $this->verification_code]);
 
         return $dataProvider;
     }

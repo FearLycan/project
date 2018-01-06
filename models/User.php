@@ -137,8 +137,8 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             static::ROLE_USER => 'Użytkownik',
-            static::ROLE_ADMIN => 'Administrator',
             static::ROLE_MODERSTOR => 'Moderator',
+            static::ROLE_ADMIN => 'Administrator',
         ];
     }
 
