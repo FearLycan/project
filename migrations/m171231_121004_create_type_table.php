@@ -24,6 +24,9 @@ class m171231_121004_create_type_table extends Migration
 
         $this->createIndex('{{%type_created_at_index}}', '{{%type}}', 'created_at');
         $this->createIndex('{{%type_updated_at_index}}', '{{%type}}', 'updated_at');
+        $this->createIndex('{{%type_name_index}}', '{{%type}}', 'name');
+        $this->createIndex('{{%type_status_index}}', '{{%type}}', 'status');
+
         $this->addForeignKey('{{%type_author_id_fk}}', '{{%type}}', 'author_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
     }
 

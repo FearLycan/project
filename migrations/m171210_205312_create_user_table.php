@@ -31,6 +31,8 @@ class m171210_205312_create_user_table extends Migration
 
         // unique constraints
         $this->createIndex('{{%user_email_unique}}', '{{%user}}', 'email', true);
+        $this->createIndex('{{%user_name_unique}}', '{{%user}}', 'name', true);
+
         // indexes for performance
         $this->createIndex('{{%user_status_index}}', '{{%user}}', 'status');
         $this->createIndex('{{%user_role_index}}', '{{%user}}', 'role');

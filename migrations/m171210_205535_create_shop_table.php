@@ -28,6 +28,8 @@ class m171210_205535_create_shop_table extends Migration
 
         $this->createIndex('{{%shop_created_at_index}}', '{{%shop}}', 'created_at');
         $this->createIndex('{{%shop_updated_at_index}}', '{{%shop}}', 'updated_at');
+        $this->createIndex('{{%shop_status_index}}', '{{%shop}}', 'status');
+
         $this->addForeignKey('{{%shop_author_id_fk}}', '{{%shop}}', 'author_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
     }
 
