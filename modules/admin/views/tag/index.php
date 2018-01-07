@@ -3,6 +3,7 @@
 use app\modules\admin\models\Tag;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\jui\DatePicker;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -56,7 +57,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->getStatusName();
                 },
             ],
-            'created_at',
+            [
+                'attribute' => 'created_at',
+                'filter' => DatePicker::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'created_at',
+                    'language' => 'pl',
+                    'dateFormat' => 'yyyy-MM-dd',
+                    'options' => ['class' => 'form-control']
+                ]),
+                'format' => 'html',
+
+            ],
+            //'created_at',
             // 'updated_at',
 
             [

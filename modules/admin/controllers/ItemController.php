@@ -2,19 +2,24 @@
 
 namespace app\modules\admin\controllers;
 
-use app\modules\admin\models\forms\TagForm;
+use app\modules\admin\models\forms\ItemForm;
+use app\modules\admin\models\Shop;
+use app\modules\admin\models\Type;
 use Yii;
-use app\modules\admin\models\Tag;
-use app\modules\admin\models\searches\TagSearch;
+use app\modules\admin\models\Item;
+use app\modules\admin\models\searches\ItemSearch;
 use app\modules\admin\components\Controller;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
+use yii\web\UploadedFile;
+use yii\widgets\ActiveForm;
 
 /**
- * TagController implements the CRUD actions for Tag model.
+ * ItemController implements the CRUD actions for Item model.
  */
-class TagController extends Controller
+class ItemController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +37,12 @@ class TagController extends Controller
     }
 
     /**
-     * Lists all Tag models.
+     * Lists all Item models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TagSearch();
+        $searchModel = new ItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +52,7 @@ class TagController extends Controller
     }
 
     /**
-     * Displays a single Tag model.
+     * Displays a single Item model.
      * @param integer $id
      * @return mixed
      */
@@ -59,27 +64,41 @@ class TagController extends Controller
     }
 
     /**
-     * Creates a new Tag model.
+     * Creates a new Item model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new TagForm();
+        $model = new ItemForm();
+        $model->scenario = ItemForm::SCENARIO_CREATE;
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->author_id = Yii::$app->user->identity->id;
-            $model->save();
+
+            $model->image = UploadedFile::getInstance($model, 'image');
+
+            die(var_dump($model->tags));
+
+            if ($model->upload()) {
+                $model->author_id = Yii::$app->user->identity->id;
+                $model->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+            $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
             return $this->render('create', [
                 'model' => $model,
+                'shops' => $shops,
+                'types' => $types,
             ]);
         }
     }
 
     /**
-     * Updates an existing Tag model.
+     * Updates an existing Item model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -87,18 +106,25 @@ class TagController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = ItemForm::SCENARIO_UPDATE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+            $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
             return $this->render('update', [
                 'model' => $model,
+                'shops' => $shops,
+                'types' => $types,
             ]);
         }
     }
 
     /**
-     * Deletes an existing Tag model.
+     * Deletes an existing Item model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -111,75 +137,18 @@ class TagController extends Controller
     }
 
     /**
-     * Finds the Tag model based on its primary key value.
+     * Finds the Item model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Tag the loaded model
+     * @return Item the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = TagForm::findOne($id)) !== null) {
+        if (($model = ItemForm::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    /**
-     * Get options for Select2 widget in offer form.
-     *
-     * @param string $phrase
-     * @param int $page
-     * @return array
-     */
-    public function actionList($phrase, $page = 1)
-    {
-        $limit = 20;
-//        $games = Tag::find()
-//            ->onlyWithTitle($phrase)
-//            ->orderBy(['rating' => SORT_DESC])
-//            ->limit($limit)
-//            ->offset(($page - 1) * $limit)
-//            ->all();
-
-        $tags = Tag::find()->select(['id', 'name'])
-            ->where(['status' => Tag::STATUS_ACTIVE])
-            ->andWhere(['like', 'name', $phrase])
-            ->limit($limit)
-            ->offset(($page - 1) * $limit)
-            ->all();
-
-        $results = [];
-        /* @var $tag Tag */
-        foreach ($tags as $tag) {
-//            $stats = Offer::find()
-//                ->select([
-//                    'count' => new Expression('COUNT(*)'),
-//                    'min' => new Expression('MIN(price)'),
-//                ])
-//                ->where([
-//                    'game_id' => $game->id,
-//                    'status' => Offer::getActiveStatuses(),
-//                ])
-//                ->asArray()
-//                ->one();
-            $results[] = [
-                'id' => $tag->name,
-                'name' => $tag->name,
-//                'image' => $game->getImage(Game::IMAGE_SIZE_SMALL),
-//                'count' => $stats['count'],
-//                'min' => $stats['min'],
-            ];
-        }
-
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        return [
-            'results' => $results,
-            'pagination' => [
-                'page' => $page,
-                'more' => count($results) === $limit,
-            ],
-        ];
     }
 }

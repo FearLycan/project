@@ -2,9 +2,7 @@
 
 namespace app\models;
 
-use yii\behaviors\SluggableBehavior;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
+
 use yii\imagine\Image as Img;
 use Imagine\Gd;
 use Imagine\Image\Box;
@@ -17,19 +15,22 @@ class Image
     const THUMBNAIL_MAX_WIDTH = 250;
     const THUMBNAIL_MAX_HEIGHT = 250;
 
-    const IMAGE_MAX_WIDTH = 1024;
-    const IMAGE_MAX_HEIGHT = 1024;
+    const IMAGE_MAX_WIDTH = 700;
+    const IMAGE_MAX_HEIGHT = 700;
+
+    const URL = 'images/item/';
+    const URL_THUMBNAIL = 'images/item/thumbnail/';
 
 
-    public static function createThumbnail($url, $width, $height)
+    public static function createThumbnail($url, $urlSave ,$width, $height)
     {
         Img::getImagine()->open($url)->thumbnail(new Box($width, $height))
-            ->save($url, ['quality' => 90]);
+            ->save($urlSave, ['quality' => 90]);
     }
 
-    public static function changeSize($url)
+    public static function changeSize($url, $width, $height)
     {
-        Img::getImagine()->open($url)->thumbnail(new Box(static::IMAGE_MAX_WIDTH, static::IMAGE_MAX_HEIGHT))
+        Img::getImagine()->open($url)->thumbnail(new Box($width, $height))
             ->save($url, ['quality' => 99]);
     }
 }

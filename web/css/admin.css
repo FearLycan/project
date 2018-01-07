@@ -97,6 +97,10 @@ div.has-success > input {
     border-color: #28a745 !important;
 }
 
+div.has-success > select {
+    border-color: #28a745 !important;
+}
+
 .not-set {
     color: #dc3545;
 }
@@ -120,4 +124,12 @@ table.detail-view td {
 
 .breadcrumb {
     padding: 0.3rem 0.5rem;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-toggle::after{
+    border: none;
 }
