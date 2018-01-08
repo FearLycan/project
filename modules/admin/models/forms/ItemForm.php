@@ -5,6 +5,7 @@ namespace app\modules\admin\models\forms;
 use app\modules\admin\models\Image;
 use app\modules\admin\models\Item;
 use app\modules\admin\models\Shop;
+use app\modules\admin\models\Tag;
 use app\modules\admin\models\Type;
 use Yii;
 use yii\helpers\Inflector;
@@ -15,6 +16,7 @@ class ItemForm extends Item
     const SCENARIO_UPDATE = 'update';
 
     public $tags;
+    public $image_name;
 
     /**
      * {@inheritdoc}
@@ -38,9 +40,9 @@ class ItemForm extends Item
             //[['tags'], 'required'],
             //[['tags'], 'safe'],
 
-            //['tags', 'tag'],
+            ['tags', 'tag'],
 
-            [['image'], 'required', 'on' => static::SCENARIO_CREATE],
+            [['image_name'], 'imageValidation', 'on' => static::SCENARIO_CREATE],
             [['image'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024],
 
             [['status'], 'in', 'range' => array_keys(static::getStatuses())],
@@ -77,12 +79,41 @@ class ItemForm extends Item
         }
     }
 
-//    public function tag($attribute)
-//    {
-//        //print_r($this->tags);
-//
-//
-//        $this->addError($attribute, $this->tags);
-//
-//    }
+    public function tag($attribute)
+    {
+        //die(var_dump($this->tags));
+
+        foreach ($this->tags as $tag) {
+
+            $t = Tag::find()->where(['name' => $tag])->one();
+            $text = '';
+            if (!empty($t) && !$t->isActive()) {
+                $text = $text . '[' . $tag . ']';
+            }
+        }
+
+        if (!empty($text)) {
+            $this->addError('tags', 'Tagi: ' . $text . ' są niedozwolone.');
+        }
+
+
+    }
+
+    public function imageValidation($attribute)
+    {
+        if(empty($this->image_name)){
+            $this->addError('image', 'Wybierz grafikę');
+        }else{
+            $this->addError('image', 'not empty');
+        }
+    }
+
+
+    public function beforeValidate()
+    {
+        if (!empty($this->image)) {
+            $this->image = 'image_name';
+        }
+        return parent::beforeValidate();
+    }
 }

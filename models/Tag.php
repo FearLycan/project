@@ -58,7 +58,7 @@ class Tag extends ActiveRecord
     public function rules()
     {
         return [
-            [['frequency', 'author_id','status'], 'integer'],
+            [['frequency', 'author_id', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
@@ -138,5 +138,14 @@ class Tag extends ActiveRecord
     {
         $this->frequency = $this->frequency + 1;
         $this->save(false, ['frequency']);
+    }
+
+    public function isActive()
+    {
+        if ($this->status == self::STATUS_ACTIVE) {
+            return true;
+        }
+
+        return false;
     }
 }

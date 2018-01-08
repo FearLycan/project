@@ -73,13 +73,20 @@ class ItemController extends Controller
         $model = new ItemForm();
         $model->scenario = ItemForm::SCENARIO_CREATE;
 
+//        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+//            Yii::$app->response->format = Response::FORMAT_JSON;
+//            return ActiveForm::validate($model);
+//        }
+
         if ($model->load(Yii::$app->request->post())) {
 
             $model->image = UploadedFile::getInstance($model, 'image');
+            $model->image = $model->image->name;
 
-            die(var_dump($model->tags));
+
 
             if ($model->upload()) {
+                die(var_dump($model->tags));
                 $model->author_id = Yii::$app->user->identity->id;
                 $model->save();
             }

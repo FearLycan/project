@@ -21,6 +21,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'id' => 'item-form',
         //'enableAjaxValidation' => true,
+        'options' => ['enctype' => 'multipart/form-data']
     ]); ?>
 
     <div class="row" style="margin-bottom: 15px;">
@@ -34,14 +35,19 @@ use yii\widgets\ActiveForm;
 
     <div class="row" style="margin-bottom: 15px;">
         <div class="col-md-6">
+            <?= $form->field($model, 'image_name')->hiddenInput()->label(false) ?>
             <?= $form->field($model, 'image')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'image/*'],
                 'pluginOptions' => [
                     'showPreview' => false,
                     'showCaption' => true,
                     'showRemove' => true,
-                    'showUpload' => false
-                ]
+                    'showUpload' => false,
+                    'showCancel' => false
+                ],
+                'pluginEvents' => [
+                    //'fileselect' => 'function() { var file = $(".file-caption-name").attr( "title" ); console.log(file); $("input[name=\'ItemForm[image]\']").val(file); }',
+                ],
             ]); ?>
         </div>
     </div>
