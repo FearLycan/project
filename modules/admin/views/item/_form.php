@@ -35,7 +35,6 @@ use yii\widgets\ActiveForm;
 
     <div class="row" style="margin-bottom: 15px;">
         <div class="col-md-6">
-            <?= $form->field($model, 'image_name')->hiddenInput()->label(false) ?>
             <?= $form->field($model, 'image')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'image/*'],
                 'pluginOptions' => [

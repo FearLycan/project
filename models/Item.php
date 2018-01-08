@@ -14,7 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property string $slug
  * @property string $url
- * @property string $images
+ * @property string $image
  * @property integer $gender
  * @property integer $shop_id
  * @property integer $type_id
@@ -74,7 +74,7 @@ class Item extends ActiveRecord
             [['shop_id', 'type_id', 'status', 'author_id'], 'integer'],
             [['shop_id', 'type_id', 'author_id'], 'required'],
             [['created_at', 'updated_at', 'gender'], 'string'],
-            [['title', 'slug', 'url', 'images'], 'string', 'max' => 255],
+            [['title', 'slug', 'url', 'image'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['shop_id'], 'exist', 'skipOnError' => true, 'targetClass' => Shop::className(), 'targetAttribute' => ['shop_id' => 'id']],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_id' => 'id']],
@@ -91,7 +91,7 @@ class Item extends ActiveRecord
             'title' => 'Title',
             'slug' => 'Slug',
             'url' => 'Url',
-            'images' => 'Images',
+            'image' => 'Image',
             'gender' => 'Gender',
             'shop_id' => 'Shop ID',
             'type_id' => 'Type ID',

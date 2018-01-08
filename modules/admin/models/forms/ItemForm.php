@@ -16,7 +16,6 @@ class ItemForm extends Item
     const SCENARIO_UPDATE = 'update';
 
     public $tags;
-    public $image_name;
 
     /**
      * {@inheritdoc}
@@ -42,8 +41,10 @@ class ItemForm extends Item
 
             ['tags', 'tag'],
 
-            [['image_name'], 'imageValidation', 'on' => static::SCENARIO_CREATE],
+            [['image'], 'required', 'on' => static::SCENARIO_CREATE],
             [['image'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024],
+            //[['upload_image'], 'imageValidation'],
+            //[['upload_image'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024],
 
             [['status'], 'in', 'range' => array_keys(static::getStatuses())],
             [['gender'], 'in', 'range' => array_keys(static::getGendersNames())],
@@ -60,13 +61,16 @@ class ItemForm extends Item
     {
         if ($this->validate()) {
             $randomString = Yii::$app->getSecurity()->generateRandomString(10);
+            //die(var_dump($this->image->extension));
             $name = Inflector::slug($this->title) . '_' . $randomString . '.' . $this->image->extension;
+
+
 
             $url = Image::URL . $name;
             $urlThumb = Image::URL_THUMBNAIL . $name;
 
             $this->image->saveAs($url);
-            $this->image->saveAs($urlThumb);
+            //$this->image->saveAs($urlThumb);
 
             $this->image = $name;
 
@@ -84,7 +88,7 @@ class ItemForm extends Item
         //die(var_dump($this->tags));
 
         foreach ($this->tags as $tag) {
-
+            /* @var Tag $t */
             $t = Tag::find()->where(['name' => $tag])->one();
             $text = '';
             if (!empty($t) && !$t->isActive()) {
@@ -101,7 +105,7 @@ class ItemForm extends Item
 
     public function imageValidation($attribute)
     {
-        if(empty($this->image_name)){
+        if(empty($this->upload_image)){
             $this->addError('image', 'Wybierz grafikę');
         }else{
             $this->addError('image', 'not empty');
@@ -109,11 +113,13 @@ class ItemForm extends Item
     }
 
 
-    public function beforeValidate()
-    {
-        if (!empty($this->image)) {
-            $this->image = 'image_name';
-        }
-        return parent::beforeValidate();
-    }
+//    public function beforeValidate()
+//    {
+//        if(empty($this->upload_image)){
+//            die(var_dump('empty'));
+//        }else{
+//            die(var_dump('not empty'));
+//        }
+//        return parent::beforeValidate();
+//    }
 }

@@ -140,6 +140,9 @@ class Tag extends ActiveRecord
         $this->save(false, ['frequency']);
     }
 
+    /**
+     * @return bool
+     */
     public function isActive()
     {
         if ($this->status == self::STATUS_ACTIVE) {
@@ -147,5 +150,28 @@ class Tag extends ActiveRecord
         }
 
         return false;
+    }
+
+    public static function saveTags($array, $itemID)
+    {
+        foreach ($array as $item){
+            $tag = self::find()->where(['name' => $item])->one();
+
+            if(empty($tag)){
+                $tag = new Tag();
+                $tag->name = $item;
+                $tag->frequency = 1;
+                $tag->status = self::STATUS_ACTIVE;
+                $tag->author_id = Yii::$app->user->identity->id;
+                $tag->save();
+
+                ItemTag::connect($tag->id, $itemID);
+            }
+
+            if($tag->isActive()){
+                ItemTag::connect($tag->id, $itemID);
+                $tag->frequencyIncrement();
+            }
+        }
     }
 }

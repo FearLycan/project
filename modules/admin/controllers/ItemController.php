@@ -3,13 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\models\forms\ItemForm;
+use app\modules\admin\models\Image;
 use app\modules\admin\models\Shop;
+use app\modules\admin\models\Tag;
 use app\modules\admin\models\Type;
 use Yii;
 use app\modules\admin\models\Item;
 use app\modules\admin\models\searches\ItemSearch;
 use app\modules\admin\components\Controller;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Inflector;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
@@ -73,6 +76,9 @@ class ItemController extends Controller
         $model = new ItemForm();
         $model->scenario = ItemForm::SCENARIO_CREATE;
 
+        $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+        $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
 //        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
 //            Yii::$app->response->format = Response::FORMAT_JSON;
 //            return ActiveForm::validate($model);
@@ -80,21 +86,58 @@ class ItemController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->image = UploadedFile::getInstance($model, 'image');
-            $model->image = $model->image->name;
+            $image = UploadedFile::getInstance($model, 'image');
+            //die(var_dump($image));
 
+//            if(!empty($image)){
+//                $randomString = Yii::$app->getSecurity()->generateRandomString(10);
+//                $name = Inflector::slug($model->title) . '_' . $randomString . '.' . $image->extension;
+//
+//                $url = Image::URL . $name;
+//
+//                $image->saveAs($url);
+//            }
 
+            //---------------------------
+            $randomString = Yii::$app->getSecurity()->generateRandomString(10);
+            $name = Inflector::slug($model->title) . '_' . $randomString . '.' . $image->extension;
 
-            if ($model->upload()) {
-                die(var_dump($model->tags));
-                $model->author_id = Yii::$app->user->identity->id;
-                $model->save();
+            $url = Image::URL . $name;
+            $urlThumb = Image::URL_THUMBNAIL . $name;
+
+            //$urlThumb = Image::URL_THUMBNAIL . $name;
+
+            //$this->image->saveAs($url);
+            //$this->image->saveAs($urlThumb);
+
+            $model->image = $name;
+            $model->author_id = Yii::$app->user->identity->id;
+            //---------------------------
+               // die(var_dump($model));
+            if ($model->save()) {
+                $image->saveAs($url);
+
+                Tag::saveTags($model->tags, $model->id);
+
+                Image::createThumbnail($url, $urlThumb, Image::THUMBNAIL_MAX_WIDTH, Image::THUMBNAIL_MAX_HEIGHT);
+                Image::changeSize($url, Image::IMAGE_MAX_WIDTH, Image::IMAGE_MAX_HEIGHT);
+
+                return $this->redirect(['view', 'id' => $model->id]);
             }
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
 
-            $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
-            $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
+//            if ($model->image && $model->upload()) {
+//                die(var_dump($model->tags));
+//                $model->author_id = Yii::$app->user->identity->id;
+//                $model->save();
+//            }
+            return $this->render('create', [
+                'model' => $model,
+                'shops' => $shops,
+                'types' => $types,
+            ]);
+
+        } else {
 
             return $this->render('create', [
                 'model' => $model,

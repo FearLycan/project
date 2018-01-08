@@ -62,4 +62,16 @@ class ItemTag extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Tag::className(), ['id' => 'tag_id']);
     }
+
+    public static function connect($itemID, $tagID)
+    {
+        $connect = self::find()->where(['item_id' => $itemID, 'tag_id' => $tagID])->one();
+
+        if (empty($connect)) {
+            $connect = new ItemTag();
+            $connect->item_id = $itemID;
+            $connect->tag_id = $tagID;
+            $connect->save();
+        }
+    }
 }

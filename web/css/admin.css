@@ -133,3 +133,7 @@ table.detail-view td {
 .dropdown-toggle::after{
     border: none;
 }
+
+.file-caption.icon-visible .file-caption-name {
+     padding-left: 0;
+}
