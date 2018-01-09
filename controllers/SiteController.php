@@ -79,7 +79,7 @@ class SiteController extends Controller
             'query' => Item::find()->where(['status' => Item::STATUS_ACTIVE]),
             //'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
             'pagination' => [
-                'pageSize' => 1,
+                'pageSize' => 40,
             ],
         ]);
 

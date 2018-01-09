@@ -183,12 +183,7 @@ class ItemController extends Controller
     public function actionCreate()
     {
         $model = new ItemForm();
-        //$model->scenario = ItemForm::SCENARIO_CREATE;
-
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
+        $model->scenario = ItemForm::SCENARIO_CREATE;
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -196,10 +191,21 @@ class ItemController extends Controller
             $randomString = Yii::$app->getSecurity()->generateRandomString(10);
             $model->image = Inflector::slug($model->title) . '_' . $randomString . '.' . $model->myFile->extension;
             $model->author_id = Yii::$app->user->identity->id;
+            $model->title = ucfirst($model->title);
 
-            $model->uploadItemImage();
+
             if ($model->save()) {
+                $model->uploadItemImage();
                 return $this->redirect(['view', 'id' => $model->id]);
+            }else{
+                $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+                $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
+                return $this->render('create', [
+                    'model' => $model,
+                    'shops' => $shops,
+                    'types' => $types,
+                ]);
             }
         } else {
             $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');

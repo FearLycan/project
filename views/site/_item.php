@@ -29,7 +29,7 @@ $url = Image::URL_THUMBNAIL;
     <div class="block-body pt-0 text-center">
         <h3 class="heading heading-6 strong-500 text-capitalize">
             <a href="#">
-                <?= $model->title ?>
+                <?= Html::encode($model->title) ?>
             </a>
         </h3>
     </div>

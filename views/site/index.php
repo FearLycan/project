@@ -70,7 +70,7 @@ $this->title = 'My Yii Application';
                 'itemView' => '_item',
                 'options' => [
                     'tag' => 'div',
-                    // 'class' => 'col-12 cols-md-space cols-sm-space cols-xs-space',
+                    'class' => 'row cols-md-space cols-sm-space cols-xs-space',
                 ],
                 'pager' => [
                     'firstPageLabel' => '«',
@@ -102,29 +102,6 @@ $this->title = 'My Yii Application';
 
         <!-- Pagination -->
         <div id="pagination" class="pagination-wrapper d-flex justify-content-center py-4">
-<!--            <ul class="pagination pagination--style-3">-->
-<!--                <li class="page-item disabled">-->
-<!--                    <a href="#" class="page-link">«</a>-->
-<!--                </li>-->
-<!--                <li class="page-item active">-->
-<!--                    <a href="#" class="page-link" aria-label="Previous">1</a>-->
-<!--                </li>-->
-<!--                <li class="page-item">-->
-<!--                    <a href="#" class="page-link">2</a>-->
-<!--                </li>-->
-<!--                <li class="page-item">-->
-<!--                    <a href="#" class="page-link">3</a>-->
-<!--                </li>-->
-<!--                <li class="page-item">-->
-<!--                    <a href="#" class="page-link">4</a>-->
-<!--                </li>-->
-<!--                <li class="page-item">-->
-<!--                    <a href="#" class="page-link">5</a>-->
-<!--                </li>-->
-<!--                <li class="page-item">-->
-<!--                    <a href="#" class="page-link">»</a>-->
-<!--                </li>-->
-<!--            </ul>-->
         </div>
     </div>
 </section>

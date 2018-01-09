@@ -41,8 +41,8 @@ class ItemForm extends Item
             ['tags', 'tag'],
 
             [['myFile'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024],
-            //[['myFile'], 'required', 'on' => static::SCENARIO_CREATE],
-            [['myFile'], 'file','skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024],
+            [['myFile'], 'required', 'on' => static::SCENARIO_CREATE],
+            //[['myFile'], 'file','skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024],
 
 
 //            [['image'], 'required', 'on' => static::SCENARIO_CREATE],
@@ -78,11 +78,13 @@ class ItemForm extends Item
     }
 
 
-    public function uploadItemImage(){
+    public function uploadItemImage()
+    {
         $url = Image::URL . $this->image;
         $urlThumb = Image::URL_THUMBNAIL . $this->image;
-        if(!$this->myFile->saveAs($url)){
+        if (!$this->myFile->saveAs($url)) {
             $this->addError('myFile','Unable to save the uploaded file');
+            return false;
         }
         $this->myFile = $url;
         Image::createThumbnail($url, $urlThumb, Image::THUMBNAIL_MAX_WIDTH, Image::THUMBNAIL_MAX_HEIGHT);

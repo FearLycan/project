@@ -30,53 +30,6 @@ $this->title = 'Sklepy';
                 <hr>
             </div>
 
-            <div class="row cols-md-space cols-sm-space cols-xs-space">
-<!--                <div class="col-lg-4">-->
-<!--                    <div class="block block--style-3">-->
-<!--                        <div class="block-image relative">-->
-<!--                            <div class="view view-first">-->
-<!--                                <a href="#">-->
-<!--                                    <img src="http://lorempixel.com/600/400/" class="img-fluid">-->
-<!--                                </a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!---->
-<!--                        <div class="aux-info-wrapper border-bottom">-->
-<!--                            <ul class="aux-info">-->
-<!--                                <li class="heading strong-400 text-center">-->
-<!--                                    House-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="col-lg-4">-->
-<!--                    <div class="block block--style-3">-->
-<!--                        <div class="block-image relative">-->
-<!--                            <div class="view view-first">-->
-<!--                                <a href="#">-->
-<!--                                    <img src="http://lorempixel.com/800/600/" class="img-fluid">-->
-<!--                                </a>-->
-<!--                            </div>-->
-<!--                            <span class="block-ribbon block-ribbon-fixed block-ribbon-right bg-yellow">For sale</span>-->
-<!--                        </div>-->
-<!---->
-<!--                        <div class="aux-info-wrapper border-bottom">-->
-<!--                            <ul class="aux-info">-->
-<!--                                <li class="heading strong-400 text-center">-->
-<!--                                    150 sqft-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-
-
-
-            </div>
-
             <?= ListView::widget([
                 'dataProvider' => $dataProvider,
                 'summary' => false,

@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin([
         'id' => 'item-form',
-        'enableAjaxValidation' => true,
+        //'enableAjaxValidation' => true,
         'options' => ['enctype' => 'multipart/form-data']
     ]); ?>
 
