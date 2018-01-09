@@ -2,10 +2,12 @@
 
 /* @var $this yii\web\View */
 
+use yii\widgets\ListView;
+
 $this->title = 'My Yii Application';
 ?>
 
-<section class="slice sct-color-1">
+<!--<section class="slice sct-color-1">
    <div class="container">
        <div class="site-index">
 
@@ -55,4 +57,74 @@ $this->title = 'My Yii Application';
            </div>
        </div>
    </div>
+</section>-->
+
+
+<section class="slice sct-color-1" id="sct_products">
+    <div class="container">
+        <div class="row-wrapper">
+            <?= ListView::widget([
+                'dataProvider' => $dataProvider,
+                'summary' => false,
+                'itemOptions' => ['class' => 'col-lg-3 col-md-6'],
+                'itemView' => '_item',
+                'options' => [
+                    'tag' => 'div',
+                    // 'class' => 'col-12 cols-md-space cols-sm-space cols-xs-space',
+                ],
+                'pager' => [
+                    'firstPageLabel' => '«',
+                    'lastPageLabel' => '»',
+                    'prevPageLabel' => false,
+                    'nextPageLabel' => false,
+                    'maxButtonCount' => 3,
+
+                    // Customzing options for pager container tag
+                    'options' => [
+                        'tag' => 'ul',
+                        'class' => 'pagination pagination--style-3',
+                        'id' => 'pager',
+                    ],
+
+                    // Customzing CSS class for pager link
+                    'linkOptions' => ['class' => 'page-link'],
+                    'activePageCssClass' => 'active',
+                    'disabledPageCssClass' => 'disabled',
+
+                    // Customzing CSS class for navigating link
+                    'prevPageCssClass' => 'pre',
+                    'nextPageCssClass' => 'next',
+                    'firstPageCssClass' => 'first',
+                    'lastPageCssClass' => 'last',
+                ],
+            ]); ?>
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="pagination-wrapper d-flex justify-content-center py-4">
+<!--            <ul class="pagination pagination--style-3">-->
+<!--                <li class="page-item disabled">-->
+<!--                    <a href="#" class="page-link">«</a>-->
+<!--                </li>-->
+<!--                <li class="page-item active">-->
+<!--                    <a href="#" class="page-link" aria-label="Previous">1</a>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a href="#" class="page-link">2</a>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a href="#" class="page-link">3</a>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a href="#" class="page-link">4</a>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a href="#" class="page-link">5</a>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a href="#" class="page-link">»</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+        </div>
+    </div>
 </section>

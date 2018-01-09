@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin([
         'id' => 'item-form',
-        //'enableAjaxValidation' => true,
+        'enableAjaxValidation' => true,
         'options' => ['enctype' => 'multipart/form-data']
     ]); ?>
 
@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
 
     <div class="row" style="margin-bottom: 15px;">
         <div class="col-md-6">
-            <?= $form->field($model, 'image')->widget(FileInput::classname(), [
+            <?= $form->field($model, 'myFile')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'image/*'],
                 'pluginOptions' => [
                     'showPreview' => false,

@@ -10,6 +10,7 @@ use app\components\AccessControl;
 //use app\models\FileSearch;
 //use app\models\User;
 use app\models\forms\RegistrationForm;
+use app\models\Item;
 use app\models\Shop;
 use app\models\User;
 use Yii;
@@ -74,7 +75,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $dataProvider = new ActiveDataProvider([
+            'query' => Item::find()->where(['status' => Item::STATUS_ACTIVE]),
+            //'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
+            'pagination' => [
+                'pageSize' => 1,
+            ],
+        ]);
+
+        return $this->render('index',[
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionShops()

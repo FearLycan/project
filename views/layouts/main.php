@@ -33,7 +33,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 
-<div class="body-wrap">
+<div class="body-wrap shop-default shop-sportswear">
     <div id="st-container" class="st-container">
         <?php if (!Yii::$app->user->isGuest): ?>
             <nav class="st-menu st-effect-1">
@@ -382,6 +382,20 @@ AppAsset::register($this);
 <a href="#" class="back-to-top btn-back-to-top"></a>
 
 <?php $this->endBody() ?>
+
+<script>
+
+    var pager = $('#pager');
+    var link = $(pager).find('li.disabled');
+    var text = $(link).find('span').text();
+    $(link).append('<a href="#" class="page-link"> ' + text + ' </a>');
+    $(link).find('span').remove();
+
+    var pagination = $('#pagination');
+
+    $(pager).appendTo( pagination );
+
+</script>
 
 <?= $this->blocks['script'] ?>
 
