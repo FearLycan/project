@@ -18,6 +18,7 @@ class m180105_223109_create_item_table extends Migration
             'slug' => $this->string(),
             'url' => $this->string(),
             'image' => $this->string(),
+            'description' => $this->text(),
             'gender' => $this->string()->notNull(),
             'shop_id' => $this->integer()->notNull(),
             'type_id' => $this->integer()->notNull(),

@@ -25,34 +25,8 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use app\models\forms\LoginForm;
 
-class SiteController extends Controller
+class ItemController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * @inheritdoc
      */
@@ -61,10 +35,6 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }
@@ -89,18 +59,21 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionShops()
+    /**
+     * @param $slug
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView($id, $slug)
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Shop::find()->where(['status' => Shop::STATUS_ACTIVE]),
-            'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
-            'pagination' => [
-                'pageSize' => 40,
-            ],
-        ]);
+        $item = Item::find()->where(['id' => $id, 'slug' => $slug])->one();
 
-        return $this->render('shops', [
-            'dataProvider' => $dataProvider,
+        if (empty($item)) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        return $this->render('view', [
+            'item' => $item,
         ]);
     }
 }

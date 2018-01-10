@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\components\Helpers;
 use app\modules\admin\models\forms\ItemForm;
 use app\modules\admin\models\Image;
 use app\modules\admin\models\Shop;
@@ -71,115 +72,6 @@ class ItemController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    /*public function actionCreate()
-    {
-        $model = new ItemForm();
-        $model->scenario = ItemForm::SCENARIO_CREATE;
-
-        $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
-        $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
-
-//        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-//            Yii::$app->response->format = Response::FORMAT_JSON;
-//            return ActiveForm::validate($model);
-//        }
-
-        if ($model->load(Yii::$app->request->post())) {
-
-            $image = UploadedFile::getInstance($model, 'image');
-            //die(var_dump($image));
-
-//            if(!empty($image)){
-//                $randomString = Yii::$app->getSecurity()->generateRandomString(10);
-//                $name = Inflector::slug($model->title) . '_' . $randomString . '.' . $image->extension;
-//
-//                $url = Image::URL . $name;
-//
-//                $image->saveAs($url);
-//            }
-
-            //---------------------------
-            $randomString = Yii::$app->getSecurity()->generateRandomString(10);
-            $name = Inflector::slug($model->title) . '_' . $randomString . '.' . $image->extension;
-
-            $url = Image::URL . $name;
-            $urlThumb = Image::URL_THUMBNAIL . $name;
-
-            //$urlThumb = Image::URL_THUMBNAIL . $name;
-
-            //$this->image->saveAs($url);
-            //$this->image->saveAs($urlThumb);
-
-            $model->image = $name;
-            $model->author_id = Yii::$app->user->identity->id;
-            //---------------------------
-               // die(var_dump($model));
-            if ($model->save()) {
-                $image->saveAs($url);
-
-                Tag::saveTags($model->tags, $model->id);
-
-                Image::createThumbnail($url, $urlThumb, Image::THUMBNAIL_MAX_WIDTH, Image::THUMBNAIL_MAX_HEIGHT);
-                Image::changeSize($url, Image::IMAGE_MAX_WIDTH, Image::IMAGE_MAX_HEIGHT);
-
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-
-
-//            if ($model->image && $model->upload()) {
-//                die(var_dump($model->tags));
-//                $model->author_id = Yii::$app->user->identity->id;
-//                $model->save();
-//            }
-            return $this->render('create', [
-                'model' => $model,
-                'shops' => $shops,
-                'types' => $types,
-            ]);
-
-        } else {
-
-            return $this->render('create', [
-                'model' => $model,
-                'shops' => $shops,
-                'types' => $types,
-            ]);
-        }
-    }*/
-
-//    public function actionCreate()
-//    {
-//        $model = new ItemForm();
-//        $model->scenario = ItemForm::SCENARIO_CREATE;
-//
-//        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-//            Yii::$app->response->format = Response::FORMAT_JSON;
-//            return ActiveForm::validate($model);
-//        }
-//
-//        if ($model->load(Yii::$app->request->post())) {
-//
-//            $model->myFile = UploadedFile::getInstance($model, 'myFile');
-//            $randomString = Yii::$app->getSecurity()->generateRandomString(10);
-//            $model->image = Inflector::slug($model->title) . '_' . $randomString . '.' . $model->myFile->extension;
-//
-//            $model->uploadItemImage();
-//            if ($model->save()) {
-//                return $this->redirect(['view', 'id' => $model->id]);
-//            }
-//        } else {
-//
-//            $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
-//            $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
-//
-//            return $this->render('create', [
-//                'model' => $model,
-//                'shops' => $shops,
-//                'types' => $types,
-//            ]);
-//        }
-//    }
-
     public function actionCreate()
     {
         $model = new ItemForm();
@@ -191,13 +83,12 @@ class ItemController extends Controller
             $randomString = Yii::$app->getSecurity()->generateRandomString(10);
             $model->image = Inflector::slug($model->title) . '_' . $randomString . '.' . $model->myFile->extension;
             $model->author_id = Yii::$app->user->identity->id;
-            $model->title = ucfirst($model->title);
-
+            $model->title = Helpers::nameize($model->title);
 
             if ($model->save()) {
                 $model->uploadItemImage();
                 return $this->redirect(['view', 'id' => $model->id]);
-            }else{
+            } else {
                 $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
                 $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
 

@@ -20,7 +20,7 @@ $url = Image::URL_THUMBNAIL;
 <!--<div class="col-lg-3 col-md-6">-->
 <div class="block product no-border z-depth-2--hover">
     <div class="block-image">
-        <a href="<?= Url::toRoute(['site/view', 'id' => $model->id, 'slug' => $model->slug]); ?>">
+        <a href="<?= Url::toRoute(['item/view', 'id' => $model->id, 'slug' => $model->slug]); ?>">
             <?= Html::img('@web/images/item/thumbnail/' . $model->image, ['alt' => $model->title]) ?>
         </a>
         <!--            <span class="product-ribbon product-ribbon-right product-ribbon--style-1 bg-blue text-uppercase">New</span>-->

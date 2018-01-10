@@ -17,6 +17,7 @@ class ItemForm extends Item
 
     public $tags;
     public $myFile;
+    public $descriptionLength = 260;
 
     /**
      * {@inheritdoc}
@@ -36,8 +37,10 @@ class ItemForm extends Item
         return [
             [['shop_id', 'type_id'], 'integer'],
             [['title', 'url'], 'string', 'max' => 255],
+            [['description'], 'string', 'max' => $this->descriptionLength],
             [['shop_id', 'type_id', 'status', 'title', 'url', 'gender', 'tags'], 'required'],
 
+            [['url'], 'url', 'defaultScheme' => ['http', 'https']],
             ['tags', 'tag'],
 
             [['myFile'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024],
@@ -83,7 +86,7 @@ class ItemForm extends Item
         $url = Image::URL . $this->image;
         $urlThumb = Image::URL_THUMBNAIL . $this->image;
         if (!$this->myFile->saveAs($url)) {
-            $this->addError('myFile','Unable to save the uploaded file');
+            $this->addError('myFile', 'Unable to save the uploaded file');
             return false;
         }
         $this->myFile = $url;
