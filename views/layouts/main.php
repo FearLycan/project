@@ -190,25 +190,25 @@ AppAsset::register($this);
                                             <div class="input-group input-group-lg">
                                                 <input class="form-control" placeholder="Search for..." type="text">
                                                 <span class="input-group-btn">
-                <button class="btn btn-base-3" type="button">Go!</button>
-                </span>
+                                                    <button class="btn btn-base-3" type="button">Go!</button>
+                                                </span>
                                             </div>
                                         </form>
                                     </div>
 
                                     <!-- Navbar links -->
-                                    <ul class="navbar-nav" data-hover="dropdown">
-                                        <li class="nav-item dropdown megamenu">
-                                            <a class="nav-link" href="#">
-                                                Strona główna
-                                            </a>
-                                        </li>
-                                        <li class="nav-item dropdown">
-                                            <a href="<?= Url::toRoute(['site/shops']); ?>" class="nav-link">
-                                                Sklepy
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <!--                                    <ul class="navbar-nav" data-hover="dropdown">-->
+                                    <!--                                        <li class="nav-item dropdown megamenu">-->
+                                    <!--                                            <a class="nav-link" href="#">-->
+                                    <!--                                                Strona główna-->
+                                    <!--                                            </a>-->
+                                    <!--                                        </li>-->
+                                    <!--                                        <li class="nav-item dropdown">-->
+                                    <!--                                            <a href="#" class="nav-link">-->
+                                    <!--                                                Sklepy-->
+                                    <!--                                            </a>-->
+                                    <!--                                        </li>-->
+                                    <!--                                    </ul>-->
 
 
                                 </div>
@@ -253,119 +253,55 @@ AppAsset::register($this);
 
                     <!-- FOOTER -->
                     <footer id="footer" class="footer">
-                        <div class="footer-top">
+                        <div class="footer-bottom py-3">
                             <div class="container">
-                                <div class="row cols-xs-space cols-sm-space cols-md-space">
-                                    <div class="col-lg-5">
-                                        <div class="col">
-                                            <img src="#">
-                                            <span class="clearfix"></span>
-                                            <span class="heading heading-sm c-gray-light strong-400">One template. Infinite solutions.</span>
-                                            <p class="mt-3">
-                                                All the components included in Boomerang are built to the same level of
-                                                quality as Bootstrap and highlighted with several example pages.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <div class="col">
-                                            <h4 class="heading heading-xs strong-600 text-uppercase mb-1">
-                                                Support
-                                            </h4>
-
-                                            <ul class="footer-links">
-                                                <li><a href="#" title="Help center">Help center</a></li>
-                                                <li><a href="#" title="Discussions">Discussions</a></li>
-                                                <li><a href="#" title="Contact support">Contact</a></li>
-                                                <li><a href="#" title="Blog">Blog</a></li>
-                                                <li><a href="#" title="Jobs">FAQ</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <div class="col">
-                                            <h4 class="heading heading-xs strong-600 text-uppercase mb-1">
-                                                Company
-                                            </h4>
-
-                                            <ul class="footer-links">
+                                <div class="row cols-xs-space col-sm-space align-items-center">
+                                    <div class="col-md-7 col-12">
+                                        <div class="text-xs-center text-sm-left">
+                                            <ul class="footer-menu">
                                                 <li>
-                                                    <a href="#" title="Home">
-                                                        Home
-                                                    </a>
+                                                    <a href="#" style="padding-left: 0;">Home</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" title="About us">
-                                                        About us
-                                                    </a>
+                                                    <a href="#">About us</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" title="Services">
-                                                        Services
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Blog">
-                                                        Blog
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Contact">
-                                                        Contact
-                                                    </a>
+                                                    <a href="#">Services</a>
                                                 </li>
                                             </ul>
+
+                                            <div class="copyright mt-1">
+                                                <ul class="copy-links">
+                                                    <li>
+                                                        © <?= date('Y') ?> <a href="#" target="_blank">
+                                                            <strong>Web name</strong>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <?= Html::a('Regulamin', ['page/view', 'slug' => 'regulamin']) ?>
+                                                    </li>
+                                                    <li>
+                                                        <?= Html::a('Polityka prywatności', ['page/view', 'slug' => 'polityka-prywatnosci']) ?>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3">
-                                        <div class="col">
-                                            <h4 class="heading heading-xs strong-600 text-uppercase mb-1">
-                                                Get in touch
-                                            </h4>
-
+                                    <div class="col-md-5">
+                                        <div class="text-xs-center text-sm-right">
                                             <ul class="social-media social-media--style-1-v4">
                                                 <li>
-                                                    <a href="#" class="facebook" target="_blank" data-toggle="tooltip"
-                                                       data-original-title="Facebook">
+                                                    <a href="#" class="facebook" target="_blank" data-toggle="tooltip" data-original-title="Facebook">
                                                         <i class="fa fa-facebook"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="instagram" target="_blank" data-toggle="tooltip"
-                                                       data-original-title="Instagram">
+                                                    <a href="#" class="instagram" target="_blank" data-toggle="tooltip" data-original-title="Instagram">
                                                         <i class="fa fa-instagram"></i>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="#" class="dribbble" target="_blank" data-toggle="tooltip"
-                                                       data-original-title="Dribbble">
-                                                        <i class="fa fa-dribbble"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="dribbble" target="_blank" data-toggle="tooltip"
-                                                       data-original-title="Github">
-                                                        <i class="fa fa-github"></i>
-                                                    </a>
-                                                </li>
                                             </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="footer-bottom">
-                            <div class="container container-sm">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="copyright text-center">
-                                            Copyright © <?= date('Y') ?> <a href="#" target="_blank">
-                                                <strong>Web name</strong>
-                                            </a> - All rights reserved
                                         </div>
                                     </div>
                                 </div>
@@ -393,7 +329,7 @@ AppAsset::register($this);
 
     var pagination = $('#pagination');
 
-    $(pager).appendTo( pagination );
+    $(pager).appendTo(pagination);
 
 </script>
 

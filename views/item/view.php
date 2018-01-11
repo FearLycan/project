@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Image;
+use app\models\Item;
 use yii\helpers\Html;
 
 /* @var \app\models\Item $item */
@@ -15,9 +17,8 @@ $this->title = $item->title
                     <div class="swiper-container swiper-container-horizontal swiper-container-undefined"
                          data-swiper-items="1" data-swiper-space-between="0">
                         <div class="swiper-wrapper pb-5" style="transform: translate3d(0px, 0px, 0px);">
-                            <div class="swiper-slide swiper-slide-active" style="width: 540px;">
-                                <img src="" class="img-fluid">
-                                <?= Html::img('@web/images/item/' . $item->image, ['alt' => $item->title, 'class' => 'img-fluid']) ?>
+                            <div class="swiper-slide swiper-slide-active">
+                                <?= Html::img('@web/'. Image::URL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid']) ?>
                             </div>
                         </div>
                         <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
@@ -42,7 +43,7 @@ $this->title = $item->title
 
                                 <div class="row mt-2">
                                     <div class="col-12">
-                                        <?= Html::a('<i class="icon ion-bag"></i> Idź do sklepu', $item->url, ['class' => 'btn btn-lg btn-block btn-gray-dark btn-icon-left']) ?>
+                                        <?= Html::a('<i class="icon ion-bag"></i> Idź do sklepu', $item->url, ['class' => 'btn btn-lg btn-block btn-gray-dark btn-icon-left', 'target' => '_blank']) ?>
                                     </div>
                                 </div>
 
@@ -60,17 +61,44 @@ $this->title = $item->title
 
                         <ul class="icons mt-4">
                             <li class="text-sm">
-                                <i class="icon icon-clothes-029"></i> Exterior: 98% cotton, 2% elastane
+                                <i class="ion-briefcase icon" aria-hidden="true"></i>
+                                Sklep: <?= Html::a($item->shop->name, ['shop/view', 'slug' => $item->shop->slug]) ?>
                             </li>
                             <li class="text-sm">
-                                <i class="icon icon-electronics-002"></i> Machine wash up to 30°/86°F gentle cycle
+                                <?php if ($item->gender == Item::GENDER_MALE): ?>
+                                    <i class="ion-man icon" aria-hidden="true"></i>
+                                    Rodzaj: <?= $item->getGenderName() ?>
+                                <?php elseif ($item->gender == Item::GENDER_FEMALE): ?>
+                                    <i class="ion-woman icon" aria-hidden="true"></i>
+                                    Rodzaj: <?= $item->getGenderName() ?>
+                                <?php elseif ($item->gender == Item::GENDER_KID): ?>
+                                    <i class="fa fa-child" aria-hidden="true"></i>
+                                    Rodzaj: <?= $item->getGenderName() ?>
+                                <?php endif; ?>
                             </li>
                             <li class="text-sm">
-                                <i class="icon icon-electronics-043"></i> Iron up to 110°C/230°F
+                                <i class="icon ion-tshirt"></i> Typ: <?= Html::encode($item->type->name) ?>
                             </li>
                         </ul>
 
-                        <ul class="inline-links inline-links--style-1 mt-4">
+<!--                        <span class="space-xs-md"></span>-->
+
+                        <ul class="inline-links inline-links--style-1 mt-4 space-xs-md col-lg-12">
+
+                            <?php foreach ($item->tags as $tag): ?>
+                                <li>
+                                    <a href="#">
+                                        <span class="badge badge-md badge-dark"><?= Html::encode($tag->name) ?></span>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+
+                        </ul>
+
+<!--                        <span class="space-xs-md"></span>-->
+
+
+                        <ul class="inline-links inline-links--style-1 mt-4 col-lg-12">
                             <li>
                                 <a href="#">Twitter</a>
                             </li>

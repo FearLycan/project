@@ -2,9 +2,9 @@
 
 namespace app\modules\admin\controllers;
 
-use app\modules\admin\components\Helpers;
+use app\components\Helpers;
+use app\components\Inflector;
 use app\modules\admin\models\forms\ItemForm;
-use app\modules\admin\models\Image;
 use app\modules\admin\models\Shop;
 use app\modules\admin\models\Tag;
 use app\modules\admin\models\Type;
@@ -13,12 +13,9 @@ use app\modules\admin\models\Item;
 use app\modules\admin\models\searches\ItemSearch;
 use app\modules\admin\components\Controller;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Inflector;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Response;
 use yii\web\UploadedFile;
-use yii\widgets\ActiveForm;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -63,7 +60,7 @@ class ItemController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => Item::findOne($id)
         ]);
     }
 
@@ -87,6 +84,7 @@ class ItemController extends Controller
 
             if ($model->save()) {
                 $model->uploadItemImage();
+                Tag::saveTags($model->tags, $model->id);
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
@@ -119,9 +117,11 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        //$model->scenario = ItemForm::SCENARIO_UPDATE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            Tag::saveTags($model->tags, $model->id);
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 

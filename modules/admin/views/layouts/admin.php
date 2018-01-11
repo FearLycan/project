@@ -44,6 +44,13 @@ AdminAsset::register($this);
             <li class="nav-item">
                 <a class="nav-link" href="<?= Url::to(['default/index']) ?>">Admin</a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="<?= Url::to(['page/index']) ?>">Strony</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="<?= Url::to(['page/index']) ?>">Lista</a>
+                    <a class="dropdown-item" href="<?= Url::to(['page/create']) ?>">Dodaj</a>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= Url::to(['shop/index']) ?>">Sklepy</a>
             </li>

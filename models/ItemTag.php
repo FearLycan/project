@@ -74,4 +74,9 @@ class ItemTag extends \yii\db\ActiveRecord
             $connect->save();
         }
     }
+
+    public function deleteConnect($itemID)
+    {
+        self::deleteAll(['item_id' => $itemID]);
+    }
 }

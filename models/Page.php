@@ -2,25 +2,26 @@
 
 namespace app\models;
 
+use app\components\SluggableBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "{{%tag}}".
+ * This is the model class for table "{{%page}}".
  *
  * @property integer $id
- * @property string $name
- * @property integer $frequency
+ * @property string $title
+ * @property string $slug
+ * @property string $content
+ * @property integer $status
  * @property integer $author_id
  * @property string $created_at
  * @property string $updated_at
  *
- * @property ItemTag[] $itemTags
- * @property Item[] $items
  * @property User $author
  */
-class Tag extends ActiveRecord
+class Page extends \yii\db\ActiveRecord
 {
     //statusy
     const STATUS_INACTIVE = 0;
@@ -41,6 +42,10 @@ class Tag extends ActiveRecord
                 ],
                 'value' => date("Y-m-d H:i:s"),
             ],
+            'slug' => [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'title',
+            ],
         ];
     }
 
@@ -49,7 +54,7 @@ class Tag extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%tag}}';
+        return '{{%page}}';
     }
 
     /**
@@ -58,9 +63,11 @@ class Tag extends ActiveRecord
     public function rules()
     {
         return [
-            [['frequency', 'author_id', 'status'], 'integer'],
+            [['content'], 'string'],
+            [['status', 'author_id'], 'integer'],
+            [['author_id'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name'], 'string', 'max' => 255],
+            [['title', 'slug'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
@@ -72,28 +79,14 @@ class Tag extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'frequency' => 'Frequency',
+            'title' => 'Title',
+            'slug' => 'Slug',
+            'content' => 'Content',
+            'status' => 'Status',
             'author_id' => 'Author ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemTags()
-    {
-        return $this->hasMany(ItemTag::className(), ['tag_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItems()
-    {
-        return $this->hasMany(Item::className(), ['id' => 'item_id'])->viaTable('{{%item_tag}}', ['tag_id' => 'id']);
     }
 
     /**
@@ -132,59 +125,5 @@ class Tag extends ActiveRecord
             static::STATUS_ACTIVE,
             static::STATUS_INACTIVE,
         ];
-    }
-
-    public function frequencyIncrement()
-    {
-        $this->frequency = $this->frequency + 1;
-        $this->save(false, ['frequency']);
-    }
-
-    public function frequencyDecrement()
-    {
-        if ($this->frequency <= 0) {
-            $this->frequency = 0;
-        } else {
-            $this->frequency = $this->frequency - 1;
-        }
-
-        $this->save(false, ['frequency']);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isActive()
-    {
-        if ($this->status == self::STATUS_ACTIVE) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public static function saveTags($array, $itemID)
-    {
-        $array = array_unique($array);
-
-        foreach ($array as $item) {
-
-            $tag = Tag::find()->where(['name' => $item])->one();
-
-            if (empty($tag)) {
-                $tag = new Tag();
-                $tag->name = $item;
-                $tag->frequency = 1;
-                $tag->status = self::STATUS_ACTIVE;
-                $tag->author_id = Yii::$app->user->identity->id;
-                $tag->save();
-            }
-
-            if ($tag->isActive()) {
-                $tag->frequencyIncrement();
-            }
-
-            ItemTag::connect($itemID, $tag->id);
-        }
     }
 }

@@ -48,9 +48,9 @@ class ItemController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Item::find()->where(['status' => Item::STATUS_ACTIVE]),
-            //'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
+            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
             'pagination' => [
-                'pageSize' => 40,
+                'pageSize' => 12,
             ],
         ]);
 
@@ -67,6 +67,8 @@ class ItemController extends Controller
     public function actionView($id, $slug)
     {
         $item = Item::find()->where(['id' => $id, 'slug' => $slug])->one();
+
+        //die(var_dump($item->tags));
 
         if (empty($item)) {
             throw new NotFoundHttpException('The requested page does not exist.');

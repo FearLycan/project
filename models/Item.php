@@ -2,8 +2,7 @@
 
 namespace app\models;
 
-use Yii;
-use yii\behaviors\SluggableBehavior;
+use app\components\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -33,13 +32,17 @@ use yii\db\ActiveRecord;
 class Item extends ActiveRecord
 {
     const GENDER_MALE = 'male';
-    const GENDER_FAMALE = 'female';
+    const GENDER_FEMALE = 'female';
     const GENDER_KID = 'kid';
 
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
+    const STATUS_PENDING = 2;
 
 
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -111,6 +114,7 @@ class Item extends ActiveRecord
         return [
             static::STATUS_ACTIVE => 'Aktywny',
             static::STATUS_INACTIVE => 'Nieaktywny',
+            static::STATUS_PENDING => 'Oczekujący',
         ];
     }
 
@@ -130,6 +134,7 @@ class Item extends ActiveRecord
         return [
             static::STATUS_ACTIVE,
             static::STATUS_INACTIVE,
+            static::STATUS_PENDING,
         ];
     }
 
@@ -139,9 +144,9 @@ class Item extends ActiveRecord
     public static function getGendersNames()
     {
         return [
-            static::GENDER_MALE => 'On',
-            static::GENDER_FAMALE => 'Ona',
-            static::GENDER_KID => 'Dziecko'
+            static::GENDER_MALE => 'Męski',
+            static::GENDER_FEMALE => 'Żeński',
+            static::GENDER_KID => 'Dziecięcy'
         ];
     }
 
@@ -160,7 +165,7 @@ class Item extends ActiveRecord
     {
         return [
             static::GENDER_MALE,
-            static::GENDER_FAMALE,
+            static::GENDER_FEMALE,
             static::GENDER_KID
         ];
     }

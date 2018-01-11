@@ -66,7 +66,7 @@ $this->title = 'My Yii Application';
             <?= ListView::widget([
                 'dataProvider' => $dataProvider,
                 'summary' => false,
-                'itemOptions' => ['class' => 'col-lg-3 col-md-6'],
+                'itemOptions' => ['class' => 'col-lg-3 col-md-6 space-xs-md'],
                 'itemView' => '_item',
                 'options' => [
                     'tag' => 'div',
