@@ -1,5 +1,6 @@
 <?php
 
+use app\components\LinkPager;
 use app\modules\admin\models\Tag;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -21,7 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Tag', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?php Pjax::begin(); ?>    <?= GridView::widget([
+    <?php Pjax::begin(); ?>
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -98,5 +100,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
         ],
+        'pager' =>[
+                'class' => LinkPager::class
+        ]
     ]); ?>
     <?php Pjax::end(); ?></div>

@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\components\Helpers;
 use app\components\Inflector;
+use app\models\ItemTag;
 use app\modules\admin\models\forms\ItemForm;
 use app\modules\admin\models\Shop;
 use app\modules\admin\models\Tag;
@@ -13,6 +14,7 @@ use app\modules\admin\models\Item;
 use app\modules\admin\models\searches\ItemSearch;
 use app\modules\admin\components\Controller;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -144,7 +146,17 @@ class ItemController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        ItemTag::deleteConnect($id);
+        Item::findOne($id)->delete();
+
+        Yii::$app->getSession()->setFlash('success', [
+            'type' => 'success',
+            'duration' => 3000,
+            'message' => Html::encode('Rekord został poprawnie usunięty.'),
+            'positonY' => 'top',
+            'positonX' => 'rigth'
+        ]);
+
 
         return $this->redirect(['index']);
     }

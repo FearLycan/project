@@ -50,7 +50,7 @@ class ItemController extends Controller
             'query' => Item::find()->where(['status' => Item::STATUS_ACTIVE]),
             'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 4,
             ],
         ]);
 

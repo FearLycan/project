@@ -1,8 +1,10 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
+use kartik\growl\Growl;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
@@ -75,6 +77,28 @@ AdminAsset::register($this);
 </nav>
 
 <main>
+
+    <!-- Get all flash messages and loop through them -->
+    <?php foreach (Yii::$app->session->getAllFlashes() as $message): ?>
+        <?= Growl::widget([
+            'type' => (!empty($message['type'])) ? $message['type'] : 'danger',
+            //'title' => (empty($message['title'])) ?: Html::encode($message['title']),
+            'title' => false,
+            'icon' => (empty($message['icon'])) ?: $message['icon'],
+            'body' => (!empty($message['message'])) ? Html::encode($message['message']) : 'Message Not Set!',
+            'showSeparator' => true,
+            'delay' => 1, //This delay is how long before the message shows
+            'pluginOptions' => [
+                'delay' => (!empty($message['duration'])) ? $message['duration'] : 3000, //This delay is how long the message shows for
+                'placement' => [
+                    'from' => (!empty($message['positonY'])) ? $message['positonY'] : 'top',
+                    'align' => (!empty($message['positonX'])) ? $message['positonX'] : 'right',
+                ]
+            ]
+        ]); ?>
+    <?php endforeach; ?>
+    <!-- ------------------------------------------------ -->
+
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

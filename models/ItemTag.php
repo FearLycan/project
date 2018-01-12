@@ -75,8 +75,13 @@ class ItemTag extends \yii\db\ActiveRecord
         }
     }
 
-    public function deleteConnect($itemID)
+    public static function deleteConnect($itemID)
     {
-        self::deleteAll(['item_id' => $itemID]);
+        $connects = self::find()->where(['item_id' => $itemID])->all();
+
+        foreach ($connects as $connect) {
+            $connect->tag->frequencyDecrement();
+            $connect->delete();
+        }
     }
 }

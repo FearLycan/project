@@ -196,19 +196,16 @@ AppAsset::register($this);
                                         </form>
                                     </div>
 
-                                    <!-- Navbar links -->
-                                    <!--                                    <ul class="navbar-nav" data-hover="dropdown">-->
-                                    <!--                                        <li class="nav-item dropdown megamenu">-->
-                                    <!--                                            <a class="nav-link" href="#">-->
-                                    <!--                                                Strona główna-->
-                                    <!--                                            </a>-->
-                                    <!--                                        </li>-->
-                                    <!--                                        <li class="nav-item dropdown">-->
-                                    <!--                                            <a href="#" class="nav-link">-->
-                                    <!--                                                Sklepy-->
-                                    <!--                                            </a>-->
-                                    <!--                                        </li>-->
-                                    <!--                                    </ul>-->
+                                    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()): ?>
+
+                                    <!-- Admin Navbar links -->
+                                    <ul class="navbar-nav" data-hover="dropdown">
+                                        <li class="nav-item dropdown megamenu">
+                                            <?= Html::a('Admin', ['/admin'], ['class' => 'nav-link']); ?>
+                                        </li>
+                                    </ul>
+
+                                    <?php endif; ?>
 
 
                                 </div>
@@ -292,12 +289,14 @@ AppAsset::register($this);
                                         <div class="text-xs-center text-sm-right">
                                             <ul class="social-media social-media--style-1-v4">
                                                 <li>
-                                                    <a href="#" class="facebook" target="_blank" data-toggle="tooltip" data-original-title="Facebook">
+                                                    <a href="#" class="facebook" target="_blank" data-toggle="tooltip"
+                                                       data-original-title="Facebook">
                                                         <i class="fa fa-facebook"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="instagram" target="_blank" data-toggle="tooltip" data-original-title="Instagram">
+                                                    <a href="#" class="instagram" target="_blank" data-toggle="tooltip"
+                                                       data-original-title="Instagram">
                                                         <i class="fa fa-instagram"></i>
                                                     </a>
                                                 </li>
