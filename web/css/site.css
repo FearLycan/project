@@ -1,7 +1,7 @@
 html,
 body {
     height: 100%;
-    /*font-family: 'Open Sans', sans-serif;*/
+    margin: 0;
 }
 
 .wrap {
@@ -186,7 +186,7 @@ div.has-success > input {
     padding: 1rem 0.5rem;
 }
 
-.block-image{
+.block-image {
     text-align: center;
 }
 
@@ -198,4 +198,15 @@ ul.icons li .icon {
     position: relative;
     top: 4px;
     text-align: center;
+}
+
+.page-content {
+    min-height: 100%;
+    /*margin-bottom: -50px;*/
+}
+
+footer {
+    /*position: absolute;*/
+    bottom: 0;
+    width: 100%;
 }

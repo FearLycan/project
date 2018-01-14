@@ -3,6 +3,7 @@
 use app\models\Image;
 use app\models\Item;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var \app\models\Item $item */
 
@@ -18,7 +19,7 @@ $this->title = $item->title
                          data-swiper-items="1" data-swiper-space-between="0">
                         <div class="swiper-wrapper pb-5" style="transform: translate3d(0px, 0px, 0px);">
                             <div class="swiper-slide swiper-slide-active">
-                                <?= Html::img('@web/'. Image::URL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid']) ?>
+                                <?= Html::img('@web/' . Image::URL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid']) ?>
                             </div>
                         </div>
                         <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
@@ -62,52 +63,36 @@ $this->title = $item->title
                         <ul class="icons mt-4">
                             <li class="text-sm">
                                 <i class="ion-briefcase icon" aria-hidden="true"></i>
-                                Sklep: <?= Html::a($item->shop->name, ['shop/view', 'slug' => $item->shop->slug]) ?>
+                                <strong>Sklep:</strong> <?= Html::encode($item->shop->name) ?>
                             </li>
                             <li class="text-sm">
                                 <?php if ($item->gender == Item::GENDER_MALE): ?>
                                     <i class="ion-man icon" aria-hidden="true"></i>
-                                    Rodzaj: <?= $item->getGenderName() ?>
+                                    <strong>Rodzaj:</strong> <?= $item->getGenderName() ?>
                                 <?php elseif ($item->gender == Item::GENDER_FEMALE): ?>
                                     <i class="ion-woman icon" aria-hidden="true"></i>
-                                    Rodzaj: <?= $item->getGenderName() ?>
+                                    <strong>Rodzaj:</strong> <?= $item->getGenderName() ?>
                                 <?php elseif ($item->gender == Item::GENDER_KID): ?>
                                     <i class="fa fa-child" aria-hidden="true"></i>
-                                    Rodzaj: <?= $item->getGenderName() ?>
+                                    <strong>Rodzaj:</strong> <?= $item->getGenderName() ?>
                                 <?php endif; ?>
                             </li>
                             <li class="text-sm">
-                                <i class="icon ion-tshirt"></i> Typ: <?= Html::encode($item->type->name) ?>
+                                <i class="icon ion-tshirt"></i>
+                                <strong>Typ:</strong> <?= Html::encode($item->type->name) ?>
                             </li>
                         </ul>
-
-<!--                        <span class="space-xs-md"></span>-->
 
                         <ul class="inline-links inline-links--style-1 mt-4 space-xs-md col-lg-12">
 
                             <?php foreach ($item->tags as $tag): ?>
                                 <li>
-                                    <a href="#">
+                                    <a href="<?= Url::to(['tag/view', 'name' => $tag->name]) ?>">
                                         <span class="badge badge-md badge-dark"><?= Html::encode($tag->name) ?></span>
                                     </a>
                                 </li>
                             <?php endforeach; ?>
 
-                        </ul>
-
-<!--                        <span class="space-xs-md"></span>-->
-
-
-                        <ul class="inline-links inline-links--style-1 mt-4 col-lg-12">
-                            <li>
-                                <a href="#">Twitter</a>
-                            </li>
-                            <li>
-                                <a href="#">Facebook</a>
-                            </li>
-                            <li>
-                                <a href="#">Pinterest</a>
-                            </li>
                         </ul>
                     </div>
                 </div>

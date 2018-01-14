@@ -74,33 +74,33 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Item::find()->where(['status' => Item::STATUS_ACTIVE]),
-            //'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
-            'pagination' => [
-                'pageSize' => 40,
-            ],
-        ]);
+//    public function actionIndex()
+//    {
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => Item::find()->where(['status' => Item::STATUS_ACTIVE]),
+//            //'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
+//            'pagination' => [
+//                'pageSize' => 40,
+//            ],
+//        ]);
+//
+//        return $this->render('index', [
+//            'dataProvider' => $dataProvider,
+//        ]);
+//    }
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionShops()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Shop::find()->where(['status' => Shop::STATUS_ACTIVE]),
-            'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
-            'pagination' => [
-                'pageSize' => 40,
-            ],
-        ]);
-
-        return $this->render('shops', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+//    public function actionShops()
+//    {
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => Shop::find()->where(['status' => Shop::STATUS_ACTIVE]),
+//            'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
+//            'pagination' => [
+//                'pageSize' => 40,
+//            ],
+//        ]);
+//
+//        return $this->render('shops', [
+//            'dataProvider' => $dataProvider,
+//        ]);
+//    }
 }

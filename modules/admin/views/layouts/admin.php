@@ -28,7 +28,7 @@ AdminAsset::register($this);
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="#">
-        <img src="http://via.placeholder.com/120x120" width="30" height="30" class="d-inline-block align-top" alt="">
+<!--        <img src="http://via.placeholder.com/120x120" width="30" height="30" class="d-inline-block align-top" alt="">-->
         Bootstrap
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"

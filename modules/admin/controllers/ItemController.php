@@ -6,6 +6,7 @@ use app\components\Helpers;
 use app\components\Inflector;
 use app\models\ItemTag;
 use app\modules\admin\models\forms\ItemForm;
+use app\modules\admin\models\Image;
 use app\modules\admin\models\Shop;
 use app\modules\admin\models\Tag;
 use app\modules\admin\models\Type;
@@ -120,9 +121,49 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $tags = ItemTag::find()->where(['item_id' => $id])->all();
+        $tab = [];
+        foreach ($tags as $key => $tag) {
+            array_push($tab, $tag->tag->name);
+        }
+        $model->tags = $tab;
 
-            Tag::saveTags($model->tags, $model->id);
+        if ($model->load(Yii::$app->request->post())) {
+
+            if ($model->tags != $tab) {
+                ItemTag::deleteConnect($model->id);
+                Tag::saveTags($model->tags, $model->id);
+            }
+
+            $model->myFile = UploadedFile::getInstance($model, 'myFile');
+
+            if ($model->myFile) {
+                //die(var_dump('nowy obrazek'));
+//                unlink(Image::URL. $model->image);
+//                unlink(Image::URL_THUMBNAIL. $model->image);
+
+                //usunięcie starych obrzaków
+                $model->removeImageFile();
+
+
+                $randomString = Yii::$app->getSecurity()->generateRandomString(10);
+                $model->image = Inflector::slug($model->title) . '_' . $randomString . '.' . $model->myFile->extension;
+
+
+                if ($model->save()) {
+                    $model->uploadItemImage();
+                    $model->save(false, ['image']);
+                } else {
+                    $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+                    $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
+                    return $this->render('update', [
+                        'model' => $model,
+                        'shops' => $shops,
+                        'types' => $types,
+                    ]);
+                }
+            }
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -146,15 +187,17 @@ class ItemController extends Controller
      */
     public function actionDelete($id)
     {
+        $item = Item::findOne($id);
+        $item->removeImageFile();
+        $item->delete();
         ItemTag::deleteConnect($id);
-        Item::findOne($id)->delete();
 
         Yii::$app->getSession()->setFlash('success', [
             'type' => 'success',
             'duration' => 3000,
             'message' => Html::encode('Rekord został poprawnie usunięty.'),
             'positonY' => 'top',
-            'positonX' => 'rigth'
+            'positonX' => 'left'
         ]);
 
 

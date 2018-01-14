@@ -209,4 +209,12 @@ class Item extends ActiveRecord
     {
         return $this->hasMany(Tag::className(), ['id' => 'tag_id'])->viaTable('{{%item_tag}}', ['item_id' => 'id']);
     }
+
+    public function removeImageFile()
+    {
+        if (file_exists(Image::URL . $this->image && Image::URL_THUMBNAIL . $this->image)) {
+            unlink(Image::URL . $this->image);
+            unlink(Image::URL_THUMBNAIL . $this->image);
+        }
+    }
 }

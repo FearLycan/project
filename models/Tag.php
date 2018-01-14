@@ -178,9 +178,7 @@ class Tag extends ActiveRecord
                 $tag->status = self::STATUS_ACTIVE;
                 $tag->author_id = Yii::$app->user->identity->id;
                 $tag->save();
-            }
-
-            if ($tag->isActive()) {
+            }else{
                 $tag->frequencyIncrement();
             }
 
