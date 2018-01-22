@@ -84,6 +84,7 @@ class ItemController extends Controller
             $model->image = Inflector::slug($model->title) . '_' . $randomString . '.' . $model->myFile->extension;
             $model->author_id = Yii::$app->user->identity->id;
             $model->title = Helpers::nameize($model->title);
+            $model->slug = Inflector::slug($model->title);
 
             if ($model->save()) {
                 $model->uploadItemImage();
@@ -148,6 +149,7 @@ class ItemController extends Controller
 
                 $randomString = Yii::$app->getSecurity()->generateRandomString(10);
                 $model->image = Inflector::slug($model->title) . '_' . $randomString . '.' . $model->myFile->extension;
+                $model->slug = Inflector::slug($model->title);
 
 
                 if ($model->save()) {

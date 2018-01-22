@@ -25,9 +25,10 @@ class LinkPager extends Pager
         // https://v4-alpha.getbootstrap.com/components/pagination/#sizing
         $this->options['class'] = 'pagination';
 
+
         // Change standard arrows "«" and "»"
-        $this->nextPageLabel = Yii::t('app', 'Next');
-        $this->prevPageLabel = Yii::t('app', 'Previous');
+        $this->nextPageLabel = Yii::t('app', '»');
+        $this->prevPageLabel = Yii::t('app', '«');
 
         // Default div for links
         $this->linkOptions['class'] = 'page-link';

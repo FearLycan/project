@@ -54,10 +54,10 @@ class Item extends ActiveRecord
                 ],
                 'value' => date("Y-m-d H:i:s"),
             ],
-            'slug' => [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'title',
-            ],
+//            'slug' => [
+//                'class' => SluggableBehavior::className(),
+//                'attribute' => 'title',
+//            ],
         ];
     }
 

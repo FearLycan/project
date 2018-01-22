@@ -35,90 +35,14 @@ AppAsset::register($this);
 
 <div class="body-wrap shop-default shop-sportswear">
     <div id="st-container" class="st-container">
-        <?php if (!Yii::$app->user->isGuest): ?>
-            <nav class="st-menu st-effect-1">
-                <div class="st-profile">
-                    <div class="st-profile-user-wrapper">
-                        <div class="profile-user-image">
-                            <?= Html::img('@web/images/avatar/noavatar.jpg', ['alt' => 'no-avatar', 'class' => 'img-circle']) ?>
-                        </div>
-                        <div class="profile-user-info">
-                            <span class="profile-user-name"><?= Yii::$app->user->identity->name ?></span>
-                            <span class="profile-user-email"><?= Yii::$app->user->identity->email ?></span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="st-menu-list mt-2">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class="ion-ios-bookmarks-outline"></i> Theme documentation
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ion-ios-cart-outline"></i> Purchase Tribus
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <h3 class="st-menu-title">Account</h3>
-                <div class="st-menu-list">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class="ion-ios-person-outline"></i> User profile
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ion-ios-location-outline"></i> My addresses
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ion-card"></i> My cards
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ion-ios-unlocked-outline"></i> Password update
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <h3 class="st-menu-title">Support center</h3>
-                <div class="st-menu-list">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class="ion-ios-information-outline"></i> About Tribus
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ion-ios-email-outline"></i> Contact &amp; support
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-camera"></i> Getting started
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        <?php endif; ?>
 
         <div class="st-pusher">
             <div class="st-content">
                 <div class="st-content-inner">
                     <!-- HEADER -->
                     <div class="header">
-                        <?php if (Yii::$app->user->isGuest): ?>
+                        <?php if (false): ?>
                             <!-- Top Bar -->
                             <div class="top-navbar top-navbar--inverse">
                                 <div class="container">
@@ -134,8 +58,6 @@ AppAsset::register($this);
                                                 </ul>
                                             </nav>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -151,11 +73,12 @@ AppAsset::register($this);
                                     <div class="px-4">
                                         <div class="row">
                                             <div class="col-12">
-                                                <input class="search-input" placeholder="Type and hit enter ..."
-                                                       type="text">
+                                                <input type="text" class="search-input" id="search-input"
+                                                       placeholder="Type and hit enter ...">
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="submit" class="hidden">Submit</button>
                                     <a href="#" class="close-search" data-toggle="global-search"
                                        title="Close search bar"></a>
                                 </form>
@@ -163,7 +86,7 @@ AppAsset::register($this);
                         </section>
 
                         <!-- Navbar -->
-                        <nav class="navbar navbar-expand-lg navbar--uppercase navbar-inverse bg-dark">
+                        <nav class="navbar navbar-expand-lg navbar--uppercase navbar-inverse bg-dark fixed-top">
                             <div class="container navbar-container">
                                 <!-- Brand/Logo -->
                                 <a class="navbar-brand" href="<?= Url::home(); ?>">
@@ -196,14 +119,14 @@ AppAsset::register($this);
                                         </form>
                                     </div>
 
-                                    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()): ?>
+                                    <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()): ?>
 
-                                    <!-- Admin Navbar links -->
-                                    <ul class="navbar-nav" data-hover="dropdown">
-                                        <li class="nav-item dropdown megamenu">
-                                            <?= Html::a('Admin', ['/admin'], ['class' => 'nav-link']); ?>
-                                        </li>
-                                    </ul>
+                                        <!-- Admin Navbar links -->
+                                        <ul class="navbar-nav" data-hover="dropdown">
+                                            <li class="nav-item dropdown megamenu">
+                                                <?= Html::a('Admin', ['/admin'], ['class' => 'nav-link']); ?>
+                                            </li>
+                                        </ul>
 
                                     <?php endif; ?>
 
@@ -221,7 +144,7 @@ AppAsset::register($this);
                                             </a>
                                         </li>
 
-                                        <?php if (!Yii::$app->user->isGuest): ?>
+                                        <?php if (false): ?>
                                             <!-- Profile -->
                                             <li class="nav-item nav-item-icon">
                                                 <a href="#" class="nav-link hidden-md-down" data-toggle="dropdown">
@@ -249,7 +172,7 @@ AppAsset::register($this);
                     </div>
 
                     <!-- FOOTER -->
-                    <footer id="footer" class="footer">
+                    <footer id="footer" class="footer fixed-bottom">
                         <div class="footer-bottom py-3">
                             <div class="container">
                                 <div class="row cols-xs-space col-sm-space align-items-center">
@@ -258,12 +181,6 @@ AppAsset::register($this);
                                             <ul class="footer-menu">
                                                 <li>
                                                     <a href="#" style="padding-left: 0;">Home</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Services</a>
                                                 </li>
                                             </ul>
 
@@ -315,22 +232,7 @@ AppAsset::register($this);
 
 <!-- Back to top button -->
 <a href="#" class="back-to-top btn-back-to-top"></a>
-
 <?php $this->endBody() ?>
-
-<script>
-
-    var pager = $('#pager');
-    var link = $(pager).find('li.disabled');
-    var text = $(link).find('span').text();
-    $(link).append('<a href="#" class="page-link"> ' + text + ' </a>');
-    $(link).find('span').remove();
-
-    var pagination = $('#pagination');
-
-    $(pager).appendTo(pagination);
-
-</script>
 
 <?= $this->blocks['script'] ?>
 

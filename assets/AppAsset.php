@@ -35,6 +35,8 @@ class AppAsset extends AssetBundle
         'js/ie10-viewport-bug-workaround.js',
         'js/slidebar.js',
         'js/classie.js',
+        'js/sticky-kit.min.js',
+        'js/viewportchecker.min.js',
         ///'js/bootstrap-dropdown-hover.min.js',
         'js/boomerang.min.js',
     ];
