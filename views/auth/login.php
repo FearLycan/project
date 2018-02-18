@@ -4,7 +4,7 @@ $this->title = 'Zaloguj się';
 
 ?>
 
-<section class="slice-lg has-bg-cover bg-size-cover" style="background-image: url(../images/login/login-image-01.jpg);">
+<section class="slice-lg has-bg-cover bg-size-cover" style="background-image: url(../images/site/login-image-01.jpg);">
     <div class="container">
         <div class="row justify-content-center cols-xs-space">
             <div class="col-lg-4">

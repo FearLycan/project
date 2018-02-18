@@ -20,7 +20,7 @@ $url = Image::URL_THUMBNAIL;
         </a>
     </div>
 
-    <div class="block-body pt-0 text-center">
+    <div class="block-body pt-0 text-center block-content">
         <h3 class="heading heading-6 strong-500 text-capitalize">
             <?= Html::a(Helpers::cutThis($model->title, 30)  , ['item/view', 'id' => $model->id, 'slug' => $model->slug]) ?>
         </h3>

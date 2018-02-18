@@ -47,7 +47,7 @@ class LoginForm extends User
             /* @var $user User */
             $user = $this->getUser();
 
-            if($user->status == User::STATUS_INACTIVE){
+            if($user && $user->status == User::STATUS_INACTIVE){
                 $this->addError($attribute, 'Konto nie zostało aktywowane');
             }
 

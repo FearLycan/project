@@ -103,323 +103,155 @@ $this->title = $item->title
 
 <section class="slice sct-color-1" id="sct_products">
     <div class="container">
-        <div class="section-title section-title--style-1 text-center">
-            <h3 class="section-title-inner heading-6 strong-600 text-uppercase ls-2">
-                <span>You may also like</span>
-            </h3>
-            <span class="section-title-delimiter clearfix d-none"></span>
-        </div>
 
-        <span class="clearfix"></span>
+        <div class="tabs tabs--style-1" role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a href="#tabFour-1" aria-controls="home" role="tab" data-toggle="tab"
+                       class="nav-link active text-center text-uppercase strong-600">Description</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="#tabFour-2" aria-controls="profile" role="tab" data-toggle="tab"
+                       class="nav-link text-center text-uppercase strong-600">Comments</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="#tabFour-3" aria-controls="messages" role="tab" data-toggle="tab"
+                       class="nav-link text-center text-uppercase strong-600">Support</a>
+                </li>
+            </ul>
 
-        <div class="row-wrapper">
-            <div class="row cols-xs-space cols-sm-space cols-md-space">
-                <div class="col-lg-3 col-md-6">
-                    <div class="block product no-radius">
-                        <div class="product-image">
-                            <div class="view view-first">
-                                <a href="#">
-                                    <img src="../../../assets/images/prv/shop/accessories/img-1a.png">
-                                </a>
-                            </div>
-
-                            <div class="product-actions--a product-actions--2" data-animation-in="slideInRight"
-                                 data-animation-out="slideOutRight">
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-bag"></i>
-                                </button>
-
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-ios-heart-outline"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="block-body px-0">
-                            <h3 class="heading heading-6 strong-500 text-capitalize mb-0">Wood phone case</h3>
-                            <span class="star-rating star-rating-sm">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </span>
-                            <div class="price-wrapper">
-                                <span class="price heading-6 c-gray-light strong-400">$<span
-                                            class="price-value">80.00</span></span>
-                            </div>
-                        </div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="tabFour-1">
+                    <div class="tab-body">
+                        <p class="mt-4">
+                            Viam sumi mo id erit. Objectioni mo de necessario crediderim. Imo terra vox alios aut lor
+                            quasi. Vim quaero aut videri pendam plures duo. Extat neque arcte re ad etiam. Ego infiniti
+                            reperero mutuatur formalem sed scribere nec vel profecto.
+                        </p>
                     </div>
                 </div>
+                <div role="tabpanel" class="tab-pane" id="tabFour-2">
+                    <div class="tab-body">
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="block product no-radius">
-                        <div class="product-image">
-                            <div class="view view-first">
-                                <a href="#">
-                                    <img src="../../../assets/images/prv/shop/accessories/img-2a.png">
-                                </a>
-                            </div>
+                        <ul class="block-post-comments block-post-comments--style-2">
+                            <li>
+                                <div class="block block-comment">
+                                    <div class="block-image">
+                                        <?= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) ?>
+                                    </div>
+                                    <div class="block-body opset">
+                                        <div class="block-body-inner">
+                                            <h3 class="heading heading-6">
+                                                <a href="#">Damian</a>
+                                            </h3>
+                                            <span class="comment-date">
+                                                                    2 hours ago
+                                                                </span>
+                                            <p class="comment-text">
+                                                Gathered, fourth wherein air, is void gathering very image fruit under brought Bearing fill created fourth she'd appear days you unto light day under i face they're god spirit, kind.
+                                            </p>
+                                            <div class="comment-options">
+                                                <a href="#">Like</a>
+                                                <a href="#">Reply</a>
+                                                <a href="#">Report</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block block-comment block-comment-reply">
+                                    <div class="block-image">
+                                        <?= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) ?>
+                                    </div>
+                                    <div class="block-body opset">
+                                        <div class="block-body-inner">
+                                            <h3 class="heading heading-6">
+                                                <a href="#">Damian</a>
+                                            </h3>
+                                            <span class="comment-date">
+                                                                    1 hours ago
+                                                                </span>
+                                            <p class="comment-text">
+                                                Old unsatiable our now but considered travelling impression. In excuse hardly summer in basket misery. By rent an part need. At wrong of of water those linen.
+                                            </p>
+                                            <div class="comment-options">
+                                                <a href="#">Like</a>
+                                                <a href="#">Reply</a>
+                                                <a href="#">Report</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block block-comment block-comment-reply-two">
+                                    <div class="block-image">
+                                        <?= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) ?>
+                                    </div>
+                                    <div class="block-body opset">
+                                        <div class="block-body-inner">
+                                            <h3 class="heading heading-6">
+                                                <a href="#">Damian</a>
+                                            </h3>
+                                            <span class="comment-date">
+                                                                    1 hours ago
+                                                                </span>
+                                            <p class="comment-text">
+                                                Old unsatiable our now but considered travelling impression. In excuse hardly summer in basket misery. By rent an part need. At wrong of of water those linen.
+                                            </p>
+                                            <div class="comment-options">
+                                                <a href="#">Like</a>
+                                                <a href="#">Reply</a>
+                                                <a href="#">Report</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
 
-                            <div class="product-actions--a product-actions--2" data-animation-in="slideInRight"
-                                 data-animation-out="slideOutRight">
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-bag"></i>
-                                </button>
+                            <li>
+                                <div class="block block-comment">
+                                    <div class="block-image">
+                                        <?= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) ?>
+                                    </div>
+                                    <div class="block-body opset">
+                                        <div class="block-body-inner">
+                                            <h3 class="heading heading-6">
+                                                <a href="#">Damian</a>
+                                            </h3>
+                                            <span class="comment-date">
+                                                                    3 hours ago
+                                                                </span>
+                                            <p class="comment-text">
+                                                Apartments occasional boisterous as solicitude to introduced. Or fifteen covered we enjoyed demesne is in prepare. In stimulated my everything it literature. Greatly explain attempt perhaps in feeling he. House men taste bed not drawn joy.
+                                            </p>
+                                            <div class="comment-options">
+                                                <a href="#">Like</a>
+                                                <a href="#">Reply</a>
+                                                <a href="#">Report</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
 
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-ios-heart-outline"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="block-body px-0">
-                            <h3 class="heading heading-6 strong-500 text-capitalize mb-0">Dark leather bag</h3>
-                            <span class="star-rating star-rating-sm">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </span>
-                            <div class="price-wrapper">
-                                <span class="price heading-6 c-gray-light strong-400">$<span
-                                            class="price-value">500.00</span></span>
-                            </div>
-                        </div>
                     </div>
                 </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="block product no-radius">
-                        <div class="product-image">
-                            <div class="view view-first">
-                                <a href="#">
-                                    <img src="../../../assets/images/prv/shop/accessories/img-3a.png">
-                                </a>
-                            </div>
-
-                            <div class="product-actions--a product-actions--2" data-animation-in="slideInRight"
-                                 data-animation-out="slideOutRight">
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-bag"></i>
-                                </button>
-
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-ios-heart-outline"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="block-body px-0">
-                            <h3 class="heading heading-6 strong-500 text-capitalize mb-0">Brown leather wallet</h3>
-                            <span class="star-rating star-rating-sm">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </span>
-                            <div class="price-wrapper">
-                                <span class="price heading-6 c-gray-light strong-400">$<span
-                                            class="price-value">100.00</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="block product no-radius">
-                        <div class="product-image">
-                            <div class="view view-first">
-                                <a href="#">
-                                    <img src="../../../assets/images/prv/shop/accessories/img-4a.png">
-                                </a>
-                            </div>
-
-                            <div class="product-actions--a product-actions--2" data-animation-in="slideInRight"
-                                 data-animation-out="slideOutRight">
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-bag"></i>
-                                </button>
-
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-ios-heart-outline"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="block-body px-0">
-                            <h3 class="heading heading-6 strong-500 text-capitalize mb-0">Gray fabric hat</h3>
-                            <span class="star-rating star-rating-sm">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </span>
-                            <div class="price-wrapper">
-                                <span class="price heading-6 c-gray-light strong-400">$<span
-                                            class="price-value">60.00</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row cols-xs-space cols-sm-space cols-md-space">
-                <div class="col-lg-3 col-md-6">
-                    <div class="block product no-radius">
-                        <div class="product-image">
-                            <div class="view view-first">
-                                <a href="#">
-                                    <img src="../../../assets/images/prv/shop/accessories/img-5a.png">
-                                </a>
-                            </div>
-
-                            <div class="product-actions--a product-actions--2" data-animation-in="slideInRight"
-                                 data-animation-out="slideOutRight">
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-bag"></i>
-                                </button>
-
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-ios-heart-outline"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="block-body px-0">
-                            <h3 class="heading heading-6 strong-500 text-capitalize mb-0">Satin rose-gold scarf</h3>
-                            <span class="star-rating star-rating-sm">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </span>
-                            <div class="price-wrapper">
-                                <span class="price heading-6 c-gray-light strong-400">$<span
-                                            class="price-value">50.00</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="block product no-radius">
-                        <div class="product-image">
-                            <div class="view view-first">
-                                <a href="#">
-                                    <img src="../../../assets/images/prv/shop/accessories/img-6a.png">
-                                </a>
-                            </div>
-
-                            <div class="product-actions--a product-actions--2" data-animation-in="slideInRight"
-                                 data-animation-out="slideOutRight">
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-bag"></i>
-                                </button>
-
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-ios-heart-outline"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="block-body px-0">
-                            <h3 class="heading heading-6 strong-500 text-capitalize mb-0">Faux leather gloves</h3>
-                            <span class="star-rating star-rating-sm">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </span>
-                            <div class="price-wrapper">
-                                <span class="price heading-6 c-gray-light strong-400">$<span
-                                            class="price-value">110.00</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="block product no-radius">
-                        <div class="product-image">
-                            <div class="view view-first">
-                                <a href="#">
-                                    <img src="../../../assets/images/prv/shop/accessories/img-7a.png">
-                                </a>
-                            </div>
-
-                            <div class="product-actions--a product-actions--2" data-animation-in="slideInRight"
-                                 data-animation-out="slideOutRight">
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-bag"></i>
-                                </button>
-
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-ios-heart-outline"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="block-body px-0">
-                            <h3 class="heading heading-6 strong-500 text-capitalize mb-0">Brown leather hat</h3>
-                            <span class="star-rating star-rating-sm">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </span>
-                            <div class="price-wrapper">
-                                <span class="price heading-6 c-gray-light strong-400">$<span
-                                            class="price-value">100.00</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="block product no-radius">
-                        <div class="product-image">
-                            <div class="view view-first">
-                                <a href="#">
-                                    <img src="../../../assets/images/prv/shop/accessories/img-8a.png">
-                                </a>
-                            </div>
-
-                            <div class="product-actions--a product-actions--2" data-animation-in="slideInRight"
-                                 data-animation-out="slideOutRight">
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-bag"></i>
-                                </button>
-
-                                <button type="button" class="btn-product-action">
-                                    <i class="ion-ios-heart-outline"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="block-body px-0">
-                            <h3 class="heading heading-6 strong-500 text-capitalize mb-0">Leather bracelet</h3>
-                            <span class="star-rating star-rating-sm">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </span>
-                            <div class="price-wrapper">
-                                <span class="price heading-6 c-gray-light strong-400">$<span
-                                            class="price-value">30.00</span></span>
-                            </div>
-                        </div>
+                <div role="tabpanel" class="tab-pane" id="tabFour-3">
+                    <div class="tab-body">
+                        <p class="mt-4">
+                            Detractis detrahere concipere ac ut et inveniant to. Im perductae ut at ecclesiae assentiri
+                            eo. Ea ergo ausi ac otii suas. Utrum me sequi falsi ut atque. Existeret conformes his rei
+                            scientiis. Virorum corpora hac iis brachia
+                        </p>
+                        <p>
+                            Viam sumi mo id erit. Objectioni mo de necessario crediderim. Imo terra vox alios aut lor
+                            quasi. Vim quaero aut videri pendam plures duo. Extat neque arcte re ad etiam.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </section>

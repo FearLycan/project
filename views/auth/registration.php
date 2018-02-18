@@ -18,7 +18,7 @@ $this->title = 'Rejestracja';
     </section>
 <?php else: ?>
     <section class="slice-lg has-bg-cover bg-size-cover"
-             style="background-image: url(../images/login/login-image-02.jpg); background-position: bottom center;">
+             style="background-image: url(../images/site/login-image-02.jpg); background-position: bottom center;">
         <div class="container">
             <div class="row justify-content-center cols-xs-space">
                 <div class="col-lg-6">

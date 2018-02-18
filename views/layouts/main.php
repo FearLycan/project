@@ -42,7 +42,7 @@ AppAsset::register($this);
                 <div class="st-content-inner">
                     <!-- HEADER -->
                     <div class="header">
-                        <?php if (false): ?>
+                        <?php if (Yii::$app->user->isGuest): ?>
                             <!-- Top Bar -->
                             <div class="top-navbar top-navbar--inverse">
                                 <div class="container">
@@ -86,7 +86,7 @@ AppAsset::register($this);
                         </section>
 
                         <!-- Navbar -->
-                        <nav class="navbar navbar-expand-lg navbar--uppercase navbar-inverse bg-dark fixed-top">
+                        <nav class="navbar navbar-expand-lg navbar--uppercase navbar-inverse bg-dark">
                             <div class="container navbar-container">
                                 <!-- Brand/Logo -->
                                 <a class="navbar-brand" href="<?= Url::home(); ?>">
@@ -118,6 +118,17 @@ AppAsset::register($this);
                                             </div>
                                         </form>
                                     </div>
+
+                                    <?php if (Yii::$app->user->isGuest): ?>
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown megamenu">
+                                                <a href="<?= Url::toRoute(['auth/login']); ?>">Zaloguj się</a>
+                                            </li>
+                                            <li class="nav-item dropdown megamenu">
+                                                <a href="<?= Url::toRoute(['auth/registration']); ?>">Rejestracja</a>
+                                            </li>
+                                        </ul>
+                                    <?php endif; ?>
 
                                     <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()): ?>
 
