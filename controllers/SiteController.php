@@ -12,6 +12,7 @@ use app\components\AccessControl;
 use app\models\forms\RegistrationForm;
 use app\models\Item;
 use app\models\Shop;
+use app\models\Tag;
 use app\models\User;
 use Yii;
 use app\components\Controller;
@@ -69,38 +70,26 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-//    public function actionIndex()
-//    {
-//        $dataProvider = new ActiveDataProvider([
-//            'query' => Item::find()->where(['status' => Item::STATUS_ACTIVE]),
-//            //'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
-//            'pagination' => [
-//                'pageSize' => 40,
-//            ],
-//        ]);
-//
-//        return $this->render('index', [
-//            'dataProvider' => $dataProvider,
-//        ]);
-//    }
+    public function actionJson($phrase)
+    {
+        $tags = Tag::find()
+            ->where(['like', 'name', $phrase])
+            ->orderBy(['frequency' => SORT_DESC])
+            ->limit(10)
+            ->all();
 
-//    public function actionShops()
-//    {
-//        $dataProvider = new ActiveDataProvider([
-//            'query' => Shop::find()->where(['status' => Shop::STATUS_ACTIVE]),
-//            'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
-//            'pagination' => [
-//                'pageSize' => 40,
-//            ],
-//        ]);
-//
-//        return $this->render('shops', [
-//            'dataProvider' => $dataProvider,
-//        ]);
-//    }
+        $results = [];
+        /* @var $game Tag */
+        foreach ($tags as $tag) {
+            $results[] = [
+                'id' => $tag->id,
+                'name' => $tag->name,
+                // 'slug' => $tag->slug,
+                'frequency' => $tag->frequency,
+            ];
+        }
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $results;
+    }
 }

@@ -346,7 +346,6 @@
 }
 
 .easy-autocomplete-container ul li div {
-    display: block;
     font-weight: normal;
     word-break: break-all
 }

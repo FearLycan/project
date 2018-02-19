@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Inflector;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -168,7 +169,7 @@ class Tag extends ActiveRecord
         $array = array_unique($array);
 
         foreach ($array as $item) {
-
+          $item =  Inflector::slug($item);
             $tag = Tag::find()->where(['name' => $item])->one();
 
             if (empty($tag)) {

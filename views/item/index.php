@@ -6,9 +6,7 @@ use app\components\LinkPager;
 use yii\widgets\ListView;
 
 $this->title = 'My Yii Application';
-//$this->registerCssFile(Yii::$app->basePath . '/web/css/easy-autocomplete.css');
-//$this->registerCssFile(Yii::$app->basePath . '/web/css/easy-autocomplete.themes.min.css');
-//$this->registerJs(Yii::$app->basePath . '/web/js/jquery.easy-autocomplete.min.js');
+
 ?>
 
 <section class="slice sct-color-1" id="sct_products">
@@ -41,8 +39,28 @@ $this->title = 'My Yii Application';
 <script src="js/jquery.easy-autocomplete.min.js"></script>
 
 <script>
+
     var options = {
-        data: ["blue", "green", "pink", "red", "yellow"]
+        url: function(phrase) {
+            return "/project/web/site/json?phrase=" +encodeURIComponent(phrase);
+        },
+        getValue: function(element) {
+            return element.name;
+        },
+        template: {
+            type: "custom",
+            method: function (title, item) {
+                return '<div class="row">' +
+                    '<div class="col-2">' +
+                        title
+                    + '</div>' +
+                '<div class="col-2">' +
+                    '<a href="/project/web/tag/'+item.name+'">wyszukaj</a>'
+                + '</div>'
+                    + '</div>'
+            }
+        },
+        requestDelay: 400
     };
 
     $("#search-input").easyAutocomplete(options);

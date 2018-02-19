@@ -2,28 +2,11 @@
 
 namespace app\controllers;
 
-use app\components\AccessControl;
-
-//use app\models\Category;
-//use app\models\CategorySearch;
-//use app\models\File;
-//use app\models\FileSearch;
-//use app\models\User;
-use app\models\forms\RegistrationForm;
 use app\models\Item;
-use app\models\Shop;
-use app\models\User;
+use app\models\searches\ItemSearch;
 use Yii;
 use app\components\Controller;
-use yii\data\ActiveDataProvider;
-use yii\filters\VerbFilter;
-
-//use yii\validators\ValidationAsset;
-//use yii\web\NotFoundHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\Response;
-use yii\widgets\ActiveForm;
-use app\models\forms\LoginForm;
 
 class ItemController extends Controller
 {
@@ -46,16 +29,12 @@ class ItemController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Item::find()->where(['status' => Item::STATUS_ACTIVE]),
-            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
-            'pagination' => [
-                'pageSize' => 4,
-            ],
-        ]);
+        $searchModel = new ItemSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -68,14 +47,17 @@ class ItemController extends Controller
     {
         $item = Item::find()->where(['id' => $id, 'slug' => $slug])->one();
 
-        //die(var_dump($item->tags));
-
         if (empty($item)) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
+        $similar = $item->getSimilar(2,6);
+
+        //die(var_dump($similar));
+
         return $this->render('view', [
             'item' => $item,
+            'similar' => $similar,
         ]);
     }
 }

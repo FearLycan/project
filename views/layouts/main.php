@@ -7,6 +7,7 @@
 use yii\helpers\Html;
 use app\assets\AppAsset;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
 ?>
@@ -69,16 +70,16 @@ AppAsset::register($this);
                                 <div class="global-search-backdrop mask-dark--style-2"></div>
 
                                 <!-- Search form -->
-                                <form class="form-horizontal form-global-search z-depth-2-top" role="form">
+                                <form class="form-horizontal form-global-search z-depth-2-top" role="form" action="<?= Url::home() ?>" method="get">
                                     <div class="px-4">
                                         <div class="row">
                                             <div class="col-12">
-                                                <input type="text" class="search-input" id="search-input"
+                                                <input type="text" class="search-input" name="title" id="search-input"
                                                        placeholder="Type and hit enter ...">
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="hidden">Submit</button>
+<!--                                    <button type="submit" class="hidden">Submit</button>-->
                                     <a href="#" class="close-search" data-toggle="global-search"
                                        title="Close search bar"></a>
                                 </form>
@@ -109,9 +110,9 @@ AppAsset::register($this);
                                      id="navbar_main">
                                     <!-- Navbar search - For small resolutions -->
                                     <div class="navbar-search-widget b-xs-bottom py-3 d-lg-none d-xl-none">
-                                        <form class="" role="form">
+                                        <form class="" role="form" action="<?= Url::home(); ?>" method="get">
                                             <div class="input-group input-group-lg">
-                                                <input class="form-control" placeholder="Search for..." type="text">
+                                                <input class="form-control" name="ItemSearch[title]" placeholder="Search for..." type="text">
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-base-3" type="button">Go!</button>
                                                 </span>
@@ -183,7 +184,7 @@ AppAsset::register($this);
                     </div>
 
                     <!-- FOOTER -->
-                    <footer id="footer" class="footer fixed-bottom">
+                    <footer id="footer" class="footer">
                         <div class="footer-bottom py-3">
                             <div class="container">
                                 <div class="row cols-xs-space col-sm-space align-items-center">

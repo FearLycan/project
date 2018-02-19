@@ -239,3 +239,27 @@ footer {
         padding-left: 160px;
     }
 }
+
+.text-cover-wrapper {
+    padding: 0 0 160px 0;
+}
+
+.similar{
+    height: 150px;
+}
+
+.view img {
+    display: inherit;
+}
+
+@media only screen and (max-width: 1366px) {
+    .page-content {
+        min-height: 600px;
+    }
+}
+
+@media only screen and (min-width: 1900px) {
+    .page-content {
+        min-height: 810px;
+    }
+}

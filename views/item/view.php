@@ -10,96 +10,96 @@ use yii\helpers\Url;
 $this->title = $item->title
 ?>
 
-<section class="slice bg-minimalist">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5">
-                <div class="swiper-js-container">
-                    <div class="swiper-container swiper-container-horizontal swiper-container-undefined"
-                         data-swiper-items="1" data-swiper-space-between="0">
-                        <div class="swiper-wrapper pb-5" style="transform: translate3d(0px, 0px, 0px);">
-                            <div class="swiper-slide swiper-slide-active">
-                                <?= Html::img('@web/' . Image::URL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid']) ?>
+    <section class="slice bg-minimalist">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="swiper-js-container">
+                        <div class="swiper-container swiper-container-horizontal swiper-container-undefined"
+                             data-swiper-items="1" data-swiper-space-between="0">
+                            <div class="swiper-wrapper pb-5" style="transform: translate3d(0px, 0px, 0px);">
+                                <div class="swiper-slide swiper-slide-active">
+                                    <?= Html::img('@web/' . Image::URL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid']) ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-                            <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+                            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+                                <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-lg-5 ml-lg-auto">
-                <div class="product-description-wrapper">
-                    <!-- Product title -->
-                    <h2 class="heading heading-4 strong-600 text-capitalize">
-                        <?= Html::encode($item->title) ?>
-                    </h2>
+                <div class="col-lg-5 ml-lg-auto">
+                    <div class="product-description-wrapper">
+                        <!-- Product title -->
+                        <h2 class="heading heading-4 strong-600 text-capitalize">
+                            <?= Html::encode($item->title) ?>
+                        </h2>
 
-                    <hr>
+                        <hr>
 
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="form-default">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="form-default">
 
-                                <div class="row mt-2">
-                                    <div class="col-12">
-                                        <?= Html::a('<i class="icon ion-bag"></i> Idź do sklepu', $item->url, ['class' => 'btn btn-lg btn-block btn-gray-dark btn-icon-left', 'target' => '_blank']) ?>
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <?= Html::a('<i class="icon ion-bag"></i> Idź do sklepu', $item->url, ['class' => 'btn btn-lg btn-block btn-gray-dark btn-icon-left', 'target' => '_blank']) ?>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <span class="space-xs-md"></span>
+                        <span class="space-xs-md"></span>
 
-                    <!-- Product description -->
-                    <div class="product-short-text">
-                        <p>
-                            <?= Html::encode($item->description) ?>
-                        </p>
+                        <!-- Product description -->
+                        <div class="product-short-text">
+                            <p>
+                                <?= Html::encode($item->description) ?>
+                            </p>
 
-                        <ul class="icons mt-4">
-                            <li class="text-sm">
-                                <i class="ion-briefcase icon" aria-hidden="true"></i>
-                                <strong>Sklep:</strong> <?= Html::encode($item->shop->name) ?>
-                            </li>
-                            <li class="text-sm">
-                                <?php if ($item->gender == Item::GENDER_MALE): ?>
-                                    <i class="ion-man icon" aria-hidden="true"></i>
-                                    <strong>Rodzaj:</strong> <?= $item->getGenderName() ?>
-                                <?php elseif ($item->gender == Item::GENDER_FEMALE): ?>
-                                    <i class="ion-woman icon" aria-hidden="true"></i>
-                                    <strong>Rodzaj:</strong> <?= $item->getGenderName() ?>
-                                <?php elseif ($item->gender == Item::GENDER_KID): ?>
-                                    <i class="fa fa-child" aria-hidden="true"></i>
-                                    <strong>Rodzaj:</strong> <?= $item->getGenderName() ?>
-                                <?php endif; ?>
-                            </li>
-                            <li class="text-sm">
-                                <i class="icon ion-tshirt"></i>
-                                <strong>Typ:</strong> <?= Html::encode($item->type->name) ?>
-                            </li>
-                        </ul>
-
-                        <ul class="inline-links inline-links--style-1 mt-4 space-xs-md col-lg-12">
-
-                            <?php foreach ($item->tags as $tag): ?>
-                                <li>
-                                    <a href="<?= Url::to(['tag/view', 'name' => $tag->name]) ?>">
-                                        <span class="badge badge-md badge-dark"><?= Html::encode($tag->name) ?></span>
-                                    </a>
+                            <ul class="icons mt-4">
+                                <li class="text-sm">
+                                    <i class="ion-briefcase icon" aria-hidden="true"></i>
+                                    <strong>Sklep:</strong> <?= Html::encode($item->shop->name) ?>
                                 </li>
-                            <?php endforeach; ?>
+                                <li class="text-sm">
+                                    <?php if ($item->gender == Item::GENDER_MALE): ?>
+                                        <i class="ion-man icon" aria-hidden="true"></i>
+                                        <strong>Rodzaj:</strong> <?= $item->getGenderName() ?>
+                                    <?php elseif ($item->gender == Item::GENDER_FEMALE): ?>
+                                        <i class="ion-woman icon" aria-hidden="true"></i>
+                                        <strong>Rodzaj:</strong> <?= $item->getGenderName() ?>
+                                    <?php elseif ($item->gender == Item::GENDER_KID): ?>
+                                        <i class="fa fa-child" aria-hidden="true"></i>
+                                        <strong>Rodzaj:</strong> <?= $item->getGenderName() ?>
+                                    <?php endif; ?>
+                                </li>
+                                <li class="text-sm">
+                                    <i class="icon ion-tshirt"></i>
+                                    <strong>Typ:</strong> <?= Html::encode($item->type->name) ?>
+                                </li>
+                            </ul>
 
-                        </ul>
+                            <ul class="inline-links inline-links--style-1 mt-4 space-xs-md col-lg-12">
+
+                                <?php foreach ($item->tags as $tag): ?>
+                                    <li>
+                                        <a href="<?= Url::to(['tag/view', 'name' => $tag->name]) ?>">
+                                            <span class="badge badge-md badge-dark"><?= Html::encode($tag->name) ?></span>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 <section class="slice sct-color-1" id="sct_products">
     <div class="container">
@@ -255,3 +255,42 @@ $this->title = $item->title
 
     </div>
 </section>
+<?php if (!empty($similar)): ?>
+    <section class="slice sct-color-1" id="sct_products">
+        <div class="container">
+            <div class="section-title section-title--style-1 text-center">
+                <h3 class="section-title-inner heading-6 strong-600 text-uppercase ls-2">
+                    <span>podobne produkty</span>
+                </h3>
+                <span class="section-title-delimiter clearfix d-none"></span>
+            </div>
+
+            <span class="clearfix"></span>
+
+            <div class="row-wrapper">
+                <div class="row cols-xs-space cols-md-space cols-md-space">
+
+                    <?php foreach ($similar as $item): ?>
+
+
+                        <div class="col-lg-3 col-md-6 space-xs-md">
+                            <div class="block product no-border z-depth-2--hover">
+                                <div class="block-image">
+                                    <a href="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>">
+                                        <?= Html::img('@web/' . Image::URL_THUMBNAIL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid similar']) ?>
+                                    </a>
+                                </div>
+
+                                <div class="block-body pt-0 text-center">
+                                    <h3 class="heading heading-6 strong-500 text-capitalize">
+                                        <?= Html::a(Helpers::cutThis($item->title, 30), ['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>

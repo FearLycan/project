@@ -5,6 +5,8 @@ namespace app\models;
 use app\components\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%item}}".
@@ -216,5 +218,32 @@ class Item extends ActiveRecord
             unlink(Image::URL . $this->image);
             unlink(Image::URL_THUMBNAIL . $this->image);
         }
+    }
+
+    /**
+     * @param $n
+     * @return array|ActiveRecord[]
+     */
+    public function getSimilar($tagLimit = 2, $itemLimit = 6)
+    {
+        $ids = ItemTag::find()
+            ->select(['tag_id'])
+            ->where(['item_id' => $this->id])
+            ->orderBy(new Expression('rand()'))
+            ->limit($tagLimit)
+            ->asArray()
+            ->all();
+
+        $ids = ArrayHelper::getColumn($ids, 'tag_id');
+
+        $items = self::find()
+            ->joinWith('tags')
+            ->where(['tag.id' => $ids])
+            ->andWhere(['!=', 'item.id', $this->id])
+            ->orderBy(new Expression('rand()'))
+            ->limit($itemLimit)
+            ->all();
+
+        return $items;
     }
 }
