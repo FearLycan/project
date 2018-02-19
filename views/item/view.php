@@ -1,5 +1,6 @@
 <?php
 
+use app\components\Helpers;
 use app\models\Image;
 use app\models\Item;
 use yii\helpers\Html;
