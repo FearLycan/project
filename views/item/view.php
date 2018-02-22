@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var \app\models\Item $item */
+/* @var \app\models\forms\CommentForm $comment */
 
 $this->title = $item->title
 ?>
@@ -102,42 +103,39 @@ $this->title = $item->title
         </div>
     </section>
 
-<section class="slice sct-color-1" id="sct_products">
-    <div class="container">
+    <section class="slice sct-color-1" id="sct_products">
+        <div class="container">
 
-        <div class="tabs tabs--style-1" role="tabpanel">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a href="#tabFour-1" aria-controls="home" role="tab" data-toggle="tab"
-                       class="nav-link active text-center text-uppercase strong-600">Description</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="#tabFour-2" aria-controls="profile" role="tab" data-toggle="tab"
-                       class="nav-link text-center text-uppercase strong-600">Comments</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="#tabFour-3" aria-controls="messages" role="tab" data-toggle="tab"
-                       class="nav-link text-center text-uppercase strong-600">Support</a>
-                </li>
-            </ul>
+            <div class="tabs tabs--style-1" role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a href="#tabFour-1" aria-controls="home" role="tab" data-toggle="tab"
+                           class="nav-link active text-center text-uppercase strong-600">Description</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="#tabFour-2" aria-controls="profile" role="tab" data-toggle="tab"
+                           class="nav-link text-center text-uppercase strong-600">Comments</a>
+                    </li>
+                </ul>
 
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="tabFour-1">
-                    <div class="tab-body">
-                        <p class="mt-4">
-                            Viam sumi mo id erit. Objectioni mo de necessario crediderim. Imo terra vox alios aut lor
-                            quasi. Vim quaero aut videri pendam plures duo. Extat neque arcte re ad etiam. Ego infiniti
-                            reperero mutuatur formalem sed scribere nec vel profecto.
-                        </p>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tabFour-1">
+                        <div class="tab-body">
+                            <p class="mt-4">
+                                Viam sumi mo id erit. Objectioni mo de necessario crediderim. Imo terra vox alios aut
+                                lor
+                                quasi. Vim quaero aut videri pendam plures duo. Extat neque arcte re ad etiam. Ego
+                                infiniti
+                                reperero mutuatur formalem sed scribere nec vel profecto.
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="tabFour-2">
-                    <div class="tab-body">
+                    <div role="tabpanel" class="tab-pane" id="tabFour-2">
+                        <div class="tab-body">
 
-                        <ul class="block-post-comments block-post-comments--style-2">
-                            <li>
+                            <div class="block-post-comments block-post-comments--style-2">
                                 <div class="block block-comment">
                                     <div class="block-image">
                                         <?= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) ?>
@@ -151,7 +149,9 @@ $this->title = $item->title
                                                                     2 hours ago
                                                                 </span>
                                             <p class="comment-text">
-                                                Gathered, fourth wherein air, is void gathering very image fruit under brought Bearing fill created fourth she'd appear days you unto light day under i face they're god spirit, kind.
+                                                Gathered, fourth wherein air, is void gathering very image fruit under
+                                                brought Bearing fill created fourth she'd appear days you unto light day
+                                                under i face they're god spirit, kind.
                                             </p>
                                             <div class="comment-options">
                                                 <a href="#">Like</a>
@@ -174,7 +174,9 @@ $this->title = $item->title
                                                                     1 hours ago
                                                                 </span>
                                             <p class="comment-text">
-                                                Old unsatiable our now but considered travelling impression. In excuse hardly summer in basket misery. By rent an part need. At wrong of of water those linen.
+                                                Old unsatiable our now but considered travelling impression. In excuse
+                                                hardly summer in basket misery. By rent an part need. At wrong of of
+                                                water those linen.
                                             </p>
                                             <div class="comment-options">
                                                 <a href="#">Like</a>
@@ -197,7 +199,9 @@ $this->title = $item->title
                                                                     1 hours ago
                                                                 </span>
                                             <p class="comment-text">
-                                                Old unsatiable our now but considered travelling impression. In excuse hardly summer in basket misery. By rent an part need. At wrong of of water those linen.
+                                                Old unsatiable our now but considered travelling impression. In excuse
+                                                hardly summer in basket misery. By rent an part need. At wrong of of
+                                                water those linen.
                                             </p>
                                             <div class="comment-options">
                                                 <a href="#">Like</a>
@@ -207,9 +211,6 @@ $this->title = $item->title
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-
-                            <li>
                                 <div class="block block-comment">
                                     <div class="block-image">
                                         <?= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) ?>
@@ -223,7 +224,10 @@ $this->title = $item->title
                                                                     3 hours ago
                                                                 </span>
                                             <p class="comment-text">
-                                                Apartments occasional boisterous as solicitude to introduced. Or fifteen covered we enjoyed demesne is in prepare. In stimulated my everything it literature. Greatly explain attempt perhaps in feeling he. House men taste bed not drawn joy.
+                                                Apartments occasional boisterous as solicitude to introduced. Or fifteen
+                                                covered we enjoyed demesne is in prepare. In stimulated my everything it
+                                                literature. Greatly explain attempt perhaps in feeling he. House men
+                                                taste bed not drawn joy.
                                             </p>
                                             <div class="comment-options">
                                                 <a href="#">Like</a>
@@ -232,30 +236,22 @@ $this->title = $item->title
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
+                            </div>
 
+                                <div class="block block-comment comment-form">
+                                    <?= $this->render('forms/_comment', [
+                                        'model' => $comment,
+                                    ]) ?>
+                                </div>
+
+                        </div>
                     </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="tabFour-3">
-                    <div class="tab-body">
-                        <p class="mt-4">
-                            Detractis detrahere concipere ac ut et inveniant to. Im perductae ut at ecclesiae assentiri
-                            eo. Ea ergo ausi ac otii suas. Utrum me sequi falsi ut atque. Existeret conformes his rei
-                            scientiis. Virorum corpora hac iis brachia
-                        </p>
-                        <p>
-                            Viam sumi mo id erit. Objectioni mo de necessario crediderim. Imo terra vox alios aut lor
-                            quasi. Vim quaero aut videri pendam plures duo. Extat neque arcte re ad etiam.
-                        </p>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-</section>
+        </div>
+    </section>
 <?php if (!empty($similar)): ?>
     <section class="slice sct-color-1" id="sct_products">
         <div class="container">

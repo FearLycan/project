@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\forms\CommentForm;
 use app\models\Item;
 use app\models\searches\ItemSearch;
 use Yii;
@@ -51,6 +52,9 @@ class ItemController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
+        $comment = new CommentForm();
+        $comment->item_id = $id;
+
         $similar = $item->getSimilar(2,6);
 
         //die(var_dump($similar));
@@ -58,6 +62,7 @@ class ItemController extends Controller
         return $this->render('view', [
             'item' => $item,
             'similar' => $similar,
+            'comment' => $comment,
         ]);
     }
 }

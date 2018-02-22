@@ -72,6 +72,9 @@ AdminAsset::register($this);
             <li class="nav-item">
                 <a class="nav-link" href="<?= Url::to(['user/index']) ?>">Użytkownicy</a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="<?= Url::to(['comment/index']) ?>">Komentarze</a>
+            </li>
         </ul>
     </div>
 </nav>
