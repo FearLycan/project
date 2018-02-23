@@ -1,6 +1,9 @@
 <?php
 
 namespace app\components;
+use Yii;
+use yii\timeago\TimeAgo;
+
 /**
  * General app helper.
  *
@@ -47,5 +50,19 @@ class Helpers
             return (substr($str, 0, strrpos($str, ' ')) . '...');
         }
         return trim($str);
+    }
+
+    public static function timeago($time)
+    {
+        $time = Yii::$app->formatter->asTimestamp($time);
+        $timeago = TimeAgo::widget([
+            'timestamp' => $time,
+            'language' => Yii::$app->language,
+            'options' => [
+                'datetime' => date('c', $time),
+            ],
+        ]);
+
+        return $timeago;
     }
 }

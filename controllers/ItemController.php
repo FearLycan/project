@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\forms\CommentForm;
 use app\models\Item;
+use app\models\searches\CommentSearch;
 use app\models\searches\ItemSearch;
 use Yii;
 use app\components\Controller;
@@ -46,6 +47,7 @@ class ItemController extends Controller
      */
     public function actionView($id, $slug)
     {
+        /* @var \app\models\Item $item */
         $item = Item::find()->where(['id' => $id, 'slug' => $slug])->one();
 
         if (empty($item)) {
@@ -57,12 +59,14 @@ class ItemController extends Controller
 
         $similar = $item->getSimilar(2,6);
 
-        //die(var_dump($similar));
+        $searchModel = new CommentSearch();
+        $commentDataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('view', [
             'item' => $item,
             'similar' => $similar,
             'comment' => $comment,
+            'commentDataProvider' => $commentDataProvider,
         ]);
     }
 }

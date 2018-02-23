@@ -17,7 +17,7 @@ class m180219_091327_create_comment_table extends Migration
             'item_id' => $this->integer()->notNull(),
             'content' => $this->text(),
             'author_id' => $this->integer()->notNull(),
-            'parent_id' => $this->integer()->null(),
+            'parent_id' => $this->integer()->null()->defaultValue(0),
             'level' => $this->smallInteger()->notNull()->defaultValue(1),
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
@@ -28,7 +28,6 @@ class m180219_091327_create_comment_table extends Migration
         $this->createIndex('{{%comment_updated_at_index}}', '{{%comment}}', 'updated_at');
 
         $this->addForeignKey('{{%comment_author_id_fk}}', '{{%comment}}', 'author_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('{{%comment_parent_id_fk}}', '{{%comment}}', 'parent_id', '{{%comment}}', 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('{{%comment_item_id_fk}}', '{{%comment}}', 'item_id', '{{%item}}', 'id', 'CASCADE', 'CASCADE');
     }
 

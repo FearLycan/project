@@ -1,10 +1,13 @@
 <?php
 
 use app\components\Helpers;
+use app\components\LinkPager;
 use app\models\Image;
 use app\models\Item;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ListView;
+use yii\widgets\Pjax;
 
 /* @var \app\models\Item $item */
 /* @var \app\models\forms\CommentForm $comment */
@@ -109,36 +112,51 @@ $this->title = $item->title
             <div class="tabs tabs--style-1" role="tabpanel">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a href="#tabFour-1" aria-controls="home" role="tab" data-toggle="tab"
-                           class="nav-link active text-center text-uppercase strong-600">Description</a>
-                    </li>
+<!--                    <li class="nav-item" role="presentation">-->
+<!--                        <a href="#tabFour-1" aria-controls="home" role="tab" data-toggle="tab"-->
+<!--                           class="nav-link active text-center text-uppercase strong-600">Description</a>-->
+<!--                    </li>-->
                     <li class="nav-item" role="presentation">
                         <a href="#tabFour-2" aria-controls="profile" role="tab" data-toggle="tab"
-                           class="nav-link text-center text-uppercase strong-600">Comments</a>
+                           class="nav-link active text-center text-uppercase strong-600">Comments</a>
                     </li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="tabFour-1">
+<!--                    <div role="tabpanel" class="tab-pane active" id="tabFour-1">-->
+<!--                        <div class="tab-body">-->
+<!--                            <p class="mt-4">-->
+<!--                                Viam sumi mo id erit. Objectioni mo de necessario crediderim. Imo terra vox alios aut-->
+<!--                                lor-->
+<!--                                quasi. Vim quaero aut videri pendam plures duo. Extat neque arcte re ad etiam. Ego-->
+<!--                                infiniti-->
+<!--                                reperero mutuatur formalem sed scribere nec vel profecto.-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div role="tabpanel" class="tab-pane active" id="tabFour-2">
                         <div class="tab-body">
-                            <p class="mt-4">
-                                Viam sumi mo id erit. Objectioni mo de necessario crediderim. Imo terra vox alios aut
-                                lor
-                                quasi. Vim quaero aut videri pendam plures duo. Extat neque arcte re ad etiam. Ego
-                                infiniti
-                                reperero mutuatur formalem sed scribere nec vel profecto.
-                            </p>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="tabFour-2">
-                        <div class="tab-body">
+                            <?php Pjax::begin(['id' => 'comments']) ?>
+                            <?= ListView::widget([
+                                'dataProvider' => $commentDataProvider,
+                                'summary' => false,
+                                //'itemOptions' => ['class' => 'col-lg-3 col-md-6 space-xs-md'],
+                                'itemView' => '_comment',
+                                'options' => [
+                                    'tag' => 'div',
+                                    'class' => 'block-post-comments block-post-comments--style-2',
+                                ],
+                                'pager' => [
+                                    'class' => LinkPager::class
+                                ]
+                            ]); ?>
+                            <?php Pjax::end() ?>
 
                             <div class="block-post-comments block-post-comments--style-2">
-                                <div class="block block-comment">
+                                <!--<div class="block block-comment">
                                     <div class="block-image">
-                                        <?= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) ?>
+                                        <?/*= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) */?>
                                     </div>
                                     <div class="block-body opset">
                                         <div class="block-body-inner">
@@ -163,7 +181,7 @@ $this->title = $item->title
                                 </div>
                                 <div class="block block-comment block-comment-reply">
                                     <div class="block-image">
-                                        <?= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) ?>
+                                        <?/*= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) */?>
                                     </div>
                                     <div class="block-body opset">
                                         <div class="block-body-inner">
@@ -188,7 +206,7 @@ $this->title = $item->title
                                 </div>
                                 <div class="block block-comment block-comment-reply-two">
                                     <div class="block-image">
-                                        <?= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) ?>
+                                        <?/*= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) */?>
                                     </div>
                                     <div class="block-body opset">
                                         <div class="block-body-inner">
@@ -213,7 +231,7 @@ $this->title = $item->title
                                 </div>
                                 <div class="block block-comment">
                                     <div class="block-image">
-                                        <?= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) ?>
+                                        <?/*= Html::img('@web/images/avatar/noavatar.jpg', ['class' => 'img-circle']) */?>
                                     </div>
                                     <div class="block-body opset">
                                         <div class="block-body-inner">
@@ -236,13 +254,14 @@ $this->title = $item->title
                                             </div>
                                         </div>
                                     </div>
-                            </div>
+                            </div>-->
 
                                 <div class="block block-comment comment-form">
                                     <?= $this->render('forms/_comment', [
                                         'model' => $comment,
                                     ]) ?>
                                 </div>
+                            </div>
 
                         </div>
                     </div>

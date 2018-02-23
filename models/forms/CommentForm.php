@@ -17,7 +17,6 @@ class CommentForm extends Comment
             [['item_id', 'author_id', 'parent_id'], 'integer'],
             [['content'], 'string'],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
-            [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comment::className(), 'targetAttribute' => ['parent_id' => 'id']],
         ];
     }
 }

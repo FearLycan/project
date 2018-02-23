@@ -3,10 +3,13 @@
 namespace app\controllers;
 
 
+use app\components\AccessControl;
 use app\components\Controller;
 use app\models\forms\CommentForm;
+use app\models\User;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 class CommentController extends Controller
 {
@@ -16,6 +19,18 @@ class CommentController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'statuses' => [
+                            User::STATUS_ACTIVE,
+                        ],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -34,23 +49,22 @@ class CommentController extends Controller
     public function actionCreate()
     {
         $model = new CommentForm();
+        $response['success'] = false;
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             $model->author_id = Yii::$app->user->identity->id;
             $model->parent_id = 0;
 
-            $model->save();
+            if ($model->save()) {
+                $response['success'] = true;
+            }
 
-            //return $this->redirect(['view', 'id' => $model->id]);
-            $status = true;
         } else {
-//            return $this->render('create', [
-//                'model' => $model,
-//            ]);
-            $status = false;
+            $response['success'] = false;
         }
 
-        return $status;
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $response;
     }
 }
