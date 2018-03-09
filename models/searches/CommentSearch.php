@@ -42,9 +42,9 @@ class CommentSearch extends Comment
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $id)
     {
-        $query = Comment::find();
+        $query = Comment::find()->where(['item_id' => $id, 'parent_id' => Comment::NO_PARENT]);
 
         // add conditions that should always apply here
 

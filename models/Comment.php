@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -22,7 +21,7 @@ use yii\db\ActiveRecord;
  * @property User $author
  * @property Item $item
  * @property Comment $parent
- * @property Comment[] $comments
+ * @property Comment[] $replies
  */
 class Comment extends \yii\db\ActiveRecord
 {
@@ -33,6 +32,10 @@ class Comment extends \yii\db\ActiveRecord
     const LEVEL_ONE = 1;
     const LEVEL_TWO = 2;
     const LEVEL_THREE = 3;
+
+    const NO_PARENT = 0;
+
+    public $contentLength = 500;
 
 
     /**
@@ -119,10 +122,13 @@ class Comment extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return array
      */
-    public function getComments()
+    public function getReplies()
     {
-        return $this->hasMany(Comment::className(), ['parent_id' => 'id']);
+        return self::find()
+            ->where(['parent_id' => $this->id])
+            ->orderBy(['created_at' => SORT_ASC])
+            ->all();
     }
 }

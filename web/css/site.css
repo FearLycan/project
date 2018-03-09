@@ -244,7 +244,7 @@ footer {
     padding: 0 0 160px 0;
 }
 
-.similar{
+.similar {
     height: 150px;
 }
 
@@ -261,5 +261,38 @@ footer {
 @media only screen and (min-width: 1900px) {
     .page-content {
         min-height: 810px;
+    }
+}
+
+.pulse {
+    box-shadow: 0 0 0 rgba(204, 169, 44, 0.5);
+    animation-delay: 2s;
+    animation: pulse 4s;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 15px rgba(204, 169, 44, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+        box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 15px rgba(204, 169, 44, 0);
+        box-shadow: 0 0 0 15px rgba(204, 169, 44, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+        box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
     }
 }

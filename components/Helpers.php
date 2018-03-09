@@ -59,7 +59,7 @@ class Helpers
             'timestamp' => $time,
             'language' => Yii::$app->language,
             'options' => [
-                'datetime' => date('c', $time),
+              //  'datetime' => date('c', $time),
             ],
         ]);
 

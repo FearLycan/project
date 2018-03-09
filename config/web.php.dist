@@ -1,0 +1,105 @@
+<?php
+
+$params = require __DIR__ . '/params.php';
+$db = require __DIR__ . '/db.php';
+
+$config = [
+    'id' => 'basic',
+    'timeZone' => 'Europe/Warsaw',
+    'language' => 'pl',
+    'basePath' => dirname(__DIR__),
+    'bootstrap' => ['log'],
+    'defaultRoute' => 'item/index',
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm' => '@vendor/npm-asset',
+    ],
+    'components' => [
+        'request' => [
+            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'cookieValidationKey' => '5ei8POAApkElVkjak0UBwCnE307EHNkA',
+        ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
+        'user' => [
+            'class' => 'app\components\WebUser',
+            'identityClass' => 'app\models\User',
+            'enableAutoLogin' => true,
+        ],
+        'errorHandler' => [
+            'errorAction' => 'site/error',
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => '',
+                'password' => '',
+                'port' => '587',
+                'encryption' => 'tls',
+                'streamOptions' => [
+                    'ssl' => [
+                        'allow_self_signed' => true,
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                    ],
+                ],
+            ],
+        ],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning'],
+                ],
+            ],
+        ],
+        'db' => $db,
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '' => 'item/index',
+                'item/<id>/<slug>' => 'item/view',
+                'tag/<name>' => 'tag/view',
+                '<alias:admin>' => 'admin/default/index',
+                '<alias:contact>' => 'site/contact',
+                'item/<id>/<slug>' => 'item/view',
+                'shop/<slug>' => 'shop/view',
+                '<slug>' => 'page/view',
+            ],
+        ],
+        'formatter' => [
+            'defaultTimeZone' => 'Europe/Warsaw',
+        ],
+    ],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Admin',
+        ],
+    ],
+    'params' => $params,
+];
+
+if (YII_ENV_DEV) {
+    // configuration adjustments for 'dev' environment
+    $config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = [
+        'class' => 'yii\debug\Module',
+        // uncomment the following to add your IP if you are not connecting from localhost.
+        //'allowedIPs' => ['127.0.0.1', '::1'],
+    ];
+
+    $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = [
+        'class' => 'yii\gii\Module',
+        // uncomment the following to add your IP if you are not connecting from localhost.
+        //'allowedIPs' => ['127.0.0.1', '::1'],
+    ];
+}
+
+return $config;
