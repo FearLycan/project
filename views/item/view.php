@@ -11,9 +11,19 @@ use yii\widgets\Pjax;
 
 /* @var \app\models\Item $item */
 /* @var \app\models\forms\CommentForm $comment */
+/* @var \app\models\forms\CommentForm $reply */
 
-$this->title = $item->title
+$this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Yii::$app->params['name']);
 ?>
+
+<?php $this->beginBlock('meta') ?>
+<meta property="og:url" content="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug], true) ?>"/>
+<meta property="og:title" content="<?= $this->title ?>"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description"
+      content="<?= Html::encode($item->shop->name) ?> - <?= Html::encode($this->title) ?>"/>
+<meta property="og:image" content="<?= Url::to('@web/images/item/thumbnail/' . $item->image, true); ?>"/>
+<?php $this->endBlock() ?>
 
 <section class="slice bg-minimalist">
     <div class="container">
@@ -135,7 +145,9 @@ $this->title = $item->title
                             </div>
                         </div>
 
-                        <?php Pjax::begin(['id' => 'comments']) ?>
+                        <div id="pjax" style="display: none;"></div>
+
+                        <?php Pjax::begin(['id' => 'comments', 'enablePushState' => false]) ?>
                         <?= ListView::widget([
                             'dataProvider' => $commentDataProvider,
                             'summary' => false,
@@ -151,38 +163,46 @@ $this->title = $item->title
                         <?php Pjax::end() ?>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="tabFour-3">
-            <div class="tab-body">
-                <?php if (!empty($similar)): ?>
-                    <section id="sct_products">
-                        <div class="container">
-                            <div class="row-wrapper">
-                                <div class="row cols-xs-space cols-md-space cols-md-space">
+                <div role="tabpanel" class="tab-pane" id="tabFour-3">
+                    <div class="tab-body">
+                        <?php if (!empty($similar)): ?>
+                            <section id="sct_products">
+                                <div class="container">
+                                    <div class="row-wrapper">
+                                        <div class="row cols-xs-space cols-md-space cols-md-space">
 
-                                    <?php foreach ($similar as $item): ?>
-                                        <div class="col-lg-3 col-md-6 space-xs-md">
-                                            <div class="block product no-border z-depth-2--hover">
-                                                <div class="block-image">
-                                                    <a href="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>">
-                                                        <?= Html::img('@web/' . Image::URL_THUMBNAIL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid similar']) ?>
-                                                    </a>
-                                                </div>
+                                            <?php foreach ($similar as $item): ?>
+                                                <div class="col-lg-3 col-md-6 space-xs-md">
+                                                    <div class="block product no-border z-depth-2--hover">
+                                                        <div class="block-image">
+                                                            <a href="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>">
+                                                                <?= Html::img('@web/' . Image::URL_THUMBNAIL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid similar']) ?>
+                                                            </a>
+                                                        </div>
 
-                                                <div class="block-body pt-0 text-center">
-                                                    <h3 class="heading heading-6 strong-500 text-capitalize">
-                                                        <?= Html::a(Helpers::cutThis($item->title, 30), ['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>
-                                                    </h3>
+                                                        <div class="block-body pt-0 text-center">
+                                                            <h3 class="heading heading-6 strong-500 text-capitalize">
+                                                                <?= Html::a(Helpers::cutThis($item->title, 30), ['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>
+                                                            </h3>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            <?php endforeach; ?>
                                         </div>
-                                    <?php endforeach; ?>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </section>
-                <?php endif; ?>
+                            </section>
+                        <?php else: ?>
+                            <section id="sct_products">
+                                <div class="container">
+                                    <div class="row-wrapper">
+                                        Brak wyników
+                                    </div>
+                                </div>
+                            </section>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

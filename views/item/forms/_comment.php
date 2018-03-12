@@ -1,14 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use yii\widgets\Pjax;
 
 ?>
 
 <div class="page-form">
-
     <?php $form = ActiveForm::begin([
         'id' => 'w1',
         'action' => ['comment/create'],
@@ -23,7 +20,6 @@ use yii\widgets\Pjax;
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>
 
 <?php $this->beginBlock('script') ?>
@@ -31,18 +27,19 @@ use yii\widgets\Pjax;
     $(document).ready(function () {
         var $form = $('form#w1');
 
-        $form.on('beforeSubmit', function () {
+        $form.on('beforeSubmit', function (event) {
 
             var data = $form.serialize();
 
             $.ajax({
                 //async: true,
-                cache: false,
+                //cache: false,
                 type: 'POST',
                 url: $form.attr('action'),
                 data: data,
                 dataType: 'json',
                 success: function (d) {
+                    console.log('here 1');
                     //$.pjax.reload({container: '#comments', async: false});
                     $.pjax.reload('#comments', {timeout: false});
 
@@ -58,7 +55,6 @@ use yii\widgets\Pjax;
                     $form.trigger('reset');
                 }
             });
-
             return false;
         });
     });
@@ -70,43 +66,47 @@ use yii\widgets\Pjax;
     }
 </script>
 
-
 <script>
-
-
-    $("div#comments").on('click', '.reply', function (event) {
+    $(document).ready(function () {
         var $reply = $(".comment-reply");
-        var $comment_body = $(this).parent().parent();
-        var user = $.trim($comment_body.find('.heading').children().text());
-        var parent_id = $comment_body.attr('id');
-        $reply.appendTo($comment_body);
-        $reply.find("textarea[name='ReplyForm[content]']").val("@" + user + " ");
-        $reply.find("input[name='ReplyForm[parent_id]']").val(parent_id);
-        $reply.removeClass('d-none');
-        $.pjax.click(event, {container: this})
+
+        $("div#comments").on('click', '.reply', function (event) {
+            var $comment_body = $(this).parent().parent();
+            var user = $.trim($comment_body.find('.heading').children().text());
+            var parent_id = $comment_body.attr('id');
+            $reply.appendTo($comment_body);
+            $reply.find("textarea[name='ReplyForm[content]']").val("@" + user + " ");
+            $reply.find("input[name='ReplyForm[parent_id]']").val(parent_id);
+            $reply.removeClass('d-none');
+        });
     });
 </script>
-
 
 <script>
     $(document).ready(function () {
         var $form = $('form#reply-form');
 
-        $form.on('beforeSubmit', function () {
+        $form.on('beforeSubmit', function (event) {
 
             var data = $form.serialize();
 
             $.ajax({
                 //async: true,
-                cache: false,
+                //cache: false,
                 type: 'POST',
                 url: $form.attr('action'),
                 data: data,
                 dataType: 'json',
                 success: function (d) {
-                    //$.pjax.reload({container: '#comments', async: false});
-                    $.pjax.reload('#comments', {timeout: false});
-                    $form.trigger('reset');
+                    console.log('here 2');
+                    if(d.success === true){
+                        //$.pjax.reload({container: '#comments', async: false});
+
+                        $.pjax.reload('#comments', {timeout: false});
+                        $form.trigger('reset');
+                    }else {
+                        alert('error');
+                    }
                 }
             });
 

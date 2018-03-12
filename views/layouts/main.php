@@ -19,6 +19,7 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
+    <?= $this->blocks['meta'] ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 
@@ -91,7 +92,7 @@ AppAsset::register($this);
                             <div class="container navbar-container">
                                 <!-- Brand/Logo -->
                                 <a class="navbar-brand" href="<?= Url::home(); ?>">
-                                    <img src="#" alt="Boomerang">
+                                    <img src="#" alt="<?= Yii::$app->params['name'] ?>">
                                 </a>
 
                                 <div class="d-inline-block">

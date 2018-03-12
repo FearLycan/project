@@ -37,6 +37,7 @@ class CommentController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'create' => ['POST'],
+                    'reply' => ['POST'],
                 ],
             ],
         ];

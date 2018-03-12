@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%comment}}".
@@ -130,5 +131,32 @@ class Comment extends \yii\db\ActiveRecord
             ->where(['parent_id' => $this->id])
             ->orderBy(['created_at' => SORT_ASC])
             ->all();
+    }
+
+    public function getCommentContent()
+    {
+
+        $preg = '{(@[a-zA-Z0-9][^\n\s]*)}';
+
+        $this->content = Html::encode($this->content);
+
+        if (preg_match_all($preg, $this->content, $users)) {
+
+
+            foreach ($users as $user) {
+                $name = str_replace('@', '', $user);
+                $u = User::find()->where(['name' => $name])->one();
+
+                if (!empty($u)) {
+                    $link = '<a href="/user/' . $u->slug . '">@' . $u->name . '</a>';
+                    $content = str_replace($user, $link, $this->content);
+                }
+            }
+
+            return $content;
+        }
+
+        $this->content;
+
     }
 }

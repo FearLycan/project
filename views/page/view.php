@@ -18,12 +18,12 @@ $this->title = $page->title;
                         </h3>
                         <ul class="inline-links inline-links--style-2 mt-1">
                             <li>
-                                Utworzono <?= Yii::$app->formatter->asDate($page->created_at, 'long'); ?>
+                                Utworzono <?= Yii::$app->formatter->asDate($page->created_at, 'l jS F Y'); ?>
                             </li>
 
                             <?php if (!empty($page->updated_at)): ?>
                                 <li>
-                                    Zaktualizowano <?= Yii::$app->formatter->asDate($page->updated_at, 'long'); ?>
+                                    Zaktualizowano <?= Yii::$app->formatter->asDate($page->updated_at, 'l jS F Y'); ?>
                                 </li>
                             <?php endif; ?>
 

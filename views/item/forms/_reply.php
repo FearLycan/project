@@ -2,11 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
 
 ?>
 
 <div class="page-form">
-
     <?php $form = ActiveForm::begin([
         'id' => 'reply-form',
         'action' => ['comment/reply'],
@@ -22,5 +22,4 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>

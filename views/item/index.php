@@ -3,11 +3,20 @@
 /* @var $this yii\web\View */
 
 use app\components\LinkPager;
+
+use yii\helpers\Url;
 use yii\widgets\ListView;
 
-$this->title = 'My Yii Application';
+$this->title = 'Weariology';
 
 ?>
+
+<?php $this->beginBlock('meta') ?>
+<meta property="og:url" content="<?= Yii::$app->params['url'] ?>"/>
+<meta property="og:title" content="<?= $this->title ?>"/>
+<meta property="og:description" content="<?= Yii::$app->params['description'] ?>"/>
+<meta property="og:image" content="<?= Url::to('@web/images/seo/weariology.png', true); ?>"/>
+<?php $this->endBlock() ?>
 
 <section class="slice sct-color-1" id="sct_products">
     <div class="container">
@@ -41,10 +50,10 @@ $this->title = 'My Yii Application';
 <script>
 
     var options = {
-        url: function(phrase) {
-            return "/project/web/site/json?phrase=" +encodeURIComponent(phrase);
+        url: function (phrase) {
+            return "/project/web/site/json?phrase=" + encodeURIComponent(phrase);
         },
-        getValue: function(element) {
+        getValue: function (element) {
             return element.name;
         },
         template: {
@@ -52,11 +61,11 @@ $this->title = 'My Yii Application';
             method: function (title, item) {
                 return '<div class="row">' +
                     '<div class="col-2">' +
-                        title
+                    title
                     + '</div>' +
-                '<div class="col-2">' +
-                    '<a href="/project/web/tag/'+item.name+'">wyszukaj</a>'
-                + '</div>'
+                    '<div class="col-2">' +
+                    '<a href="/project/web/tag/' + item.name + '">wyszukaj</a>'
+                    + '</div>'
                     + '</div>'
             }
         },

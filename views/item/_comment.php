@@ -37,11 +37,11 @@ use yii\helpers\Html;
             <div class="block-body opset">
                 <div class="block-body-inner" id="<?= Html::encode($reply->id) ?>">
                     <h3 class="heading heading-6">
-                        <?= Html::a(Html::encode($reply->author->name), ['user/show', 'id' => $reply->author->id]) ?>
+                        <?= Html::a(Html::encode($reply->author->name), ['user/view', 'id' => $reply->author->id]) ?>
                     </h3>
                     <span class="comment-date"> <?= Helpers::timeago($reply->created_at) ?> </span>
                     <p class="comment-text">
-                        <?= Html::encode($reply->content) ?>
+                        <?= $reply->getCommentContent() ?>
                     </p>
                     <div class="comment-options">
                         <a href="javascript:void(0);" class="like">Like</a>
@@ -62,11 +62,11 @@ use yii\helpers\Html;
                     <div class="block-body opset">
                         <div class="block-body-inner" id="<?= Html::encode($reply->id) ?>">
                             <h3 class="heading heading-6">
-                                <?= Html::a(Html::encode($rep->author->name), ['user/show', 'id' => $rep->author->id]) ?>
+                                <?= Html::a(Html::encode($rep->author->name), ['user/view', 'id' => $rep->author->id]) ?>
                             </h3>
                             <span class="comment-date"> <?= Helpers::timeago($rep->created_at) ?> </span>
                             <p class="comment-text">
-                                <?= Html::encode($rep->content) ?>
+                                <?= $rep->getCommentContent() ?>
                             </p>
                             <div class="comment-options">
                                 <a href="javascript:void(0);" class="like">Like</a>

@@ -28,7 +28,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        'js/pace.min.js', //niebieski pasek pokazujący wczytywanie strony
+       // 'js/pace.min.js', //niebieski pasek pokazujący wczytywanie strony
         'js/popper.min.js',
         'js/bootstrap.min.js',
         'js/jquery.easing.js',
