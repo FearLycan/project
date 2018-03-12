@@ -14,7 +14,7 @@ use yii\helpers\Html;
     <div class="block-body opset">
         <div class="block-body-inner" id="<?= Html::encode($model->id) ?>">
             <h3 class="heading heading-6">
-                <?= Html::a(Html::encode($model->author->name), ['user/show', 'id' => $model->author->id]) ?>
+                <?= Html::a(Html::encode($model->author->name), ['user/view', 'slug' => $model->author->slug]) ?>
             </h3>
             <span class="comment-date"> <?= Helpers::timeago($model->created_at) ?> </span>
             <p class="comment-text">
@@ -37,7 +37,7 @@ use yii\helpers\Html;
             <div class="block-body opset">
                 <div class="block-body-inner" id="<?= Html::encode($reply->id) ?>">
                     <h3 class="heading heading-6">
-                        <?= Html::a(Html::encode($reply->author->name), ['user/view', 'id' => $reply->author->id]) ?>
+                        <?= Html::a(Html::encode($reply->author->name), ['user/view', 'id' => $reply->author->slug]) ?>
                     </h3>
                     <span class="comment-date"> <?= Helpers::timeago($reply->created_at) ?> </span>
                     <p class="comment-text">

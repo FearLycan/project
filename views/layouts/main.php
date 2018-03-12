@@ -36,8 +36,83 @@ AppAsset::register($this);
 
 
 <div class="body-wrap shop-default shop-sportswear">
-    <div id="st-container" class="st-container">
+    <div id="st-container" class="st-container st-effect-1">
 
+        <nav class="st-menu st-effect-1" id="menu-1">
+            <div class="st-profile">
+                <div class="st-profile-user-wrapper">
+                    <div class="profile-user-image">
+                        <img src="../../assets/images/prv/people/person-1.jpg" class="img-circle hoverZoomLink">
+                    </div>
+                    <div class="profile-user-info">
+                        <span class="profile-user-name">Bertram Ozzie</span>
+                        <span class="profile-user-email">username@example.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="st-menu-list mt-2">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-bookmarks-outline"></i> Theme documentation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-cart-outline"></i> Purchase Tribus
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <h3 class="st-menu-title">Account</h3>
+            <div class="st-menu-list">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-person-outline"></i> User profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-location-outline"></i> My addresses
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ion-card"></i> My cards
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-unlocked-outline"></i> Password update
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <h3 class="st-menu-title">Support center</h3>
+            <div class="st-menu-list">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-information-outline"></i> About Tribus
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-email-outline"></i> Contact &amp; support
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-camera"></i> Getting started
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
         <div class="st-pusher">
             <div class="st-content">
@@ -124,10 +199,10 @@ AppAsset::register($this);
                                     <?php if (Yii::$app->user->isGuest): ?>
                                         <ul class="navbar-nav">
                                             <li class="nav-item dropdown megamenu">
-                                                <a href="<?= Url::toRoute(['auth/login']); ?>">Zaloguj się</a>
+                                                <?= Html::a('Zaloguj się', ['auth/login'], ['class' => 'nav-link']); ?>
                                             </li>
                                             <li class="nav-item dropdown megamenu">
-                                                <a href="<?= Url::toRoute(['auth/registration']); ?>">Rejestracja</a>
+                                                <?= Html::a('Rejestracja', ['auth/registration'], ['class' => 'nav-link']); ?>
                                             </li>
                                         </ul>
                                     <?php endif; ?>
@@ -143,7 +218,6 @@ AppAsset::register($this);
 
                                     <?php endif; ?>
 
-
                                 </div>
 
                                 <div class="pl-4 d-none d-lg-inline-block">
@@ -157,7 +231,7 @@ AppAsset::register($this);
                                             </a>
                                         </li>
 
-                                        <?php if (false): ?>
+                                        <?php if (!Yii::$app->user->isGuest): ?>
                                             <!-- Profile -->
                                             <li class="nav-item nav-item-icon">
                                                 <a href="#" class="nav-link hidden-md-down" data-toggle="dropdown">
