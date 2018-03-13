@@ -2,9 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\forms\SettingsForm;
 use Yii;
 use app\models\User;
-use app\models\searches\UserSearch;
 use app\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -45,6 +45,31 @@ class UserController extends Controller
         }
 
         return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionSettings()
+    {
+        $model = SettingsForm::find()
+            ->where(['id' => Yii::$app->user->identity->id])
+            ->one();
+
+        if (($model === null)) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        foreach (User::getSocialMediaTypes() as $type){
+            $model->{$type} = $model->socialLinks[$type];
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->setSocialLinks($model->getLinksSettings());
+            $model->save();
+            return $this->redirect(['user/settings']);
+        }
+
+        return $this->render('settings', [
             'model' => $model,
         ]);
     }

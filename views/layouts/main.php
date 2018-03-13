@@ -4,6 +4,7 @@
 
 /* @var $content string */
 
+use app\components\Helpers;
 use yii\helpers\Html;
 use app\assets\AppAsset;
 use yii\helpers\Url;
@@ -42,11 +43,12 @@ AppAsset::register($this);
             <div class="st-profile">
                 <div class="st-profile-user-wrapper">
                     <div class="profile-user-image">
-                        <img src="../../assets/images/prv/people/person-1.jpg" class="img-circle hoverZoomLink">
+                        <img src="/project/web/images/avatar/noavatar.jpg" class="img-circle hoverZoomLink">
                     </div>
                     <div class="profile-user-info">
-                        <span class="profile-user-name">Bertram Ozzie</span>
-                        <span class="profile-user-email">username@example.com</span>
+                        <span class="profile-user-name"><?= Yii::$app->user->identity->name ?></span>
+                        <span class="profile-user-email">
+                            <?= Helpers::cutThis(Yii::$app->user->identity->email, 26) ?></span>
                     </div>
                 </div>
             </div>
@@ -54,60 +56,75 @@ AppAsset::register($this);
             <div class="st-menu-list mt-2">
                 <ul>
                     <li>
-                        <a href="#">
-                            <i class="ion-ios-bookmarks-outline"></i> Theme documentation
+                        <a href="<?= Url::to(['item/add']); ?>">
+                            <i class="ion-ios-plus-outline"></i> Dodaj nowe
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="ion-ios-cart-outline"></i> Purchase Tribus
+                        <a href="<?= Url::to(['user/collection']); ?>">
+                            <i class="ion-tshirt-outline"></i> Moja kolekcja
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['user/favorite']); ?>">
+                            <i class="ion-ios-star-outline"></i> Ulubione
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <h3 class="st-menu-title">Account</h3>
+            <h3 class="st-menu-title">Konto</h3>
             <div class="st-menu-list">
                 <ul>
                     <li>
-                        <a href="#">
-                            <i class="ion-ios-person-outline"></i> User profile
+                        <a href="<?= Url::to(['user/view', 'slug' => Yii::$app->user->identity->slug]); ?>">
+                            <i class="ion-ios-person-outline"></i> Profil
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="ion-ios-location-outline"></i> My addresses
+                        <a href="<?= Url::to(['message/index']); ?>">
+                            <i class="ion-ios-person-outline"></i> Wiadomośći
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="ion-card"></i> My cards
+                        <a href="<?= Url::to(['user/fallowers', 'slug' => Yii::$app->user->identity->slug]); ?>">
+                            <i class="ion-ios-people-outline"></i> Obserwowani
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="<?= Url::to(['user/password']); ?>">
                             <i class="ion-ios-unlocked-outline"></i> Password update
                         </a>
                     </li>
+                    <li>
+                        <a href="<?= Url::to(['user/settings']); ?>">
+                            <i class="ion-ios-gear-outline"></i> Settings
+                        </a>
+                    </li>
                 </ul>
             </div>
 
-            <h3 class="st-menu-title">Support center</h3>
+            <h3 class="st-menu-title">Support</h3>
             <div class="st-menu-list">
                 <ul>
                     <li>
-                        <a href="#">
-                            <i class="ion-ios-information-outline"></i> About Tribus
+                        <a href="<?= Url::to(['page/view', 'slug' => 'regulamin']) ?>">
+                            <i class="ion-ios-paper-outline"></i> Regulamin
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="ion-ios-email-outline"></i> Contact &amp; support
+                        <a href="<?= Url::to(['page/view', 'slug' => 'polityka-prywatnosci']) ?>">
+                            <i class="ion-ios-book-outline"></i> Polityka prywatności
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-camera"></i> Getting started
+                        <a href="<?= Url::to(['site/contact']) ?>">
+                            <i class="ion-ios-email-outline"></i> Kontakt
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['site/about']) ?>">
+                            <i class="ion-ios-information-outline"></i> <?= Yii::$app->params['name'] ?>
                         </a>
                     </li>
                 </ul>
@@ -128,9 +145,11 @@ AppAsset::register($this);
                                         <div class="col-md-6">
                                             <nav class="top-navbar-menu">
                                                 <ul class="top-menu">
-                                                    <li><a href="<?= Url::toRoute(['auth/login']); ?>">Zaloguj się</a>
+                                                    <li>
+                                                        <a href="<?= Url::toRoute(['auth/login']); ?>">Zaloguj się</a>
                                                     </li>
-                                                    <li><a href="<?= Url::toRoute(['auth/registration']); ?>">Rejestracja</a>
+                                                    <li>
+                                                        <a href="<?= Url::toRoute(['auth/registration']); ?>">Rejestracja</a>
                                                     </li>
                                                 </ul>
                                             </nav>
@@ -146,7 +165,8 @@ AppAsset::register($this);
                                 <div class="global-search-backdrop mask-dark--style-2"></div>
 
                                 <!-- Search form -->
-                                <form class="form-horizontal form-global-search z-depth-2-top" role="form" action="<?= Url::home() ?>" method="get">
+                                <form class="form-horizontal form-global-search z-depth-2-top" role="form"
+                                      action="<?= Url::home() ?>" method="get">
                                     <div class="px-4">
                                         <div class="row">
                                             <div class="col-12">
@@ -155,7 +175,7 @@ AppAsset::register($this);
                                             </div>
                                         </div>
                                     </div>
-<!--                                    <button type="submit" class="hidden">Submit</button>-->
+                                    <!--                                    <button type="submit" class="hidden">Submit</button>-->
                                     <a href="#" class="close-search" data-toggle="global-search"
                                        title="Close search bar"></a>
                                 </form>
@@ -188,7 +208,8 @@ AppAsset::register($this);
                                     <div class="navbar-search-widget b-xs-bottom py-3 d-lg-none d-xl-none">
                                         <form class="" role="form" action="<?= Url::home(); ?>" method="get">
                                             <div class="input-group input-group-lg">
-                                                <input class="form-control" name="ItemSearch[title]" placeholder="Search for..." type="text">
+                                                <input class="form-control" name="ItemSearch[title]"
+                                                       placeholder="Search for..." type="text">
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-base-3" type="button">Go!</button>
                                                 </span>
@@ -203,6 +224,12 @@ AppAsset::register($this);
                                             </li>
                                             <li class="nav-item dropdown megamenu">
                                                 <?= Html::a('Rejestracja', ['auth/registration'], ['class' => 'nav-link']); ?>
+                                            </li>
+                                        </ul>
+                                    <?php else: ?>
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown megamenu">
+                                                <?= Html::a('Dodaj', ['item/create'], ['class' => 'nav-link']); ?>
                                             </li>
                                         </ul>
                                     <?php endif; ?>
@@ -234,7 +261,8 @@ AppAsset::register($this);
                                         <?php if (!Yii::$app->user->isGuest): ?>
                                             <!-- Profile -->
                                             <li class="nav-item nav-item-icon">
-                                                <a href="#" class="nav-link hidden-md-down" data-toggle="dropdown">
+                                                <a href="<?= Url::to(['user/view', 'slug' => Yii::$app->user->identity->slug]); ?>"
+                                                   class="nav-link hidden-md-down">
                                                     <i class="fa fa-user"></i>
                                                 </a>
                                             </li>
@@ -274,8 +302,8 @@ AppAsset::register($this);
                                             <div class="copyright mt-1">
                                                 <ul class="copy-links">
                                                     <li>
-                                                        © <?= date('Y') ?> <a href="#" target="_blank">
-                                                            <strong>Web name</strong>
+                                                        © <?= date('Y') ?> <a href="<?= Url::home(true) ?>">
+                                                            <strong> <?= Yii::$app->params['name'] ?> </strong>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -293,14 +321,12 @@ AppAsset::register($this);
                                         <div class="text-xs-center text-sm-right">
                                             <ul class="social-media social-media--style-1-v4">
                                                 <li>
-                                                    <a href="#" class="facebook" target="_blank" data-toggle="tooltip"
-                                                       data-original-title="Facebook">
+                                                    <a href="#" class="facebook" target="_blank">
                                                         <i class="fa fa-facebook"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="instagram" target="_blank" data-toggle="tooltip"
-                                                       data-original-title="Instagram">
+                                                    <a href="#" class="instagram" target="_blank">
                                                         <i class="fa fa-instagram"></i>
                                                     </a>
                                                 </li>

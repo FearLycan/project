@@ -74,4 +74,12 @@ class ItemController extends Controller
             'commentDataProvider' => $commentDataProvider,
         ]);
     }
+
+
+    public function actionCreate()
+    {
+        return $this->render('create', [
+
+        ]);
+    }
 }

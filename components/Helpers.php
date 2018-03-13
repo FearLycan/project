@@ -1,6 +1,7 @@
 <?php
 
 namespace app\components;
+
 use Yii;
 use yii\timeago\TimeAgo;
 
@@ -59,10 +60,17 @@ class Helpers
             'timestamp' => $time,
             'language' => Yii::$app->language,
             'options' => [
-              //  'datetime' => date('c', $time),
+                //  'datetime' => date('c', $time),
             ],
         ]);
 
         return $timeago;
+    }
+
+    public static function cutSocialLink($link)
+    {
+        $protocals = ['https://www.', 'http://www.'];
+        $short = str_replace($protocals, '', $link);
+        return self::cutThis($short, 32);
     }
 }

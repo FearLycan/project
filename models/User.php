@@ -13,6 +13,12 @@ use yii\behaviors\SluggableBehavior;
  *
  * @property integer $id
  * @property string $name
+ * @property string $real_name
+ * @property string $real_last_name
+ * @property string $city
+ * @property string $country
+ * @property string $about
+ * @property string $links
  * @property string $slug
  * @property string $email
  * @property string $password
@@ -38,6 +44,12 @@ class User extends ActiveRecord implements IdentityInterface
     const ROLE_MODERSTOR = 2;
     const ROLE_ADMIN = 10;
 
+    //social media
+    const SOCIAL_FACEBOOK = 'facebook';
+    const SOCIAL_INSTAGRAM = 'instagram';
+
+    public $aboutLength = 350;
+
 
     /**
      * @inheritdoc
@@ -55,7 +67,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['role', 'status'], 'integer'],
             [['registered_at', 'last_login_at', 'last_seen'], 'safe'],
-            [['name', 'email', 'password', 'auth_key', 'verification_code'], 'string', 'max' => 255],
+            [['name', 'email', 'password', 'auth_key', 'verification_code', 'real_name', 'real_last_name', 'country', 'city'], 'string', 'max' => 255],
+            [['about'], 'string', 'max' => $this->aboutLength],
             [['email'], 'unique'],
         ];
     }
@@ -263,5 +276,32 @@ class User extends ActiveRecord implements IdentityInterface
         } else {
             return static::generateUniqueRandomString();
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSocialLinks()
+    {
+        return json_decode($this->links, true);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setSocialLinks($value)
+    {
+        $this->links = json_encode($value);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getSocialMediaTypes()
+    {
+        return [
+            self::SOCIAL_FACEBOOK,
+            self::SOCIAL_INSTAGRAM,
+        ];
     }
 }

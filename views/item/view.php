@@ -109,6 +109,15 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                             <?php endforeach; ?>
 
                         </ul>
+
+                    </div>
+
+                    <span class="space-xs-md"></span>
+
+                    <div class="product-short-text">
+                       <p>
+                           Dodane przez: <?= Html::a($item->author->name, ['user/view', 'slug' => $item->author->slug]) ?>
+                       </p>
                     </div>
                 </div>
             </div>
