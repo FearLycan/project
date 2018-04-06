@@ -39,6 +39,7 @@ AppAsset::register($this);
 <div class="body-wrap shop-default shop-sportswear">
     <div id="st-container" class="st-container st-effect-1">
 
+        <?php if (!Yii::$app->user->isGuest): ?>
         <nav class="st-menu st-effect-1" id="menu-1">
             <div class="st-profile">
                 <div class="st-profile-user-wrapper">
@@ -130,6 +131,7 @@ AppAsset::register($this);
                 </ul>
             </div>
         </nav>
+        <?php endif; ?>
 
         <div class="st-pusher">
             <div class="st-content">
@@ -138,7 +140,7 @@ AppAsset::register($this);
                     <div class="header">
                         <?php if (Yii::$app->user->isGuest): ?>
                             <!-- Top Bar -->
-                            <div class="top-navbar top-navbar--inverse">
+                            <!--<div class="top-navbar top-navbar--inverse">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-6"></div>
@@ -146,17 +148,17 @@ AppAsset::register($this);
                                             <nav class="top-navbar-menu">
                                                 <ul class="top-menu">
                                                     <li>
-                                                        <a href="<?= Url::toRoute(['auth/login']); ?>">Zaloguj się</a>
+                                                        <a href="<?/*= Url::toRoute(['auth/login']); */?>">Zaloguj się</a>
                                                     </li>
                                                     <li>
-                                                        <a href="<?= Url::toRoute(['auth/registration']); ?>">Rejestracja</a>
+                                                        <a href="<?/*= Url::toRoute(['auth/registration']); */?>">Rejestracja</a>
                                                     </li>
                                                 </ul>
                                             </nav>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         <?php endif; ?>
 
                         <!-- Global Search -->

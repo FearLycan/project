@@ -81,7 +81,7 @@ JS;
 
 
                 <?= $form->field($model, 'tags')->widget(Select2::classname(), [
-                    //'data' => $shops,
+                    'theme' => Select2::THEME_BOOTSTRAP,
                     'options' => ['placeholder' => 'Tags...', 'multiple' => true],
                     'showToggleAll' => false,
                     'toggleAllSettings' => [
@@ -118,28 +118,13 @@ JS;
 
         <div class="row" style="margin-bottom: 15px;">
             <div class="col-md-3">
-                <?= $form->field($model, 'gender')->dropDownList(Item::getGendersNames(), ['class' => 'form-control selectpicker']) ?>
+                <?= $form->field($model, 'gender')->dropDownList(Item::getGendersNames(), ['class' => 'form-control form-control-lg selectpicker']) ?>
             </div>
             <div class="col-md-3">
-                <?= $form->field($model, 'shop_id')->widget(Select2::classname(), [
-                    'data' => $shops,
-                    'options' => ['placeholder' => 'Wybierz sklep'],
-                    'toggleAllSettings' => [
-                        'options' => ['class' => 'spoko']
-                    ],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]); ?>
+                <?= $form->field($model, 'shop_id')->dropDownList($shops, ['class' => 'form-control form-control-lg selectpicker']) ?>
             </div>
             <div class="col-md-3">
-                <?= $form->field($model, 'type_id')->widget(Select2::classname(), [
-                    'data' => $types,
-                    'options' => ['placeholder' => 'Wybierz typ'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]); ?>
+                <?= $form->field($model, 'type_id')->dropDownList($types, ['class' => 'form-control form-control-lg selectpicker']) ?>
             </div>
         </div>
 

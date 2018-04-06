@@ -156,7 +156,7 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
 
                         <div id="pjax" style="display: none;"></div>
 
-                        <?php Pjax::begin(['id' => 'comments', 'enablePushState' => false]) ?>
+                        <?php Pjax::begin(['id' => 'comments']) ?>
                         <?= ListView::widget([
                             'dataProvider' => $commentDataProvider,
                             'summary' => false,

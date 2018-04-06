@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'id' => 'w1',
         'action' => ['comment/create'],
-        'options' => ['data-pjax' => true],
+        //'options' => ['data-pjax' => true],
     ]); ?>
 
     <?= $form->field($model, 'content')->textarea(['maxlength' => true, 'class' => 'form-control', 'rows' => 3]) ?>

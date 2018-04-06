@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
     <?php $form = ActiveForm::begin([
         'id' => 'reply-form',
         'action' => ['comment/reply'],
-        'options' => ['data-pjax' => true],
+       // 'options' => ['data-pjax' => true],
     ]); ?>
 
     <?= $form->field($model, 'content')->textarea(['maxlength' => true, 'class' => 'form-control', 'rows' => 3]) ?>
