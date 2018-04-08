@@ -27,6 +27,33 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
 
 <section class="slice bg-minimalist">
     <div class="container">
+        <?php if (!Yii::$app->user->isGuest && $item->author_id == Yii::$app->user->identity->id): ?>
+        <?php endif; ?>
+        <div class="row">
+
+            <div class="col-lg-1">
+                <a href="<?= Url::to(['item/update', 'id' => $item->id]) ?>" class="btn btn-primary">Edytuj</a>
+            </div>
+
+            <div class="offset-9 col-lg-2 text-lg-right" style="padding-top: 5px;">
+
+                <?php if($item->status == Item::STATUS_ACTIVE): ?>
+                    <span class="badge badge-success badge-lg" style=""><?= $item->getStatusName() ?></span>
+                <?php elseif ($item->status == Item::STATUS_PENDING): ?>
+                    <span class="badge badge-info badge-lg" style=""><?= $item->getStatusName() ?></span>
+                <?php elseif ($item->status == Item::STATUS_INACTIVE): ?>
+                    <span class="badge badge-danger badge-lg" style=""><?= $item->getStatusName() ?></span>
+                <?php endif; ?>
+
+            </div>
+
+
+            <div class="col-lg-12">
+                   <span class="space-xs-md"></span>
+                <!--<hr>-->
+            </div>
+
+        </div>
         <div class="row">
             <div class="col-lg-5">
                 <div class="swiper-js-container">
@@ -115,9 +142,10 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                     <span class="space-xs-md"></span>
 
                     <div class="product-short-text">
-                       <p>
-                           Dodane przez: <?= Html::a($item->author->name, ['user/view', 'slug' => $item->author->slug]) ?>
-                       </p>
+                        <p>
+                            Dodane przez:
+                            <?= Html::a($item->author->name, ['user/view', 'slug' => $item->author->slug]) ?>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -125,100 +153,107 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
     </div>
 </section>
 
-<section class="slice sct-color-1" id="sct_products">
-    <div class="container">
+<?php if($item->isActive()): ?>
+    <section class="slice sct-color-1" id="sct_products">
+        <div class="container">
 
-        <div class="tabs tabs--style-1" role="tabpanel">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a href="#tabFour-2" aria-controls="profile" role="tab" data-toggle="tab"
-                       class="nav-link active text-center text-uppercase strong-600">Komentarze</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="#tabFour-3" aria-controls="profile" role="tab" data-toggle="tab"
-                       class="nav-link text-center text-uppercase strong-600">PODOBNE PRODUKTY</a>
-                </li>
-            </ul>
+            <div class="tabs tabs--style-1" role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a href="#tabFour-2" aria-controls="profile" role="tab" data-toggle="tab"
+                           class="nav-link active text-center text-uppercase strong-600">Komentarze</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="#tabFour-3" aria-controls="profile" role="tab" data-toggle="tab"
+                           class="nav-link text-center text-uppercase strong-600">PODOBNE PRODUKTY</a>
+                    </li>
+                </ul>
 
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="tabFour-2">
-                    <div class="tab-body">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tabFour-2">
+                        <div class="tab-body">
 
-                        <div class="block-post-comments block-post-comments--style-2">
-                            <div class="block block-comment comment-form">
-                                <?= $this->render('forms/_comment', [
-                                    'model' => $comment,
-                                ]) ?>
+                            <div class="block-post-comments block-post-comments--style-2">
+                                <div class="block block-comment comment-form">
+                                    <?= $this->render('forms/_comment', [
+                                        'model' => $comment,
+                                    ]) ?>
+                                </div>
                             </div>
+
+                            <div id="pjax" style="display: none;"></div>
+
+                            <?php Pjax::begin(['id' => 'comments']) ?>
+                            <?= ListView::widget([
+                                'dataProvider' => $commentDataProvider,
+                                'summary' => false,
+                                'itemView' => '_comment',
+                                'options' => [
+                                    'tag' => 'div',
+                                    'class' => 'block-post-comments block-post-comments--style-2',
+                                ],
+                                'pager' => [
+                                    'class' => LinkPager::class
+                                ]
+                            ]); ?>
+                            <?php Pjax::end() ?>
                         </div>
-
-                        <div id="pjax" style="display: none;"></div>
-
-                        <?php Pjax::begin(['id' => 'comments']) ?>
-                        <?= ListView::widget([
-                            'dataProvider' => $commentDataProvider,
-                            'summary' => false,
-                            'itemView' => '_comment',
-                            'options' => [
-                                'tag' => 'div',
-                                'class' => 'block-post-comments block-post-comments--style-2',
-                            ],
-                            'pager' => [
-                                'class' => LinkPager::class
-                            ]
-                        ]); ?>
-                        <?php Pjax::end() ?>
                     </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="tabFour-3">
-                    <div class="tab-body">
-                        <?php if (!empty($similar)): ?>
-                            <section id="sct_products">
-                                <div class="container">
-                                    <div class="row-wrapper">
-                                        <div class="row cols-xs-space cols-md-space cols-md-space">
+                    <div role="tabpanel" class="tab-pane" id="tabFour-3">
+                        <div class="tab-body">
+                            <?php if (!empty($similar)): ?>
+                                <section id="sct_products">
+                                    <div class="container">
+                                        <div class="row-wrapper">
+                                            <div class="row cols-xs-space cols-md-space cols-md-space">
 
-                                            <?php foreach ($similar as $item): ?>
-                                                <div class="col-lg-3 col-md-6 space-xs-md">
-                                                    <div class="block product no-border z-depth-2--hover">
-                                                        <div class="block-image">
-                                                            <a href="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>">
-                                                                <?= Html::img('@web/' . Image::URL_THUMBNAIL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid similar']) ?>
-                                                            </a>
-                                                        </div>
+                                                <?php foreach ($similar as $item): ?>
+                                                    <div class="col-lg-3 col-md-6 space-xs-md">
+                                                        <div class="block product no-border z-depth-2--hover">
+                                                            <div class="block-image">
+                                                                <a href="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>">
+                                                                    <?= Html::img('@web/' . Image::URL_THUMBNAIL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid similar']) ?>
+                                                                </a>
+                                                            </div>
 
-                                                        <div class="block-body pt-0 text-center">
-                                                            <h3 class="heading heading-6 strong-500 text-capitalize">
-                                                                <?= Html::a(Helpers::cutThis($item->title, 30), ['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>
-                                                            </h3>
+                                                            <div class="block-body pt-0 text-center">
+                                                                <h3 class="heading heading-6 strong-500 text-capitalize">
+                                                                    <?= Html::a(Helpers::cutThis($item->title, 30), ['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>
+                                                                </h3>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            <?php endforeach; ?>
+                                                <?php endforeach; ?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </section>
-                        <?php else: ?>
-                            <section id="sct_products">
-                                <div class="container">
-                                    <div class="row-wrapper">
-                                        Brak wyników
+                                </section>
+                            <?php else: ?>
+                                <section id="sct_products">
+                                    <div class="container">
+                                        <div class="row-wrapper">
+                                            Brak wyników
+                                        </div>
                                     </div>
-                                </div>
-                            </section>
-                        <?php endif; ?>
+                                </section>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
 
 <div class="block block-comment comment-reply d-none">
     <?= $this->render('forms/_reply', [
         'model' => $reply,
     ]) ?>
 </div>
+
+<?php endif; ?>
+
+<?php $this->beginBlock('script') ?>
+<?php $this->endBlock() ?>

@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
                         </div>
 
                         <div class="col-md-6 col-lg-6">
-                            <?= $form->field($model, 'real_last_name')->textInput(['maxlength' => true, 'class' => 'form-control form-control-lg']); ?>
+                            <?php /* echo $form->field($model, 'real_last_name')->textInput(['maxlength' => true, 'class' => 'form-control form-control-lg']); */?>
                         </div>
                     </div>
 

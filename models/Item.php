@@ -125,7 +125,7 @@ class Item extends ActiveRecord
      */
     public function getStatusName()
     {
-        return User::getStatusNames()[$this->status];
+        return self::getStatusNames()[$this->status];
     }
 
     /**
@@ -135,8 +135,18 @@ class Item extends ActiveRecord
     {
         return [
             static::STATUS_ACTIVE,
-            static::STATUS_INACTIVE,
             static::STATUS_PENDING,
+            static::STATUS_INACTIVE,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getActiveStatuses()
+    {
+        return [
+            static::STATUS_ACTIVE,
         ];
     }
 
@@ -245,5 +255,13 @@ class Item extends ActiveRecord
             ->all();
 
         return $items;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive()
+    {
+        return in_array($this->status, self::getActiveStatuses());
     }
 }

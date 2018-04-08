@@ -143,7 +143,7 @@ class ItemController extends Controller
 //                unlink(Image::URL. $model->image);
 //                unlink(Image::URL_THUMBNAIL. $model->image);
 
-                //usunięcie starych obrzaków
+                //usunięcie starych obrazków
                 $model->removeImageFile();
 
 
@@ -166,6 +166,8 @@ class ItemController extends Controller
                     ]);
                 }
             }
+
+            $model->save();
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

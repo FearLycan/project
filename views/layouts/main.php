@@ -57,7 +57,7 @@ AppAsset::register($this);
             <div class="st-menu-list mt-2">
                 <ul>
                     <li>
-                        <a href="<?= Url::to(['item/add']); ?>">
+                        <a href="<?= Url::to(['item/create']); ?>">
                             <i class="ion-ios-plus-outline"></i> Dodaj nowe
                         </a>
                     </li>

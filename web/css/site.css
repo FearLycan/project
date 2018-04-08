@@ -230,6 +230,16 @@ footer {
     padding-left: 20px !important;
 }
 
+.btn-file{
+    padding: 8px;
+}
+
+.slice {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    position: relative;
+}
+
 @media (min-width: 768px) {
     .block-comment-reply {
         padding-left: 80px;

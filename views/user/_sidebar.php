@@ -81,19 +81,21 @@ use yii\helpers\Html;
         <div class="profile-useful-links clearfix">
             <div class="useful-links">
 
-                <?php foreach ($model->socialLinks as $name => $link): ?>
-                    <?php if ($name == User::SOCIAL_FACEBOOK): ?>
-                        <a href="<?= Html::encode($link) ?>" class="link link--style-1" target="_blank">
-                            <i class="ion-social-facebook-outline"></i>
-                            <?= Html::encode(Helpers::cutSocialLink($link)) ?>
-                        </a>
-                    <?php elseif ($name == User::SOCIAL_INSTAGRAM): ?>
-                        <a href="<?= Html::encode($link) ?>" class="link link--style-1" target="_blank">
-                            <i class="icon ion-social-instagram-outline"></i>
-                            <?= Html::encode(Helpers::cutSocialLink($link)) ?>
-                        </a>
-                    <?php endif; ?>
-                <?php endforeach; ?>
+                <?php if(!empty($model->socialLinks)): ?>
+                    <?php foreach ($model->socialLinks as $name => $link): ?>
+                        <?php if ($name == User::SOCIAL_FACEBOOK): ?>
+                            <a href="<?= Html::encode($link) ?>" class="link link--style-1" target="_blank">
+                                <i class="ion-social-facebook-outline"></i>
+                                <?= Html::encode(Helpers::cutSocialLink($link)) ?>
+                            </a>
+                        <?php elseif ($name == User::SOCIAL_INSTAGRAM): ?>
+                            <a href="<?= Html::encode($link) ?>" class="link link--style-1" target="_blank">
+                                <i class="icon ion-social-instagram-outline"></i>
+                                <?= Html::encode(Helpers::cutSocialLink($link)) ?>
+                            </a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
 
             </div>
         </div>

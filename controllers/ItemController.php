@@ -7,6 +7,7 @@ use app\models\forms\CommentForm;
 use app\models\forms\ItemForm;
 use app\models\forms\ReplyForm;
 use app\models\Item;
+use app\models\ItemTag;
 use app\models\searches\CommentSearch;
 use app\models\searches\ItemSearch;
 use app\models\Shop;
@@ -98,11 +99,12 @@ class ItemController extends Controller
             $model->author_id = Yii::$app->user->identity->id;
             $model->title = Helpers::nameize($model->title);
             $model->slug = Inflector::slug($model->title);
+            $model->status = Item::STATUS_PENDING;
 
             if ($model->save()) {
                 $model->uploadItemImage();
                 Tag::saveTags($model->tags, $model->id);
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'slug' => $model->slug]);
             } else {
                 $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
                 $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
@@ -118,6 +120,74 @@ class ItemController extends Controller
             $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
 
             return $this->render('create', [
+                'model' => $model,
+                'shops' => $shops,
+                'types' => $types,
+            ]);
+        }
+    }
+
+    /**
+     * Updates an existing Item model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = ItemForm::findOne($id);
+
+        $tags = ItemTag::find()->where(['item_id' => $id])->all();
+        $tab = [];
+        foreach ($tags as $key => $tag) {
+            array_push($tab, $tag->tag->name);
+        }
+        $model->tags = $tab;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            if ($model->tags != $tab) {
+                ItemTag::deleteConnect($model->id);
+                Tag::saveTags($model->tags, $model->id);
+            }
+
+            $model->myFile = UploadedFile::getInstance($model, 'myFile');
+
+            if ($model->myFile) {
+                //usunięcie starych obrazków
+                $model->removeImageFile();
+
+
+                $randomString = Yii::$app->getSecurity()->generateRandomString(10);
+                $model->image = Inflector::slug($model->title) . '_' . $randomString . '.' . $model->myFile->extension;
+                $model->slug = Inflector::slug($model->title);
+
+
+                if ($model->save()) {
+                    $model->uploadItemImage();
+                    $model->save(false, ['image']);
+                } else {
+                    $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+                    $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
+                    return $this->render('update', [
+                        'model' => $model,
+                        'shops' => $shops,
+                        'types' => $types,
+                    ]);
+                }
+            }
+
+            $model->status = Item::STATUS_PENDING;
+            $model->save();
+
+            return $this->redirect(['item/view', 'id' => $model->id, 'slug' => $model->slug]);
+        } else {
+
+            $shops = ArrayHelper::map(Shop::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+            $types = ArrayHelper::map(Type::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
+            return $this->render('update', [
                 'model' => $model,
                 'shops' => $shops,
                 'types' => $types,

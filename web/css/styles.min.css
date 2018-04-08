@@ -3304,11 +3304,6 @@ blockquote .blockquote-source::before {
     font-size: .875rem
 }
 
-.alert strong {
-    color: inherit !important;
-    font-weight: 500
-}
-
 .badge {
     padding: .45em .45em;
     font-size: 0.625rem;
