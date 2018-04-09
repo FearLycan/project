@@ -75,9 +75,9 @@ $this->title = 'Weariology';
     $("#search-input").easyAutocomplete(options);
 </script>
 
-<script>
-    var pager = $('ul.pagination');
+<!--<script>
+   /* var pager = $('ul.pagination');
     var pagination = $('#pagination');
-    $(pager).appendTo(pagination);
-</script>
+    $(pager).appendTo(pagination);*/
+</script>-->
 <?php $this->endBlock() ?>

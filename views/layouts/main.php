@@ -62,7 +62,7 @@ AppAsset::register($this);
                         </a>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['user/collection']); ?>">
+                        <a href="<?= Url::to(['item/collection']); ?>">
                             <i class="ion-tshirt-outline"></i> Moja kolekcja
                         </a>
                     </li>

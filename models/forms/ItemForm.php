@@ -54,6 +54,25 @@ class ItemForm extends Item
     }
 
     /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'title' => 'Tytuł',
+            'description' => 'Opis produktu',
+            'url' => 'Link do sklepu',
+            'myFile' => 'Grafika',
+            'gender' => 'Dla kogo',
+            'shop_id' => 'Sklep',
+            'type_id' => 'Typ',
+            'status' => 'Status',
+            'tags' => 'Tagi',
+        ];
+    }
+
+    /**
      * @return bool
      */
     public function upload()

@@ -1,5 +1,6 @@
 <?php
 
+use app\models\forms\ItemForm;
 use app\models\Item;
 use kartik\file\FileInput;
 use kartik\select2\Select2;
@@ -55,6 +56,16 @@ use yii\widgets\ActiveForm;
                     ],
                 ]); ?>
             </div>
+
+            <?php if($model->scenario == ItemForm::SCENARIO_UPDATE): ?>
+                <div class="col-md-6" style="padding-top: 35px; text-align: right;">
+                    <a style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="<img src='/images/item/thumbnail/'.<?= $model->image ?>.' />">
+                        Aktualna grafika dla produktu
+                    </a>
+
+                </div>
+            <?php endif; ?>
+
         </div>
 
         <div class="row" style="margin-bottom: 15px;">
@@ -159,6 +170,12 @@ JS;
                 });
             }
         }
+
+        $('a[data-toggle="tooltip"]').tooltip({
+            animated: 'fade',
+            placement: 'bottom',
+            html: true
+        });
     </script>
 
 <?php $this->endBlock(); ?>

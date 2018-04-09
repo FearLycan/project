@@ -16,8 +16,11 @@ $this->title = Html::encode('Edycja | '.$model->title . ' | ' . Yii::$app->param
 <section class="slice sct-color-1" id="sct_products">
     <div class="container">
 
+        <h1 class="heading">Edycja produktu <?= Html::encode($model->title) ?></h1>
+
+
         <div class="alert alert-warning" role="alert">
-         <strong>Uwaga!</strong> Edycja spowoduje, że ten przedmiot ponownie będzie oczekiwał na zaakceptowanie przez moderatora.
+         <strong>Uwaga!</strong> Edycja spowoduje, że ten produkt ponownie będzie oczekiwał na zaakceptowanie przez moderatora.
         </div>
 
         <div class="row-wrapper">

@@ -132,10 +132,20 @@ class ItemController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
-        $model = ItemForm::findOne($id);
+        $model = ItemForm::find()
+            ->where(['id' => $id, 'author_id' => Yii::$app->user->identity->id])
+            ->andWhere(['in', 'status', [Item::STATUS_ACTIVE, Item::STATUS_PENDING]])
+            ->one();
+
+        if(empty($model)){
+            $this->notFound();
+        }
+
+        $model->scenario = ItemForm::SCENARIO_UPDATE;
 
         $tags = ItemTag::find()->where(['item_id' => $id])->all();
         $tab = [];
@@ -193,5 +203,21 @@ class ItemController extends Controller
                 'types' => $types,
             ]);
         }
+    }
+
+    public function actionCollection()
+    {
+        $query = Item::find()
+            ->where(['author_id' => Yii::$app->user->identity->id])
+            ->andWhere(['in', 'status', Item::getStatuses()]);
+
+        $searchModel = new ItemSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
+
+        return $this->render('collection', [
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+        ]);
+
     }
 }

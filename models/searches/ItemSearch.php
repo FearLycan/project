@@ -44,10 +44,11 @@ class ItemSearch extends Item
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $query = null)
     {
-        $query = Item::find()->where(['item.status' => Item::STATUS_ACTIVE]);
-
+        if(empty($query)){
+            $query = Item::find()->where(['item.status' => Item::STATUS_ACTIVE]);
+        }
 
         // add conditions that should always apply here
 
