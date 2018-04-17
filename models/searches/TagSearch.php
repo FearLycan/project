@@ -2,30 +2,25 @@
 
 namespace app\models\searches;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\Item;
+use app\modules\admin\models\Tag;
 
 /**
- * ItemSearch represents the model behind the search form about `app\modules\admin\models\Item`.
+ * TagSearch represents the model behind the search form about `app\modules\admin\models\Tag`.
  */
-class ItemSearch extends Item
+class TagSearch extends Tag
 {
-    public $title;
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['title'], 'string'],
+            [['id', 'frequency', 'author_id', 'status'], 'integer'],
+            [['name', 'created_at', 'updated_at'], 'safe'],
         ];
-    }
-
-    public function formName()
-    {
-        return '';
     }
 
     /**
@@ -44,20 +39,14 @@ class ItemSearch extends Item
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $query = null)
+    public function search($params)
     {
-        if(empty($query)){
-            $query = Item::find()->where(['item.status' => Item::getActiveStatuses()]);
-        }
+        $query = Tag::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
-            'pagination' => [
-                'pageSize' => 40,
-            ],
         ]);
 
         $this->load($params);
@@ -68,7 +57,17 @@ class ItemSearch extends Item
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'item.title', $this->title]);
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'frequency' => $this->frequency,
+            'author_id' => $this->author_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'status' => $this->status,
+        ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

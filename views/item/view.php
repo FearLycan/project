@@ -27,30 +27,38 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
 
 <section class="slice bg-minimalist">
     <div class="container">
-        <?php if (!Yii::$app->user->isGuest && $item->author_id == Yii::$app->user->identity->id): ?>
-        <?php endif; ?>
+
         <div class="row">
 
-            <div class="col-lg-1">
-                <a href="<?= Url::to(['item/update', 'id' => $item->id]) ?>" class="btn btn-primary">Edytuj</a>
-            </div>
+            <?php if ($item->status == Item::STATUS_ARCHIVES): ?>
+                <div class="col-lg-12">
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Uwaga!</strong> Ten przedmiot posiada status archiwalny, może już nie być dostępny w sklepie.
+                    </div>
+                </div>
+            <?php endif; ?>
 
-            <div class="offset-9 col-lg-2 text-lg-right" style="padding-top: 5px;">
+            <?php if (!Yii::$app->user->isGuest && $item->author_id == Yii::$app->user->identity->id): ?>
+                <div class="col-lg-1">
+                    <a href="<?= Url::to(['item/update', 'id' => $item->id]) ?>" class="btn btn-primary">Edytuj</a>
+                </div>
 
-                <?php if($item->status == Item::STATUS_ACTIVE): ?>
-                    <span class="badge badge-success badge-lg" style=""><?= $item->getStatusName() ?></span>
-                <?php elseif ($item->status == Item::STATUS_PENDING): ?>
-                    <span class="badge badge-info badge-lg" style=""><?= $item->getStatusName() ?></span>
-                <?php elseif ($item->status == Item::STATUS_INACTIVE): ?>
-                    <span class="badge badge-danger badge-lg" style=""><?= $item->getStatusName() ?></span>
-                <?php endif; ?>
+                <div class="offset-9 col-lg-2 text-lg-right" style="padding-top: 5px;">
+                    <?php if($item->status == Item::STATUS_ACTIVE): ?>
+                        <span class="badge badge-success badge-lg" style=""><?= $item->getStatusName() ?></span>
+                    <?php elseif ($item->status == Item::STATUS_PENDING): ?>
+                        <span class="badge badge-info badge-lg" style=""><?= $item->getStatusName() ?></span>
+                    <?php elseif ($item->status == Item::STATUS_INACTIVE): ?>
+                        <span class="badge badge-danger badge-lg" style=""><?= $item->getStatusName() ?></span>
+                    <?php elseif ($item->status == Item::STATUS_ARCHIVES): ?>
+                        <span class="badge badge-warning badge-lg" style=""><?= $item->getStatusName() ?></span>
+                    <?php endif; ?>
 
-            </div>
-
+                </div>
+            <?php endif; ?>
 
             <div class="col-lg-12">
                    <span class="space-xs-md"></span>
-                <!--<hr>-->
             </div>
 
         </div>

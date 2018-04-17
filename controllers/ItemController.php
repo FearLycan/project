@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\AccessControl;
 use app\components\Helpers;
 use app\models\forms\CommentForm;
 use app\models\forms\ItemForm;
@@ -13,8 +14,10 @@ use app\models\searches\ItemSearch;
 use app\models\Shop;
 use app\models\Tag;
 use app\models\Type;
+use app\models\User;
 use Yii;
 use app\components\Controller;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\NotFoundHttpException;
@@ -22,6 +25,41 @@ use yii\web\UploadedFile;
 
 class ItemController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'bump' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'statuses' => [
+                            User::STATUS_ACTIVE,
+                        ],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => [
+                            'index',
+                            'view',
+                        ],
+                        'roles' => ['?'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -138,7 +176,7 @@ class ItemController extends Controller
     {
         $model = ItemForm::find()
             ->where(['id' => $id, 'author_id' => Yii::$app->user->identity->id])
-            ->andWhere(['in', 'status', [Item::STATUS_ACTIVE, Item::STATUS_PENDING]])
+            ->andWhere(['in', 'status', [Item::STATUS_ACTIVE, Item::STATUS_PENDING, Item::STATUS_ARCHIVES]])
             ->one();
 
         if(empty($model)){

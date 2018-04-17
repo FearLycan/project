@@ -1,13 +1,18 @@
 <?php
 
 use app\components\LinkPager;
+use yii\helpers\Html;
 use yii\widgets\ListView;
 
+$this->title = Html::encode('Kolekcja dodanych przedmiotów | ' . Yii::$app->params['name']);
 ?>
 
 
 <section class="slice sct-color-1" id="sct_products">
     <div class="container">
+        <h1 class="heading">Kolekcja dodanych przedmiotów</h1>
+        <span class="space-xs-md"></span>
+
         <div class="row-wrapper">
             <?= ListView::widget([
                 'dataProvider' => $dataProvider,

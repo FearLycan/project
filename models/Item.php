@@ -40,6 +40,7 @@ class Item extends ActiveRecord
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
     const STATUS_PENDING = 2;
+    const STATUS_ARCHIVES = 3;
 
 
     /**
@@ -115,8 +116,9 @@ class Item extends ActiveRecord
     {
         return [
             static::STATUS_ACTIVE => 'Aktywny',
-            static::STATUS_INACTIVE => 'Nieaktywny',
             static::STATUS_PENDING => 'Oczekujący',
+            static::STATUS_INACTIVE => 'Nieaktywny',
+            static::STATUS_ARCHIVES => 'Archiwum',
         ];
     }
 
@@ -137,6 +139,7 @@ class Item extends ActiveRecord
             static::STATUS_ACTIVE,
             static::STATUS_PENDING,
             static::STATUS_INACTIVE,
+            static::STATUS_ARCHIVES,
         ];
     }
 
@@ -147,6 +150,7 @@ class Item extends ActiveRecord
     {
         return [
             static::STATUS_ACTIVE,
+            static::STATUS_ARCHIVES,
         ];
     }
 
