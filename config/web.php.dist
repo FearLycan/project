@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'Weariology',
     'timeZone' => 'Europe/Warsaw',
     'language' => 'pl',
     'basePath' => dirname(__DIR__),
@@ -26,6 +27,7 @@ $config = [
             'class' => 'app\components\WebUser',
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['auth/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -65,7 +67,10 @@ $config = [
             'rules' => [
                 '' => 'item/index',
                 'item/<id>/<slug>' => 'item/view',
+                'tag/list' => 'tag/list',
                 'tag/<name>' => 'tag/view',
+                'user/settings' => 'user/settings',
+                'user/<slug>' => 'user/view',
                 '<alias:admin>' => 'admin/default/index',
                 '<alias:contact>' => 'site/contact',
                 'item/<id>/<slug>' => 'item/view',

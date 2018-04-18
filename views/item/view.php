@@ -33,7 +33,8 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
             <?php if ($item->status == Item::STATUS_ARCHIVES): ?>
                 <div class="col-lg-12">
                     <div class="alert alert-warning" role="alert">
-                        <strong>Uwaga!</strong> Ten przedmiot posiada status archiwalny, może już nie być dostępny w sklepie.
+                        <strong>Uwaga!</strong> Ten przedmiot posiada status archiwalny, może już nie być dostępny w
+                        sklepie.
                     </div>
                 </div>
             <?php endif; ?>
@@ -44,7 +45,7 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                 </div>
 
                 <div class="offset-9 col-lg-2 text-lg-right" style="padding-top: 5px;">
-                    <?php if($item->status == Item::STATUS_ACTIVE): ?>
+                    <?php if ($item->status == Item::STATUS_ACTIVE): ?>
                         <span class="badge badge-success badge-lg" style=""><?= $item->getStatusName() ?></span>
                     <?php elseif ($item->status == Item::STATUS_PENDING): ?>
                         <span class="badge badge-info badge-lg" style=""><?= $item->getStatusName() ?></span>
@@ -58,7 +59,7 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
             <?php endif; ?>
 
             <div class="col-lg-12">
-                   <span class="space-xs-md"></span>
+                <span class="space-xs-md"></span>
             </div>
 
         </div>
@@ -161,7 +162,7 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
     </div>
 </section>
 
-<?php if($item->isActive()): ?>
+<?php if ($item->isActive()): ?>
     <section class="slice sct-color-1" id="sct_products">
         <div class="container">
 
@@ -170,17 +171,22 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a href="#tabFour-2" aria-controls="profile" role="tab" data-toggle="tab"
-                           class="nav-link active text-center text-uppercase strong-600">Komentarze</a>
+                           class="nav-link text-center text-uppercase strong-600">Komentarze</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a href="#tabFour-3" aria-controls="profile" role="tab" data-toggle="tab"
                            class="nav-link text-center text-uppercase strong-600">PODOBNE PRODUKTY</a>
                     </li>
+
+                    <li class="nav-item" role="presentation">
+                        <a href="#tabFour-4" aria-controls="profile" role="tab" data-toggle="tab"
+                           class="nav-link active text-center text-uppercase strong-600">Opinie</a>
+                    </li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="tabFour-2">
+                    <div role="tabpanel" class="tab-pane" id="tabFour-2">
                         <div class="tab-body">
 
                             <div class="block-post-comments block-post-comments--style-2">
@@ -249,17 +255,36 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                             <?php endif; ?>
                         </div>
                     </div>
+                    <div role="tabpanel" class="tab-pane active" id="tabFour-4">
+                        <div class="tab-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3>
+                                        Opinie, recenzje i testy dla produktu:
+                                    </h3>
+                                </div>
+                                <div class="col-6">
+                                    <p>
+                                        podział ocen, tabelka
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <?= Html::a('Dodaj recenzje',['review/create', 'id' => $item->id, 'slug' => $item->slug],['class' => 'btn btn-styled btn-primary']) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
 
-<div class="block block-comment comment-reply d-none">
-    <?= $this->render('forms/_reply', [
-        'model' => $reply,
-    ]) ?>
-</div>
+    <div class="block block-comment comment-reply d-none">
+        <?= $this->render('forms/_reply', [
+            'model' => $reply,
+        ]) ?>
+    </div>
 
 <?php endif; ?>
 
