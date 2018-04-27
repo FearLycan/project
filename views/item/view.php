@@ -170,52 +170,19 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a href="#tabFour-2" aria-controls="profile" role="tab" data-toggle="tab"
-                           class="nav-link text-center text-uppercase strong-600">Komentarze</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
                         <a href="#tabFour-3" aria-controls="profile" role="tab" data-toggle="tab"
-                           class="nav-link text-center text-uppercase strong-600">PODOBNE PRODUKTY</a>
+                           class="nav-link active text-center text-uppercase strong-600">PODOBNE PRODUKTY</a>
                     </li>
 
                     <li class="nav-item" role="presentation">
                         <a href="#tabFour-4" aria-controls="profile" role="tab" data-toggle="tab"
-                           class="nav-link active text-center text-uppercase strong-600">Opinie</a>
+                           class="nav-link text-center text-uppercase strong-600">Opinie</a>
                     </li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane" id="tabFour-2">
-                        <div class="tab-body">
-
-                            <div class="block-post-comments block-post-comments--style-2">
-                                <div class="block block-comment comment-form">
-                                    <?= $this->render('forms/_comment', [
-                                        'model' => $comment,
-                                    ]) ?>
-                                </div>
-                            </div>
-
-                            <div id="pjax" style="display: none;"></div>
-
-                            <?php Pjax::begin(['id' => 'comments']) ?>
-                            <?= ListView::widget([
-                                'dataProvider' => $commentDataProvider,
-                                'summary' => false,
-                                'itemView' => '_comment',
-                                'options' => [
-                                    'tag' => 'div',
-                                    'class' => 'block-post-comments block-post-comments--style-2',
-                                ],
-                                'pager' => [
-                                    'class' => LinkPager::class
-                                ]
-                            ]); ?>
-                            <?php Pjax::end() ?>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="tabFour-3">
+                    <div role="tabpanel" class="tab-pane active" id="tabFour-3">
                         <div class="tab-body">
                             <?php if (!empty($similar)): ?>
                                 <section id="sct_products">
@@ -223,18 +190,18 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                                         <div class="row-wrapper">
                                             <div class="row cols-xs-space cols-md-space cols-md-space">
 
-                                                <?php foreach ($similar as $item): ?>
+                                                <?php foreach ($similar as $i): ?>
                                                     <div class="col-lg-3 col-md-6 space-xs-md">
                                                         <div class="block product no-border z-depth-2--hover">
                                                             <div class="block-image">
-                                                                <a href="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>">
-                                                                    <?= Html::img('@web/' . Image::URL_THUMBNAIL . $item->image, ['alt' => $item->title, 'class' => 'img-fluid similar']) ?>
+                                                                <a href="<?= Url::to(['item/view', 'id' => $i->id, 'slug' => $i->slug]) ?>">
+                                                                    <?= Html::img('@web/' . Image::URL_THUMBNAIL . $i->image, ['alt' => $i->title, 'class' => 'img-fluid similar']) ?>
                                                                 </a>
                                                             </div>
 
                                                             <div class="block-body pt-0 text-center">
                                                                 <h3 class="heading heading-6 strong-500 text-capitalize">
-                                                                    <?= Html::a(Helpers::cutThis($item->title, 30), ['item/view', 'id' => $item->id, 'slug' => $item->slug]) ?>
+                                                                    <?= Html::a(Helpers::cutThis($i->title, 30), ['item/view', 'id' => $i->id, 'slug' => $i->slug]) ?>
                                                                 </h3>
                                                             </div>
                                                         </div>
@@ -255,36 +222,36 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                             <?php endif; ?>
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane active" id="tabFour-4">
+                    <div role="tabpanel" class="tab-pane" id="tabFour-4">
                         <div class="tab-body">
                             <div class="row">
+                                <div class="col-6">
+                                    <?= Html::a('Dodaj recenzje', ['review/create', 'id' => $item->id, 'slug' => $item->slug], ['class' => 'btn btn-styled btn-primary']) ?>
+                                </div>
                                 <div class="col-12">
-                                    <h3>
-                                        Opinie, recenzje i testy dla produktu:
-                                    </h3>
-                                </div>
-                                <div class="col-6">
-                                    <p>
-                                        podział ocen, tabelka
-                                    </p>
-                                </div>
-                                <div class="col-6">
-                                    <?= Html::a('Dodaj recenzje',['review/create', 'id' => $item->id, 'slug' => $item->slug],['class' => 'btn btn-styled btn-primary']) ?>
+                                    <hr>
                                 </div>
                             </div>
+
+                            <?= ListView::widget([
+                                'dataProvider' => $reviewDataProvider,
+                                'summary' => false,
+                                'itemOptions' => ['class' => 'col-lg-12 col-md-12 space-xs-md'],
+                                'itemView' => '_review',
+                                'options' => [
+                                    'tag' => 'div',
+                                    'class' => 'row cols-md-space cols-sm-space cols-xs-space',
+                                ],
+                                'pager' => [
+                                    'class' => LinkPager::class
+                                ]
+                            ]); ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-
-    <div class="block block-comment comment-reply d-none">
-        <?= $this->render('forms/_reply', [
-            'model' => $reply,
-        ]) ?>
-    </div>
 
 <?php endif; ?>
 

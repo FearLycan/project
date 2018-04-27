@@ -11,6 +11,7 @@ use app\models\Item;
 use app\models\ItemTag;
 use app\models\searches\CommentSearch;
 use app\models\searches\ItemSearch;
+use app\models\searches\ReviewSearch;
 use app\models\Shop;
 use app\models\Tag;
 use app\models\Type;
@@ -102,23 +103,24 @@ class ItemController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
-        $comment = new CommentForm();
-        $comment->item_id = $id;
+        //$comment = new CommentForm();
+        //$comment->item_id = $id;
 
-        $reply = new ReplyForm();
-        $reply->item_id = $id;
+        //$reply = new ReplyForm();
+        //$reply->item_id = $id;
 
         $similar = $item->getSimilar(2, 6);
 
-        $searchModel = new CommentSearch();
-        $commentDataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
+        //$searchModel = new CommentSearch();
+        //$commentDataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
+
+        $searchModel = new ReviewSearch();
+        $reviewDataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
 
         return $this->render('view', [
             'item' => $item,
             'similar' => $similar,
-            'comment' => $comment,
-            'reply' => $reply,
-            'commentDataProvider' => $commentDataProvider,
+            'reviewDataProvider' => $reviewDataProvider,
         ]);
     }
 

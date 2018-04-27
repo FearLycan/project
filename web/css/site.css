@@ -230,7 +230,7 @@ footer {
     padding-left: 20px !important;
 }
 
-.btn-file{
+.btn-file {
     padding: 8px;
 }
 
@@ -288,16 +288,35 @@ footer {
     padding: 2rem 1rem;
 }
 
-.select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field{
+.select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field {
     margin-top: 5px;
 }
 
-.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice{
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
     margin: 10px 0 0 6px;
 }
 
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear {
     margin-top: 10px;
+}
+
+.rating-container .caption {
+    margin-top: 0;
+    margin-left: 10px;
+}
+
+.checkbox-label {
+    display: inline-block;
+    vertical-align: top;
+    font-size: .875rem;
+    line-height: 18px;
+    cursor: pointer;
+}
+
+input[type='checkbox'] {
+    margin-right: 15px;
+    position: relative;
+    top: 2px;
 }
 
 @-webkit-keyframes pulse {

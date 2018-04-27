@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%review}}".
@@ -14,6 +16,7 @@ use Yii;
  * @property string $images
  * @property integer $confirmed_by_purchase
  * @property integer $author_id
+ * @property integer $item_id
  * @property string $created_at
  * @property string $updated_at
  *
@@ -25,6 +28,27 @@ class Review extends \yii\db\ActiveRecord
     const STATUS_ACTIVE = 1;
     const STATUS_PENDING = 2;
     const STATUS_REMOVED = 3;
+
+    const CONFIRM_BY_PURCHASE = 1;
+    const NOT_CONFIRM_BY_PURCHASE = 0;
+
+    /**
+     * @param bool $insert
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => date("Y-m-d H:i:s"),
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -72,5 +96,31 @@ class Review extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getStatusNames()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Aktywny',
+            self::STATUS_INACTIVE => 'Nieaktywny',
+            self::STATUS_PENDING => 'Oczekujący',
+            self::STATUS_REMOVED => 'Usunięty',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return self::getStatusNames()[$this->status];
+    }
+
+    public static function getPendingCount()
+    {
+        return self::find()->where(['status' => self::STATUS_PENDING])->count();
     }
 }

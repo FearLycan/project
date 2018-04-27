@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\components\Controller;
 use app\models\forms\ReviewForm;
 use app\models\Item;
+use app\models\Review;
+use kartik\growl\Growl;
 use Yii;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
@@ -21,11 +23,27 @@ class ReviewController extends Controller
         }
 
         $model = new ReviewForm();
-
-        $model->scenario = ReviewForm::SCENARIO_CREATE;
+        $model->item_id = $id;
+        $model->author_id = Yii::$app->user->identity->id;
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->myFile = UploadedFile::getInstance($model, 'myFile');
+            $model->myFiles = UploadedFile::getInstances($model, 'myFiles');
+            $model->status = Review::STATUS_PENDING;
+
+            $model->save();
+
+            if ($model->upload()) {
+                Yii::$app->getSession()
+                    ->addFlash(Growl::TYPE_SUCCESS, ['Świetnie!',' Twoja recenzja została zapisana i <strong>oczekuje na akceptację</strong>']);
+
+                $model->images = json_encode($model->names);
+                $model->save(false, ['images']);
+
+                return $this->redirect(['item/view', 'id' => $id, 'slug' => $slug]);
+            } else {
+                Yii::$app->getSession()
+                    ->addFlash(Growl::TYPE_WARNING, ['Uwaga!',' Wystapił błąd podczas zapisywania recenzji']);
+            }
         }
 
         return $this->render('create', [

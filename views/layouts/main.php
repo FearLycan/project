@@ -5,6 +5,7 @@
 /* @var $content string */
 
 use app\components\Helpers;
+use kartik\growl\Growl;
 use yii\helpers\Html;
 use app\assets\AppAsset;
 use yii\helpers\Url;
@@ -283,6 +284,26 @@ AppAsset::register($this);
                             </div>
                         </nav>
                     </div>
+
+                    <?php foreach (Yii::$app->session->getAllFlashes() as $key => $message): ?>
+
+                    <?= Growl::widget([
+                            'type' => $key,
+                            'title' =>  $message[0][0],
+                            'body' => $message[0][1],
+                            'showSeparator' => true,
+                            'delay' => 200,
+                            'pluginOptions' => [
+                                //'showProgressbar' => true,
+                                'placement' => [
+                                    'from' => 'top',
+                                    'align' => 'right',
+                                    'timer' => 2000,
+                                ]
+                            ]
+                        ]); ?>
+
+                    <?php endforeach; ?>
 
                     <div class="page-content">
                         <?= $content ?>

@@ -21,6 +21,9 @@ class Image
     const URL = 'images/item/';
     const URL_THUMBNAIL = 'images/item/thumbnail/';
 
+    const URL_REVIEW = 'images/review/';
+    const URL_THUMBNAIL_REVIEW = 'images/review/thumbnail/';
+
 
     public static function createThumbnail($url, $urlSave ,$width, $height)
     {

@@ -69,41 +69,49 @@ AdminAsset::register($this);
             <li class="nav-item">
                 <a class="nav-link" href="<?= Url::to(['tag/index']) ?>">Tagi</a>
             </li>
+            <li class="nav-item dropdown">
+                <?php $reviews = \app\models\Review::getPendingCount() ?>
+                <a class="nav-link" href="<?= Url::to(['item/index']) ?>">Recenzje <?= $reviews ? '<small>('.$reviews.')</small>' : '' ?></a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <?php if($reviews): ?>
+                        <a class="dropdown-item" href="<?= Url::to(['review/index', 'ReviewSearch[status]' => \app\models\Review::STATUS_PENDING]) ?>">Oczekujące <?= $reviews ? '<small>('.$reviews.')</small>' : '' ?></a>
+                    <?php endif; ?>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= Url::to(['user/index']) ?>">Użytkownicy</a>
             </li>
-           <!-- <li class="nav-item dropdown">
-                <a class="nav-link" href="<?php /*//Url::to(['comment/index']) */?>">Komentarze</a>
+            <!--<li class="nav-item">
+                <?php /*$reviews = \app\models\Review::getPendingCount() */?>
+                <a class="nav-link" href="<?/*= Url::to(['review/index']) */?>">Recenzje <?/*= $reviews ? '<small>('.$reviews.')</small>' : '' */?>  </a>
             </li>-->
-            <li class="nav-item">
-                <a class="nav-link" href="<?= Url::to(['review/index']) ?>">Recenzje</a>
-            </li>
+
+
         </ul>
     </div>
 </nav>
 
 <main>
 
-    <!-- Get all flash messages and loop through them -->
-    <?php foreach (Yii::$app->session->getAllFlashes() as $message): ?>
+    <?php foreach (Yii::$app->session->getAllFlashes() as $key => $message): ?>
+
         <?= Growl::widget([
-            'type' => (!empty($message['type'])) ? $message['type'] : 'danger',
-            //'title' => (empty($message['title'])) ?: Html::encode($message['title']),
-            'title' => false,
-            'icon' => (empty($message['icon'])) ?: $message['icon'],
-            'body' => (!empty($message['message'])) ? Html::encode($message['message']) : 'Message Not Set!',
+            'type' => $key,
+            'title' =>  $message[0][0],
+            'body' => $message[0][1],
             'showSeparator' => true,
-            'delay' => 1, //This delay is how long before the message shows
+            'delay' => 200,
             'pluginOptions' => [
-                'delay' => (!empty($message['duration'])) ? $message['duration'] : 3000, //This delay is how long the message shows for
+                'showProgressbar' => true,
                 'placement' => [
-                    'from' => (!empty($message['positonY'])) ? $message['positonY'] : 'top',
-                    'align' => (!empty($message['positonX'])) ? $message['positonX'] : 'right',
+                    'from' => 'top',
+                    'align' => 'right',
+                    'timer' => 2000,
                 ]
             ]
         ]); ?>
+
     <?php endforeach; ?>
-    <!-- ------------------------------------------------ -->
 
     <div class="container">
         <?= Breadcrumbs::widget([
@@ -118,7 +126,7 @@ AdminAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <span class="text-muted">© Project Admin <?= date('Y') ?></span>
+        <span class="text-muted">© <?= Yii::$app->params['name'] ?> <?= date('Y') ?></span>
     </div>
 </footer>
 

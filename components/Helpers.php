@@ -73,4 +73,33 @@ class Helpers
         $short = str_replace($protocals, '', $link);
         return self::cutThis($short, 32);
     }
+
+    public static function ratingOptions()
+    {
+        return [
+            'language' => 'en',
+            'min' => 0,
+            'max' => 5,
+            'step' => 0.5,
+            'starCaptions' => [
+                0 => 'Niedostateczny',
+                1 => 'Niedostateczny',
+                2 => 'Dopuszczający',
+                3 => 'Dostateczny',
+                4 => 'Dobry',
+                5 => 'Bardzo dobry',
+            ],
+            'starCaptionClasses' => [
+                0 => 'text-danger',
+                1 => 'text-danger',
+                2 => 'text-warning',
+                3 => 'text-info',
+                4 => 'text-primary',
+                5 => 'text-success',
+            ],
+            'filledStar' => '<i class="ion-android-star" aria-hidden="true"></i>',
+            'emptyStar' => '<i class="ion-android-star-outline" aria-hidden="true"></i>',
+            'defaultCaption' => '{rating}',
+        ];
+    }
 }
