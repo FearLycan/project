@@ -4,6 +4,50 @@ body {
     margin: 0;
 }
 
+/*footer {
+  !*  position: absolute;
+    bottom: 0;
+    left: 0;*!
+    width: 100%;
+    height: 90px;
+}*/
+
+/*
+.body-wrap{
+    min-height: 100%;
+   !* margin-bottom: -90px;*!
+}
+*/
+
+.f-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+}
+
+ul.navbar-nav > .active > a {
+    color: inherit;
+}
+
+.block-post > .block-post-body > p {
+    margin-top: 0 !important;
+    margin-bottom: 0.5rem;
+}
+
+.block-post > .block-post-body > ul {
+    font-size: .875rem;
+    line-height: 1.5rem;
+}
+
+.section-title .section-title-inner {
+    text-transform: lowercase;
+}
+
+.body-wrap {
+    background-color: transparent;
+}
+
 .bg-dark {
     background-color: #111111 !important;
 }
@@ -206,16 +250,16 @@ ul.icons li .icon {
     text-align: center;
 }
 
-footer {
-    /*position: absolute;*/
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 90px;
+.section-title-tag {
+    text-transform: lowercase;
 }
 
-.section-title .section-title-inner {
-    text-transform: lowercase;
+.mask-dark--style-2 {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.block-body-new {
+    padding: 0.5rem 1.5rem !important;
 }
 
 .block-comment {
@@ -224,6 +268,11 @@ footer {
 
 .block-comment .block-body > .block-body-inner {
     padding-bottom: 1rem;
+}
+
+.bottom-input {
+    position: absolute;
+    bottom: 0;
 }
 
 .opset {
@@ -264,13 +313,13 @@ footer {
 
 @media only screen and (max-width: 1366px) {
     .page-content {
-        min-height: 600px;
+        /*  min-height: 600px;*/
     }
 }
 
 @media only screen and (min-width: 1900px) {
     .page-content {
-        min-height: 810px;
+        /*min-height: 810px;*/
     }
 }
 

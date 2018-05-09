@@ -29,8 +29,8 @@ class ShopForm extends Shop
         return [
             [['name', 'url'], 'string', 'max' => 255],
             [['status'], 'in', 'range' => array_keys(static::getStatuses())],
-            [['name', 'url', 'status'], 'required'],
-            [['image'], 'required' , 'on' => static::SCENARIO_CREATE],
+            [['name', 'url', 'status', 'color'], 'required'],
+            [['image'], 'required', 'on' => static::SCENARIO_CREATE],
             [['image'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024],
         ];
     }
@@ -44,6 +44,7 @@ class ShopForm extends Shop
             'name' => 'Nazwa Sklepu',
             'image' => 'Logo',
             'url' => 'Link do strony sklepu',
+            'color' => 'Kolor',
         ];
     }
 

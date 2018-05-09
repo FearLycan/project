@@ -7,7 +7,6 @@ use app\models\Item;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ListView;
-use yii\widgets\Pjax;
 
 /* @var \app\models\Item $item */
 /* @var \app\models\forms\CommentForm $comment */
@@ -20,8 +19,7 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
 <meta property="og:url" content="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug], true) ?>"/>
 <meta property="og:title" content="<?= $this->title ?>"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description"
-      content="<?= Html::encode($item->shop->name) ?> - <?= Html::encode($this->title) ?>"/>
+<meta property="og:description" content="<?= Html::encode($item->shop->name) ?> - <?= Html::encode($this->title) ?>"/>
 <meta property="og:image" content="<?= Url::to('@web/images/item/thumbnail/' . $item->image, true); ?>"/>
 <?php $this->endBlock() ?>
 
@@ -114,7 +112,7 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                         <ul class="icons mt-4">
                             <li class="text-sm">
                                 <i class="ion-briefcase icon" aria-hidden="true"></i>
-                                <strong>Sklep:</strong> <?= Html::encode($item->shop->name) ?>
+                                <strong>Sklep:</strong> <a href="<?= Url::to(['shop/view', 'slug' => $item->shop->slug]) ?>"><?= Html::encode($item->shop->name) ?></a>
                             </li>
                             <li class="text-sm">
                                 <?php if ($item->gender == Item::GENDER_MALE): ?>
@@ -199,7 +197,7 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                                                                 </a>
                                                             </div>
 
-                                                            <div class="block-body pt-0 text-center">
+                                                            <div class="block-body text-center block-body-new">
                                                                 <h3 class="heading heading-6 strong-500 text-capitalize">
                                                                     <?= Html::a(Helpers::cutThis($i->title, 30), ['item/view', 'id' => $i->id, 'slug' => $i->slug]) ?>
                                                                 </h3>
@@ -236,7 +234,7 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
                             <?= ListView::widget([
                                 'dataProvider' => $reviewDataProvider,
                                 'summary' => false,
-                                'itemOptions' => ['class' => 'col-lg-12 col-md-12 space-xs-md'],
+                                'itemOptions' => ['class' => 'col-lg-12 col-md-12'],
                                 'itemView' => '_review',
                                 'options' => [
                                     'tag' => 'div',
@@ -257,3 +255,11 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
 
 <?php $this->beginBlock('script') ?>
 <?php $this->endBlock() ?>
+
+<?php $this->registerJsFile(
+    '@web/js/jquery.fancybox.min.js',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+); ?>
+<?php $this->registerCssFile('@web/css/jquery.fancybox.min.css');?>
+
+<?php $this->registerCss("ul.pagination {margin-left: 15px;}"); ?>

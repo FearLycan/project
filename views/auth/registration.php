@@ -4,7 +4,7 @@ $this->title = 'Rejestracja';
 ?>
 
 <?php if ($status == true): ?>
-    <section class="slice--offset slice sct-color-1">
+    <section class="slice--offset slice sct-color-1" id="register">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 ">
@@ -17,8 +17,8 @@ $this->title = 'Rejestracja';
         </div>
     </section>
 <?php else: ?>
-    <section class="slice-lg has-bg-cover bg-size-cover"
-             style="background-image: url(../images/site/login-image-02.jpg); background-position: bottom center;">
+<!--    <section class="slice-lg has-bg-cover bg-size-cover" id="register" style="background-image: url(../images/site/login-image-02.jpg); background-position: bottom center;">-->
+    <section class="slice-lg has-bg-cover bg-size-cover" id="register">
         <div class="container">
             <div class="row justify-content-center cols-xs-space">
                 <div class="col-lg-6">

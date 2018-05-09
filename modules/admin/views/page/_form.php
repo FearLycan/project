@@ -2,10 +2,9 @@
 
 use app\modules\admin\models\Page;
 use dosamigos\ckeditor\CKEditor;
+use dosamigos\tinymce\TinyMce;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-$this->registerJs("CKEDITOR.plugins.addExternal('pbckcode', '/pbckcode/plugin.js', '');");
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Page */
@@ -29,19 +28,18 @@ $this->registerJs("CKEDITOR.plugins.addExternal('pbckcode', '/pbckcode/plugin.js
 
     <div class="row" style="margin-bottom: 15px;">
         <div class="col-12">
-            <?= $form->field($model, 'content')->widget(CKEditor::className(), [
+            <?= $form->field($model, 'content')->widget(TinyMce::className(), [
                 'options' => ['rows' => 6],
-                'preset' => 'custom',
+                'language' => 'pl',
                 'clientOptions' => [
-                    ['allowedContent' => true],
-                    'toolbarGroups' => [
-                        ['name' => 'undo'],
-                        ['name' => 'basicstyles', 'groups' => ['basicstyles', 'cleanup']],
-                        ['name' => 'colors'],
-                        ['name' => 'document', 'groups' => ['document', 'doctools', 'mode']],
-                    ]
+                    'plugins' => [
+                        "advlist autolink lists link charmap print preview anchor",
+                        "searchreplace visualblocks code fullscreen",
+                        "insertdatetime media table contextmenu paste"
+                    ],
+                    'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
                 ]
-            ]) ?>
+            ]); ?>
 
         </div>
     </div>

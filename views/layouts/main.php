@@ -28,9 +28,18 @@ AppAsset::register($this);
     <!-- Favicon -->
     <!--    <link href="favicon.png" rel="icon" type="image/png">-->
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84680217-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-84680217-3');
+    </script>
+
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
 
 </head>
 <body>
@@ -41,97 +50,7 @@ AppAsset::register($this);
     <div id="st-container" class="st-container st-effect-1">
 
         <?php if (!Yii::$app->user->isGuest): ?>
-        <nav class="st-menu st-effect-1" id="menu-1">
-            <div class="st-profile">
-                <div class="st-profile-user-wrapper">
-                    <div class="profile-user-image">
-                        <img src="/project/web/images/avatar/noavatar.jpg" class="img-circle hoverZoomLink">
-                    </div>
-                    <div class="profile-user-info">
-                        <span class="profile-user-name"><?= Yii::$app->user->identity->name ?></span>
-                        <span class="profile-user-email">
-                            <?= Helpers::cutThis(Yii::$app->user->identity->email, 26) ?></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="st-menu-list mt-2">
-                <ul>
-                    <li>
-                        <a href="<?= Url::to(['item/create']); ?>">
-                            <i class="ion-ios-plus-outline"></i> Dodaj nowe
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::to(['item/collection']); ?>">
-                            <i class="ion-tshirt-outline"></i> Moja kolekcja
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::to(['user/favorite']); ?>">
-                            <i class="ion-ios-star-outline"></i> Ulubione
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <h3 class="st-menu-title">Konto</h3>
-            <div class="st-menu-list">
-                <ul>
-                    <li>
-                        <a href="<?= Url::to(['user/view', 'slug' => Yii::$app->user->identity->slug]); ?>">
-                            <i class="ion-ios-person-outline"></i> Profil
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::to(['message/index']); ?>">
-                            <i class="ion-ios-person-outline"></i> Wiadomośći
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::to(['user/fallowers', 'slug' => Yii::$app->user->identity->slug]); ?>">
-                            <i class="ion-ios-people-outline"></i> Obserwowani
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::to(['user/password']); ?>">
-                            <i class="ion-ios-unlocked-outline"></i> Password update
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::to(['user/settings']); ?>">
-                            <i class="ion-ios-gear-outline"></i> Settings
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <h3 class="st-menu-title">Support</h3>
-            <div class="st-menu-list">
-                <ul>
-                    <li>
-                        <a href="<?= Url::to(['page/view', 'slug' => 'regulamin']) ?>">
-                            <i class="ion-ios-paper-outline"></i> Regulamin
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::to(['page/view', 'slug' => 'polityka-prywatnosci']) ?>">
-                            <i class="ion-ios-book-outline"></i> Polityka prywatności
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::to(['site/contact']) ?>">
-                            <i class="ion-ios-email-outline"></i> Kontakt
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::to(['site/about']) ?>">
-                            <i class="ion-ios-information-outline"></i> <?= Yii::$app->params['name'] ?>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+            <?= $this->render('_st-menu') ?>
         <?php endif; ?>
 
         <div class="st-pusher">
@@ -139,29 +58,6 @@ AppAsset::register($this);
                 <div class="st-content-inner">
                     <!-- HEADER -->
                     <div class="header">
-                        <?php if (Yii::$app->user->isGuest): ?>
-                            <!-- Top Bar -->
-                            <!--<div class="top-navbar top-navbar--inverse">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6"></div>
-                                        <div class="col-md-6">
-                                            <nav class="top-navbar-menu">
-                                                <ul class="top-menu">
-                                                    <li>
-                                                        <a href="<?/*= Url::toRoute(['auth/login']); */?>">Zaloguj się</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="<?/*= Url::toRoute(['auth/registration']); */?>">Rejestracja</a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
-                        <?php endif; ?>
-
                         <!-- Global Search -->
                         <section id="sctGlobalSearch" class="global-search global-search-overlay">
                             <div class="container">
@@ -248,6 +144,13 @@ AppAsset::register($this);
 
                                     <?php endif; ?>
 
+                                    <!-- Admin Navbar links -->
+                                    <ul class="navbar-nav" data-hover="dropdown">
+                                        <li class="nav-item dropdown megamenu">
+                                            <?= Html::a('Sklepy', ['/shop'], ['class' => 'nav-link']); ?>
+                                        </li>
+                                    </ul>
+
                                 </div>
 
                                 <div class="pl-4 d-none d-lg-inline-block">
@@ -294,7 +197,6 @@ AppAsset::register($this);
                             'showSeparator' => true,
                             'delay' => 200,
                             'pluginOptions' => [
-                                //'showProgressbar' => true,
                                 'placement' => [
                                     'from' => 'top',
                                     'align' => 'right',
@@ -365,6 +267,8 @@ AppAsset::register($this);
         </div><!-- END: st-pusher -->
     </div>
 </div>
+
+
 
 <!-- Back to top button -->
 <a href="#" class="back-to-top btn-back-to-top"></a>

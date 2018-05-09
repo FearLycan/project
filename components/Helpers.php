@@ -78,6 +78,7 @@ class Helpers
     {
         return [
             'language' => 'en',
+            'size' => 'sm',
             'min' => 0,
             'max' => 5,
             'step' => 0.5,

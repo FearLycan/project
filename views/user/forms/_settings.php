@@ -1,6 +1,7 @@
 <?php
 
 use app\models\User;
+use kartik\file\FileInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -22,16 +23,6 @@ use yii\widgets\ActiveForm;
                 </div>
                 <div class="card-body px-0">
                     <div class="row">
-                        <div class="col-md-6 col-lg-6">
-                            <?= $form->field($model, 'real_name')->textInput(['maxlength' => true, 'class' => 'form-control form-control-lg']); ?>
-                        </div>
-
-                        <div class="col-md-6 col-lg-6">
-                            <?php /* echo $form->field($model, 'real_last_name')->textInput(['maxlength' => true, 'class' => 'form-control form-control-lg']); */?>
-                        </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-md-12 col-lg-12">
                             <?= $form->field($model, 'about')->textarea(['maxlength' => true, 'class' => 'form-control form-control-lg', 'rows' => 4]) ?>
                         </div>
@@ -45,21 +36,22 @@ use yii\widgets\ActiveForm;
             <div class="card no-border">
                 <div class="card-title px-0 pb-0 no-border">
                     <h3 class="heading heading-6 strong-600">
-                        Lokalizacja
+                        Avatar
                     </h3>
                     <p class="mt-1 mb-0">
-                        Podstawowe dane o Twojej lokalizacji
+                        Zmień swój wygląd.
                     </p>
                 </div>
                 <div class="card-body px-0">
                     <div class="row">
-                        <div class="col-md-6 col-lg-6">
-                            <?= $form->field($model, 'city')->textInput(['maxlength' => true, 'class' => 'form-control form-control-lg']); ?>
+                        <div class="col-md-12 col-lg-6">
+                            <?= $form->field($model, 'myFile')->fileInput(['class' => 'bottom-input'])->label(false) ?>
                         </div>
 
-                        <div class="col-md-6 col-lg-6">
-                            <?= $form->field($model, 'country')->textInput(['maxlength' => true, 'class' => 'form-control form-control-lg']); ?>
+                        <div class="col-md-12 col-lg-6">
+                            <?= Html::img('@web/images/avatar/' . $model->avatar, ['class' => 'img-fluid']) ?>
                         </div>
+
                     </div>
                 </div>
             </div>

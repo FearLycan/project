@@ -93,9 +93,19 @@ class ShopController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->scenario = ShopForm::SCENARIO_UPDATE;
+        $image = $model->image;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            if(!empty($model->image)){
+                $model->image = UploadedFile::getInstance($model, 'image');
+                if ($model->upload()) {
+                    $model->save();
+                }
+            }
+
+            $model->image = $image;
+            $model->save();
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

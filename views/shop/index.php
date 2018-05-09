@@ -2,10 +2,14 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
 use yii\widgets\ListView;
 
-$this->title = 'Sklepy';
+$this->title = Html::encode('Lista sklepów | ' . Yii::$app->params['name']);
 ?>
+
+<?php $this->beginBlock('meta') ?>
+<?php $this->endBlock() ?>
 
 <section class="slice sct-color-1">
     <div class="container">
@@ -18,10 +22,6 @@ $this->title = 'Sklepy';
                             <span>Lista sklepów</span>
                         </h3>
                         <span class="section-title-delimiter clearfix"></span>
-                    </div>
-
-                    <div class="fluid-paragraph fluid-paragraph-sm c-gray-light strong-300 text-center">
-                        Start building fast, beautiful and modern looking websites in no time using our theme.
                     </div>
                 </div>
             </div>

@@ -58,7 +58,7 @@ class ReviewForm extends Review
                 }
 
                 Image::createThumbnail($url, $urlThumb, Image::THUMBNAIL_MAX_WIDTH, Image::THUMBNAIL_MAX_HEIGHT);
-                Image::changeSize($url, Image::IMAGE_MAX_WIDTH, Image::IMAGE_MAX_HEIGHT);
+                Image::changeSize($url, Image::IMAGE_REVIEW_MAX_WIDTH, Image::IMAGE_REVIEW_MAX_HEIGHT);
 
                 $this->names[] = $name;
 

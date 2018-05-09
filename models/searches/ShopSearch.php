@@ -2,18 +2,20 @@
 
 namespace app\models\searches;
 
+use app\models\Shop;
 use yii\base\Model;
-use app\models\Review;
 use yii\data\ActiveDataProvider;
 
-class ReviewSearch extends Review
+class ShopSearch extends Shop
 {
     /**
      * @inheritdoc
      */
     public function rules()
     {
-        return [];
+        return [
+            [['name'], 'string'],
+        ];
     }
 
     /**
@@ -32,15 +34,14 @@ class ReviewSearch extends Review
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $query)
+    public function search($params)
     {
+        $query = Shop::find()->where(['status' => self::STATUS_ACTIVE]);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize' => 20,
-            ],
         ]);
 
         $this->load($params);
@@ -53,9 +54,10 @@ class ReviewSearch extends Review
 
         // grid filtering conditions
         $query->andFilterWhere([
+
         ]);
 
-        //$query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

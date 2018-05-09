@@ -2,12 +2,8 @@
 
 namespace app\models;
 
-
 use yii\imagine\Image as Img;
-use Imagine\Gd;
 use Imagine\Image\Box;
-use Imagine\Image\BoxInterface;
-
 
 class Image
 {
@@ -18,11 +14,19 @@ class Image
     const IMAGE_MAX_WIDTH = 700;
     const IMAGE_MAX_HEIGHT = 700;
 
+    const IMAGE_REVIEW_MAX_WIDTH = 1400;
+    const IMAGE_REVIEW_MAX_HEIGHT = 1400;
+
+    const IMAGE_AVATAR_MAX_WIDTH = 150;
+    const IMAGE_AVATAR_MAX_HEIGHT = 150;
+
     const URL = 'images/item/';
     const URL_THUMBNAIL = 'images/item/thumbnail/';
 
     const URL_REVIEW = 'images/review/';
     const URL_THUMBNAIL_REVIEW = 'images/review/thumbnail/';
+
+    const URL_AVATAR = 'images/avatar/';
 
 
     public static function createThumbnail($url, $urlSave ,$width, $height)

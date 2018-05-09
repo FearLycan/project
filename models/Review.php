@@ -21,6 +21,7 @@ use yii\db\ActiveRecord;
  * @property string $updated_at
  *
  * @property User $author
+ * @property Item $item
  */
 class Review extends \yii\db\ActiveRecord
 {
@@ -96,6 +97,14 @@ class Review extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItem()
+    {
+        return $this->hasOne(Item::className(), ['id' => 'item_id']);
     }
 
     /**

@@ -39,6 +39,7 @@ class AppAsset extends AssetBundle
         'js/viewportchecker.min.js',
         ///'js/bootstrap-dropdown-hover.min.js',
         'js/boomerang.min.js',
+        'js/site.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -23,7 +23,7 @@ use yii\helpers\Url;
         </div>
 
 
-        <div class="col-3">
+        <div class="col-5">
             <a href="<?= Url::toRoute(['item/view', 'id' => $model->id, 'slug' => $model->slug]); ?>">
                 <?= Html::encode($model->title) ?>
             </a>
@@ -45,7 +45,7 @@ use yii\helpers\Url;
 
         <div class="col-3"></div>
 
-        <div class="col-5 text-lg-right">
+        <div class="col-3 text-lg-right">
             <a href="<?= Url::to(['item/update', 'id' => $model->id]) ?>" class="btn btn-primary">Edytuj</a>
         </div>
 

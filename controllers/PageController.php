@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\components\Controller;
 use app\models\Page;
+use yii\web\NotFoundHttpException;
 
 class PageController extends Controller
 {

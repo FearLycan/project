@@ -2,17 +2,54 @@
 
 namespace app\controllers;
 
+use app\components\AccessControl;
 use app\components\Controller;
 use app\models\forms\ReviewForm;
 use app\models\Item;
 use app\models\Review;
+use app\models\User;
 use kartik\growl\Growl;
 use Yii;
+use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
 class ReviewController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'bump' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'statuses' => [
+                            User::STATUS_ACTIVE,
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+
+    /**
+     * @param $id
+     * @param $slug
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
     public function actionCreate($id, $slug)
     {
         /* @var \app\models\Item $item */

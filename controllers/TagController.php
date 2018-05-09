@@ -8,6 +8,7 @@ use app\components\Controller;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 use yii\web\Response;
 
 class TagController extends Controller
@@ -46,7 +47,7 @@ class TagController extends Controller
 
         return $this->render('view', [
             'dataProvider' => $dataProvider,
-            'tag' => $name,
+            'tag' => Html::encode($name),
         ]);
     }
 

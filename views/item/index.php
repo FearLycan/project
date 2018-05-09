@@ -59,14 +59,42 @@ $this->title = 'Weariology';
         template: {
             type: "custom",
             method: function (title, item) {
-                return '<div class="row">' +
-                    '<div class="col-2">' +
-                    title
-                    + '</div>' +
-                    '<div class="col-2">' +
-                    '<a href="/project/web/tag/' + item.name + '">wyszukaj</a>'
-                    + '</div>'
-                    + '</div>'
+
+                if(item.type == 'tag'){
+                    return '<div class="row">' +
+                        '<div class="col-2">' +
+                        item.name
+                        + '</div>' +
+                        '<div class="col-2">' +
+                        '<a href="/project/web/tag/' + item.name + '">wyszukaj</a>'
+                        + '</div>'
+                        + '</div>';
+                }
+
+                if(item.type == 'shop'){
+                    return '<div class="row">' +
+                        '<div class="col-2">' +
+                        item.name
+                        + '</div>' +
+                        '<div class="col-2">' +
+                        '<a href="/project/web/shop/' + item.slug + '">zobacz</a>'
+                        + '</div>'
+                        + '</div>';
+                }
+
+                if(item.type == 'item'){
+                    return '<div class="row">' +
+                        '<div class="col-2">' +
+                        title
+                        + '</div>' +
+                        '<div class="col-2">' +
+                        '<a href="/project/web/tag/' + item.name + '">wyszukaj</a>'
+                        + '</div>'
+                        + '</div>';
+                }
+
+
+
             }
         },
         requestDelay: 400

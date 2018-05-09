@@ -4,12 +4,10 @@ namespace app\controllers;
 
 use app\components\AccessControl;
 use app\components\Helpers;
-use app\models\forms\CommentForm;
 use app\models\forms\ItemForm;
-use app\models\forms\ReplyForm;
 use app\models\Item;
 use app\models\ItemTag;
-use app\models\searches\CommentSearch;
+use app\models\Review;
 use app\models\searches\ItemSearch;
 use app\models\searches\ReviewSearch;
 use app\models\Shop;
@@ -103,19 +101,13 @@ class ItemController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
-        //$comment = new CommentForm();
-        //$comment->item_id = $id;
-
-        //$reply = new ReplyForm();
-        //$reply->item_id = $id;
-
         $similar = $item->getSimilar(2, 6);
 
-        //$searchModel = new CommentSearch();
-        //$commentDataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
+        $query = Review::find()
+            ->where(['item_id' => $id, 'status' => Review::STATUS_ACTIVE]);
 
         $searchModel = new ReviewSearch();
-        $reviewDataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
+        $reviewDataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
         return $this->render('view', [
             'item' => $item,

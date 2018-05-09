@@ -12,6 +12,7 @@ use yii\behaviors\SluggableBehavior;
  * @property string $image
  * @property string $slug
  * @property string $url
+ * @property string $color
  * @property integer $author_id
  * @property integer $status
  * @property string $created_at
@@ -51,7 +52,7 @@ class Shop extends \yii\db\ActiveRecord
         return [
             [['author_id', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name', 'slug', 'image', 'url'], 'string', 'max' => 255],
+            [['name', 'slug', 'image', 'url','color'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
@@ -66,7 +67,8 @@ class Shop extends \yii\db\ActiveRecord
             'name' => 'Name',
             'slug' => 'Slug',
             'image' => 'Image',
-            'Status' => 'status',
+            'color' => 'Color',
+            'status' => 'Status',
             'author_id' => 'Author ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

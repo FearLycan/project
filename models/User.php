@@ -22,6 +22,7 @@ use yii\behaviors\SluggableBehavior;
  * @property string $slug
  * @property string $email
  * @property string $password
+ * @property string $avatar
  * @property integer $role
  * @property integer $status
  * @property string $registered_at
@@ -67,7 +68,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['role', 'status'], 'integer'],
             [['registered_at', 'last_login_at', 'last_seen'], 'safe'],
-            [['name', 'email', 'password', 'auth_key', 'verification_code', 'real_name', 'real_last_name', 'country', 'city'], 'string', 'max' => 255],
+            [['name', 'email', 'password', 'auth_key', 'verification_code'], 'string', 'max' => 255],
             [['about'], 'string', 'max' => $this->aboutLength],
             [['email'], 'unique'],
         ];
@@ -303,5 +304,12 @@ class User extends ActiveRecord implements IdentityInterface
             self::SOCIAL_FACEBOOK,
             self::SOCIAL_INSTAGRAM,
         ];
+    }
+
+    public function removeAvatarFile()
+    {
+        if (file_exists(Image::URL_AVATAR . $this->avatar)) {
+            unlink(Image::URL_AVATAR . $this->avatar);
+        }
     }
 }
