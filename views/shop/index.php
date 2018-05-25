@@ -47,8 +47,6 @@ $this->title = Html::encode('Lista sklepów | ' . Yii::$app->params['name']);
 
 <?php $this->beginBlock('script') ?>
 <script>
-    console.log('ok');
-
     $(document).ready(function(){
         $("li.heading").hover(function(){
             $(this).find('span.name').css('display', 'none');

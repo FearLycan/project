@@ -277,6 +277,10 @@ AppAsset::register($this);
 
 <?= $this->blocks['script'] ?>
 
+<script type="text/javascript" id="cookieinfo"
+        src="//cookieinfoscript.com/js/cookieinfo.min.js" data-message="Używamy plików cookie w celach statystycznych, reklamowych oraz funkcjonalnych." data-linkmsg="Czytaj więcej" data-moreinfo="https://policies.google.com/technologies/cookies" data-bg="#645862" data-fg="#FFFFFF" data-link="#F1D600" data-text-align="left" data-close-text="Got it!">
+</script>
+
 </body>
 </html>
 <?php $this->endPage() ?>

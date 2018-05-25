@@ -1,7 +1,6 @@
 function menuActive($controller) {
     var ul = $('ul.navbar-nav');
     $(ul).find('a[href*="' + $controller + '"]').parent('li').addClass('active');
-    console.log($controller);
 }
 
 var pager = $('ul.pagination');
@@ -18,9 +17,7 @@ $(document).ready(function () {
     if ($('#login').length) {
         $('body').css({'background-image': 'url(../images/site/login-image-01.jpg)', 'background-size': 'cover'});
     }
-    //background-position: center;
-    //background-repeat: no-repeat;
-    //background-size: cover;
+
     if ($('#register').length) {
         $('body').css({
             'background-image': 'url(../images/site/login-image-02.jpg)',
@@ -29,6 +26,5 @@ $(document).ready(function () {
             'background-position': 'center'
         });
     }
-
 
 });
