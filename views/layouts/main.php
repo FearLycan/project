@@ -86,7 +86,8 @@ AppAsset::register($this);
                             <div class="container navbar-container">
                                 <!-- Brand/Logo -->
                                 <a class="navbar-brand" href="<?= Url::home(); ?>">
-                                    <img src="#" alt="<?= Yii::$app->params['name'] ?>">
+                                    <img style="height: 70px;" src="<?= Url::to('@web/images/site/logo.png') ?>" alt="<?= Yii::$app->params['name'] ?>">
+                                    <?= Yii::$app->params['name'] ?>
                                 </a>
 
                                 <div class="d-inline-block">

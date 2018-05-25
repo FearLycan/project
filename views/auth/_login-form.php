@@ -49,7 +49,7 @@ use yii\widgets\ActiveForm;
     <div class="col-12">
         <div class="mt-1 ">
             <small>
-                <a href="<?= Url::toRoute(['site/reset']); ?>">Nie pamiętasz hasła?</a>
+               <!-- <a href="<?/*= Url::toRoute(['site/reset']); */?>">Nie pamiętasz hasła?</a>-->
             </small>
         </div>
     </div>

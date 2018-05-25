@@ -1,10 +1,19 @@
 <?php
 
+
+use yii\helpers\Url;
+
 $this->title = 'Zaloguj się';
 
 ?>
 
-<!--<section class="slice-lg has-bg-cover bg-size-cover" style="background-image: url(../images/site/login-image-01.jpg);">-->
+<?php $this->beginBlock('meta') ?>
+<meta property="og:url" content="<?= Yii::$app->params['url'] ?>"/>
+<meta property="og:title" content="<?= $this->title ?>"/>
+<meta property="og:description" content="<?= Yii::$app->params['description'] ?>"/>
+<meta property="og:image" content="<?= Url::to('@web/images/seo/weariology.png', true); ?>"/>
+<?php $this->endBlock() ?>
+
 <section class="slice-lg has-bg-cover bg-size-cover" id="login">
     <div class="container">
         <div class="row justify-content-center cols-xs-space">
@@ -30,3 +39,6 @@ $this->title = 'Zaloguj się';
         </div>
     </div>
 </section>
+
+<?php $this->beginBlock('script') ?>
+<?php $this->endBlock() ?>

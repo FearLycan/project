@@ -1,7 +1,16 @@
 <?php
 
+use yii\helpers\Url;
+
 $this->title = 'Rejestracja';
 ?>
+
+<?php $this->beginBlock('meta') ?>
+    <meta property="og:url" content="<?= Yii::$app->params['url'] ?>"/>
+    <meta property="og:title" content="<?= $this->title ?>"/>
+    <meta property="og:description" content="<?= Yii::$app->params['description'] ?>"/>
+    <meta property="og:image" content="<?= Url::to('@web/images/seo/weariology.png', true); ?>"/>
+<?php $this->endBlock() ?>
 
 <?php if ($status == true): ?>
     <section class="slice--offset slice sct-color-1" id="register">
@@ -47,3 +56,6 @@ $this->title = 'Rejestracja';
 
 
 <?php endif; ?>
+
+<?php $this->beginBlock('script') ?>
+<?php $this->endBlock() ?>
