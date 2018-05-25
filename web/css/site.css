@@ -49,7 +49,7 @@ ul.navbar-nav > .active > a {
 }
 
 .bg-dark {
-    background-color: #111111 !important;
+    background-color: #131313 !important;
 }
 
 .badge-dark {
@@ -58,7 +58,12 @@ ul.navbar-nav > .active > a {
 }
 
 .badge-dark:hover {
-    background-color: #111111 !important;
+    background-color: #131313 !important;
+}
+
+.footer {
+    background-color: #131313 !important;
+    color: rgba(255,255,255,0.7);
 }
 
 .wrap {

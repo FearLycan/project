@@ -22,6 +22,9 @@ AdminAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/images/icon/favicon.ico" type="image/x-icon" />
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -29,7 +32,7 @@ AdminAsset::register($this);
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="#">
 <!--        <img src="http://via.placeholder.com/120x120" width="30" height="30" class="d-inline-block align-top" alt="">-->
-        Bootstrap
+        <?= Yii::$app->params['name'] ?>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">

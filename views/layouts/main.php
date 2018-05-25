@@ -26,7 +26,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 
     <!-- Favicon -->
-    <!--    <link href="favicon.png" rel="icon" type="image/png">-->
+    <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/images/icon/favicon.ico" type="image/x-icon" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84680217-3"></script>
