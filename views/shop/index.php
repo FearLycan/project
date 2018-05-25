@@ -33,7 +33,7 @@ $this->title = Html::encode('Lista sklepów | ' . Yii::$app->params['name']);
             <?= ListView::widget([
                 'dataProvider' => $dataProvider,
                 'summary' => false,
-                'itemOptions' => ['class' => 'col-lg-4 cols-xs-space'],
+                'itemOptions' => ['class' => 'col-lg-4 space-xs-md'],
                 'itemView' => '_shop',
                 'options' => [
                     'tag' => 'div',
