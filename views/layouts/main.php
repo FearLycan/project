@@ -22,7 +22,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <meta name="keywords" content="<?= Yii::$app->params['keywords'] ?>" />
-    <meta property="fb:app_id" content="239323143282506" />
+    <meta property="fb:pages" content="239323143282506" />
     <meta property="og:locale" content="pl_PL" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="<?= Yii::$app->params['name'] ?>" />
