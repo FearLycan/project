@@ -23,6 +23,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <meta name="keywords" content="<?= Yii::$app->params['keywords'] ?>" />
     <meta property="fb:pages" content="239323143282506" />
+    <meta property="fb:app_id" content="202080437098127" />
     <meta property="og:locale" content="pl_PL" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="<?= Yii::$app->params['name'] ?>" />
