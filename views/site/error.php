@@ -10,7 +10,7 @@ use yii\helpers\Url;
 $this->title = $name;
 ?>
 
-<section class="slice-lg has-bg-cover bg-size-cover" style="background-image: url(<?= Url::home(); ?>/images/site/error.jpg);">
+<section class="slice-lg has-bg-cover bg-size-cover" style="background-image: url(<?= Url::home(); ?>images/site/error.jpg);">
     <div class="container">
         <div class="slice holder-item holder-item-light">
             <div class="container container-sm d-flex align-items-center">
