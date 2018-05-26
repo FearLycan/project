@@ -2,6 +2,7 @@
 
 use app\models\Shop;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $model Shop */
 ?>
@@ -10,7 +11,7 @@ use yii\helpers\Html;
 <div class="block block--style-3">
     <div class="block-image relative">
         <div class="view view-first">
-            <a href="<?= \yii\helpers\Url::to(['shop/view', 'slug' => $model->slug]) ?>">
+            <a href="<?= Url::to(['shop/view', 'slug' => $model->slug]) ?>">
                 <?= Html::img('@web/images/shop/' . $model->image, ['class' => 'img-fluid']) ?>
             </a>
         </div>

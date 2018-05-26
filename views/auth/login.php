@@ -3,7 +3,7 @@
 
 use yii\helpers\Url;
 
-$this->title = 'Zaloguj się';
+$this->title = 'Zaloguj się' . ' | ' . Yii::$app->params['name'];
 
 ?>
 
@@ -11,6 +11,7 @@ $this->title = 'Zaloguj się';
 <meta property="og:url" content="<?= Yii::$app->params['url'] ?>"/>
 <meta property="og:title" content="<?= $this->title ?>"/>
 <meta property="og:description" content="<?= Yii::$app->params['description'] ?>"/>
+<meta name="description" content="<?= Yii::$app->params['description'] ?>"/>
 <meta property="og:image" content="<?= Url::to('@web/images/seo/weariology.png', true); ?>"/>
 <?php $this->endBlock() ?>
 

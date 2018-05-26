@@ -55,6 +55,7 @@ ul.navbar-nav > .active > a {
 .badge-dark {
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
+    margin-bottom: 7px;
 }
 
 .badge-dark:hover {

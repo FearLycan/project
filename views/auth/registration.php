@@ -2,13 +2,14 @@
 
 use yii\helpers\Url;
 
-$this->title = 'Rejestracja';
+$this->title = 'Rejestracja' . ' | ' . Yii::$app->params['name'];
 ?>
 
 <?php $this->beginBlock('meta') ?>
     <meta property="og:url" content="<?= Yii::$app->params['url'] ?>"/>
     <meta property="og:title" content="<?= $this->title ?>"/>
     <meta property="og:description" content="<?= Yii::$app->params['description'] ?>"/>
+    <meta name="description" content="<?= Yii::$app->params['description'] ?>"/>
     <meta property="og:image" content="<?= Url::to('@web/images/seo/weariology.png', true); ?>"/>
 <?php $this->endBlock() ?>
 
@@ -26,7 +27,7 @@ $this->title = 'Rejestracja';
         </div>
     </section>
 <?php else: ?>
-<!--    <section class="slice-lg has-bg-cover bg-size-cover" id="register" style="background-image: url(../images/site/login-image-02.jpg); background-position: bottom center;">-->
+    <!--    <section class="slice-lg has-bg-cover bg-size-cover" id="register" style="background-image: url(../images/site/login-image-02.jpg); background-position: bottom center;">-->
     <section class="slice-lg has-bg-cover bg-size-cover" id="register">
         <div class="container">
             <div class="row justify-content-center cols-xs-space">

@@ -2,7 +2,6 @@
 
 /* @var $model \app\models\Shop */
 
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ListView;
@@ -11,9 +10,14 @@ $this->title = Html::encode($model->name . ' | ' . Yii::$app->params['name']);
 ?>
 
 <?php $this->beginBlock('meta') ?>
+<meta property="og:url" content="<?= Url::to(['shop/view' ,'slug' => $model->slug], true) ?>" />
+<meta property="og:title" content="<?= $this->title ?>" />
+<meta property="og:description" content="<?= Yii::$app->params['description'] ?>" />
+<meta name="description" content="<?= Yii::$app->params['description'] ?>" />
+<meta property="og:image" content="<?= Url::to('@web/images/shop/'.  $model->image, true); ?>" />
 <?php $this->endBlock() ?>
 
-<section class="slice-xl" style="background-image: url(<?= Url::to('@web/images/shop/' . $model->image) ?>); background-position: center center; background-repeat: no-repeat;
+<section class="slice-xl" style="background-image: url(<?= Url::to('@web/images/shop/' . $model->image); ?>); background-position: center center; background-repeat: no-repeat;
         background-color: <?= $model->color ?>;">
     <span class="mask mask-dark--style-2"></span>
     <div class="container">
@@ -35,21 +39,6 @@ $this->title = Html::encode($model->name . ' | ' . Yii::$app->params['name']);
 
 <section class="slice sct-color-1" id="sct_products">
     <div class="container">
-
-      <!--  <div class="row">
-            <div class="col">
-                <div class="section-title section-title--style-1 text-center mb-4">
-                    <h3 class="section-title-inner heading-2 strong-400">
-                        <span><?/*= $model->name */?></span>
-                    </h3>
-                    <span class="section-title-delimiter clearfix"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <hr>
-        </div>-->
 
         <div class="row-wrapper">
             <?= ListView::widget([

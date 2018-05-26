@@ -3,12 +3,18 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ListView;
 
 $this->title = Html::encode('Lista sklepów | ' . Yii::$app->params['name']);
 ?>
 
 <?php $this->beginBlock('meta') ?>
+<meta property="og:url" content="<?= Url::to(['/shop'], true) ?>" />
+<meta property="og:title" content="<?= $this->title ?>" />
+<meta property="og:description" content="<?= Yii::$app->params['description'] ?>"/>
+<meta name="description" content="<?= Yii::$app->params['description'] ?>"/>
+<meta property="og:image" content="<?= Url::to('@web/images/seo/weariology.png', true); ?>"/>
 <?php $this->endBlock() ?>
 
 <section class="slice sct-color-1">

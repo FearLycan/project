@@ -16,11 +16,18 @@ $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Y
 ?>
 
 <?php $this->beginBlock('meta') ?>
-<meta property="og:url" content="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug], true) ?>"/>
-<meta property="og:title" content="<?= $this->title ?>"/>
-<meta property="og:type" content="article"/>
-<meta property="og:description" content="<?= Html::encode($item->shop->name) ?> - <?= Html::encode($this->title) ?>"/>
-<meta property="og:image" content="<?= Url::to('@web/images/item/thumbnail/' . $item->image, true); ?>"/>
+<meta property="og:url" content="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug], true) ?>" />
+<meta property="og:title" content="<?= $this->title ?>" />
+
+<?php if(empty($item->description)): ?>
+    <meta property="og:description" content="<?= Html::encode($item->shop->name) ?> - <?= Html::encode($this->title) ?>" />
+    <meta name="description" content="<?= Html::encode($item->shop->name) ?> - <?= Html::encode($this->title) ?>" />
+<?php else: ?>
+    <meta property="og:description" content="<?= Html::encode($item->description) ?>" />
+    <meta name="description" content="<?= Html::encode($item->description) ?>" />
+<?php endif; ?>
+
+<meta property="og:image" content="<?= Url::to('@web/images/item/thumbnail/' . $item->image, true); ?>" />
 <?php $this->endBlock() ?>
 
 <section class="slice bg-minimalist">
