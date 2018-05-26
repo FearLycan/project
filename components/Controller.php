@@ -1,7 +1,9 @@
 <?php
 namespace app\components;
+
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+
 class Controller extends \yii\web\Controller
 {
     /**

@@ -11,6 +11,18 @@ use yii\web\Response;
 
 class SiteController extends Controller
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
+    }
+
     public function actionJson($phrase)
     {
         $tags = Tag::find()
