@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 var options = {
     url: function (phrase) {
-        return "/project/web/site/json?phrase=" + encodeURIComponent(phrase);
+        return "/site/json?phrase=" + encodeURIComponent(phrase);
     },
     getValue: function (element) {
         return element.name;
@@ -49,7 +49,7 @@ var options = {
                     '<small class="s-small">tag</small>' +
                     '</div>' +
                     '<div class="col-2">' +
-                    '<a href="/project/web/tag/' + item.name + '">wyszukaj</a>'
+                    '<a href="/tag/' + item.name + '">wyszukaj</a>'
                     + '</div>'
                     + '</div>';
             }
@@ -63,7 +63,7 @@ var options = {
                     '<small class="s-small">sklep</small>' +
                     '</div>' +
                     '<div class="col-2">' +
-                    '<a href="/project/web/shop/' + item.slug + '">zobacz</a>'
+                    '<a href="/shop/' + item.slug + '">zobacz</a>'
                     + '</div>'
                     + '</div>';
             }
@@ -77,7 +77,7 @@ var options = {
                     '<small class="s-small">przedmiot</small>' +
                     '</div>' +
                     '<div class="col-2">' +
-                    '<a href="/project/web/item/' + item.id + '/' + item.slug + '">zobacz</a>'
+                    '<a href="/item/' + item.id + '/' + item.slug + '">zobacz</a>'
                     + '</div>'
                     + '</div>';
             }
