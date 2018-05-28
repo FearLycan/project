@@ -97,6 +97,19 @@ ul.inline-links > li {
     padding: 0 .8em 0 0 !important;
 }
 
+.s-title{
+    font-size: 17px;
+}
+
+.s-small{
+    color: #9f9f9f;
+}
+
+.easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category{
+    padding: 5px 12px;
+}
+
+
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     position: relative;
