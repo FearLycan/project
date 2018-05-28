@@ -25,6 +25,8 @@ class AppAsset extends AssetBundle
         'fonts/font-awesome/css/font-awesome.min.css',
         'fonts/ionicons/css/ionicons.min.css',
         'css/styles.min.css',
+        'css/easy-autocomplete.min.css',
+        'css/easy-autocomplete.themes.min.css',
         'css/site.css',
     ];
     public $js = [
@@ -39,6 +41,7 @@ class AppAsset extends AssetBundle
         'js/viewportchecker.min.js',
         ///'js/bootstrap-dropdown-hover.min.js',
         'js/boomerang.min.js',
+        'js/jquery.easy-autocomplete.min.js',
         'js/site.js',
     ];
     public $depends = [

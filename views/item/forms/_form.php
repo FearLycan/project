@@ -59,7 +59,7 @@ use yii\widgets\ActiveForm;
 
             <?php if($model->scenario == ItemForm::SCENARIO_UPDATE): ?>
                 <div class="col-md-6" style="padding-top: 35px; text-align: right;">
-                    <a style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="<img src='/images/item/thumbnail/'.<?= $model->image ?>.' />">
+                    <a style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="<?= Url::to('@web/images/item/thumbnail/'. $model->image) ?>" />">
                         Aktualna grafika dla produktu
                     </a>
 

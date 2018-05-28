@@ -64,7 +64,7 @@ ul.navbar-nav > .active > a {
 
 .footer {
     background-color: #131313 !important;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .wrap {
@@ -91,6 +91,10 @@ ul.navbar-nav > .active > a {
 .not-set {
     color: #c55;
     font-style: italic;
+}
+
+ul.inline-links > li {
+    padding: 0 .8em 0 0 !important;
 }
 
 /* add sorting icons to gridview sort links */
@@ -319,7 +323,7 @@ ul.icons li .icon {
 
 @media only screen and (max-width: 1366px) {
     .page-content {
-          min-height: 600px;
+        min-height: 600px;
     }
 }
 
