@@ -12,11 +12,11 @@ $this->title = 'Weariology';
 ?>
 
 <?php $this->beginBlock('meta') ?>
-<meta property="og:url" content="<?= Yii::$app->params['url'] ?>" />
-<meta property="og:title" content="<?= $this->title ?>" />
-<meta property="og:description" content="<?= Yii::$app->params['description'] ?>" />
-<meta name="description" content="<?= Yii::$app->params['description'] ?>" />
-<meta property="og:image" content="<?= Url::to('@web/images/seo/weariology.png', true); ?>" />
+    <meta property="og:url" content="<?= Yii::$app->params['url'] ?>" />
+    <meta property="og:title" content="<?= $this->title ?>"/>
+    <meta property="og:description" content="<?= Yii::$app->params['description'] ?>" />
+    <meta name="description" content="<?= Yii::$app->params['description'] ?>" />
+    <meta property="og:image" content="<?= Url::to('@web/images/seo/weariology.png', true); ?>" />
 <?php $this->endBlock() ?>
 
 <section class="slice sct-color-1" id="sct_products">
