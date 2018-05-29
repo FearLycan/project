@@ -47,6 +47,37 @@ class SiteController extends Controller
             ->all();
 
         $results = [];
+        if (strpos($phrase, ',') !== false) {
+            //true
+
+
+            $where = [];
+
+            $phrases = explode(',', $phrase);
+
+            foreach ($phrases as $mtag) {
+                $where[] = ['like', 'name', $mtag];
+            }
+
+            $mtags = Tag::find()
+                ->where(['status' => Tag::STATUS_ACTIVE])
+                ->andWhere($where)
+                ->limit(10)
+                ->all();
+
+
+            $results[] = [
+                //'id' => $tag->id,
+               // 'name' => implode(',', $phrases),
+                //'slug' => '',
+                'type' => 'multi-tag',
+                'count' => count($mtags),
+            ];
+
+
+        }
+
+
         /* @var $tag Tag */
         foreach ($tags as $tag) {
             $results[] = [

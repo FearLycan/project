@@ -92,7 +92,7 @@ class ItemController extends Controller
      * @return string
      * @throws NotFoundHttpException
      */
-    public function actionView($id, $slug)
+    public function actionView($id, $slug, $view = null)
     {
         /* @var \app\models\Item $item */
         $item = Item::find()->where(['id' => $id, 'slug' => $slug])->one();
@@ -101,18 +101,25 @@ class ItemController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
-        $similar = $item->getSimilar(2, 6);
+        $reviewDataProvider = null;
+        $similar = null;
+        if($view == null){
+            $similar = $item->getSimilar(2, 12);
+        }elseif($view == 'review') {
+            $query = Review::find()
+                ->where(['item_id' => $id, 'status' => Review::STATUS_ACTIVE]);
 
-        $query = Review::find()
-            ->where(['item_id' => $id, 'status' => Review::STATUS_ACTIVE]);
-
-        $searchModel = new ReviewSearch();
-        $reviewDataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
+            $searchModel = new ReviewSearch();
+            $reviewDataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
+        }else{
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
 
         return $this->render('view', [
             'item' => $item,
             'similar' => $similar,
             'reviewDataProvider' => $reviewDataProvider,
+            'view' => $view,
         ]);
     }
 
