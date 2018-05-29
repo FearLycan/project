@@ -12,9 +12,7 @@ use yii\widgets\ListView;
 /* @var \app\models\forms\CommentForm $comment */
 /* @var \app\models\forms\CommentForm $reply */
 
-if ($view == null) {
-    $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Yii::$app->params['name']);
-} elseif ($view == 'review') {
+if ($view == 'review') {
     $this->title = Html::encode('Recenzje | ' . $item->title . ' | ' . $item->shop->name . ' | ' . Yii::$app->params['name']);
 } else {
     $this->title = Html::encode($item->title . ' | ' . $item->shop->name . ' | ' . Yii::$app->params['name']);

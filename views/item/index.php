@@ -7,16 +7,16 @@ use app\components\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 
-$this->title = 'Weariology';
+$this->title = Yii::$app->params['name'];
 
 ?>
 
 <?php $this->beginBlock('meta') ?>
-    <meta property="og:url" content="<?= Yii::$app->params['url'] ?>" />
+    <meta property="og:image" content="<?= Url::to('@web/images/seo/weariology.png', true); ?>"/>
+    <meta name="description" content="<?= Yii::$app->params['description'] ?>"/>
+    <meta property="og:url" content="<?= Yii::$app->params['url'] ?>"/>
     <meta property="og:title" content="<?= $this->title ?>"/>
-    <meta property="og:description" content="<?= Yii::$app->params['description'] ?>" />
-    <meta name="description" content="<?= Yii::$app->params['description'] ?>" />
-    <meta property="og:image" content="<?= Url::to('@web/images/seo/weariology.png', true); ?>" />
+    <meta property="og:description" content="<?= Yii::$app->params['description'] ?>"/>
 <?php $this->endBlock() ?>
 
 <section class="slice sct-color-1" id="sct_products">
