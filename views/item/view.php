@@ -25,7 +25,7 @@ if ($view == null) {
 <?php $this->beginBlock('meta') ?>
     <meta property="og:url" content="<?= Url::to(['item/view', 'id' => $item->id, 'slug' => $item->slug], true) ?>"/>
     <meta property="og:title" content="<?= $this->title ?>"/>
-
+    <meta property="og:image" content="<?= Url::to('@web/images/item/thumbnail/' . $item->image, true); ?>"/>
 <?php if (empty($item->description)): ?>
     <meta property="og:description"
           content="<?= Html::encode($item->shop->name) ?> - <?= Html::encode($this->title) ?>"/>
@@ -34,8 +34,6 @@ if ($view == null) {
     <meta property="og:description" content="<?= Html::encode($item->description) ?>"/>
     <meta name="description" content="<?= Html::encode($item->description) ?>"/>
 <?php endif; ?>
-
-    <meta property="og:image" content="<?= Url::to('@web/images/item/thumbnail/' . $item->image, true); ?>"/>
 <?php $this->endBlock() ?>
 
     <section class="slice bg-minimalist">
