@@ -82,6 +82,7 @@ class ReviewForm extends Review
                 'item_id' => $this->item_id,
                 'author_id' => $this->author_id,
             ])
+            ->andWhere(['<>','id', $this->id])
             ->one();
 
         /* @var $review \app\models\Review */
