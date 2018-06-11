@@ -27,8 +27,8 @@ class LinkPager extends Pager
 
 
         // Change standard arrows "«" and "»"
-        $this->nextPageLabel = Yii::t('app', '»');
-        $this->prevPageLabel = Yii::t('app', '«');
+        $this->nextPageLabel = '»';
+        $this->prevPageLabel = '«';
 
         // Default div for links
         $this->linkOptions['class'] = 'page-link';
