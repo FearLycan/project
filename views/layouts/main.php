@@ -253,15 +253,15 @@ AppAsset::register($this);
                                         <div class="text-xs-center text-sm-right">
                                             <ul class="social-media social-media--style-1-v4">
                                                 <li>
-                                                    <a href="#" class="facebook" target="_blank">
+                                                    <a href="<?= Yii::$app->params['facebook'] ?>" class="facebook" target="_blank">
                                                         <i class="fa fa-facebook"></i>
                                                     </a>
                                                 </li>
-                                                <li>
+                                               <!-- <li>
                                                     <a href="#" class="instagram" target="_blank">
                                                         <i class="fa fa-instagram"></i>
                                                     </a>
-                                                </li>
+                                                </li>-->
                                             </ul>
                                         </div>
                                     </div>
